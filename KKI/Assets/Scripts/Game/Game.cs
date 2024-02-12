@@ -19,6 +19,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Deck _deck;
     [SerializeField] private Transform _playerDeckContainer;
     [SerializeField] private AutoLayout3D.GridLayoutGroup3D _layoutGroup3D;
+    [SerializeField] private Scene _currentScene;
 
     private List<Cell> _cells = new List<Cell>();
     private List<Cell> _movingCells = new List<Cell>();
@@ -48,6 +49,7 @@ public class Game : MonoBehaviour
     public Settings GameSettings => _settings;
     public AudioMixer GameAudioMixer => _audioMixer;
 
+    public Scene CurrentScene => _currentScene;
     public GameStartState StartState => _startState;
     public GameDeckBuildState DeckBuildState => _deckbuildState;
     public GameMainMenuState MainMenuState => _mainMenuState;
@@ -82,11 +84,12 @@ public class Game : MonoBehaviour
     void Awake()
     {
         Application.targetFrameRate = 60;
-        EventBus.Instance.OnSelectCell?.AddListener(OnSelectCell);  
+        
     }
 
     private void Initialize()
     {
+        EventBus.Instance.OnSelectCell?.AddListener(OnSelectCell);
         _stateMachine = new StateMachine();
 
         _startState = new(_stateMachine, this);
