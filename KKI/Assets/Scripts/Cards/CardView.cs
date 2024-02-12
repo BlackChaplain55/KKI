@@ -3,13 +3,10 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 
+//Этот модкль отвечает за визуал карты
+
 public class CardView : MonoBehaviour
 {
-    [SerializeField] private Color _defaultColor = Color.green;
-    [SerializeField] private Color _enterColor = Color.yellow;
-    [SerializeField] private Color _selectColor = Color.yellow;
-    [SerializeField] private Color _selectEnterColor = Color.red;
-    [SerializeField] private Color _highlightColor = Color.green;
     [SerializeField] private MeshRenderer _meshRenderer;
     [SerializeField] private Card _card;
     [SerializeField] private Game _game;
@@ -19,16 +16,10 @@ public class CardView : MonoBehaviour
     public Animator Anim => _anim;
     public ParticleSystem SelectedVFX => _selectedVFX;
 
-    private void Awake()
-    {
-        
-    }
-
     private void OnEnable()
     {
         _card.StateChanged += (state, oldState, sender) => StateChanged(state, sender.PointerEnter);
         _card.PointerChanged += (pointerEnter, sender) => StateChanged(sender.CurrentState, pointerEnter);
-        // _meshRenderer.material.color = _defaultColor;
     }
 
     private void OnDisable()
@@ -48,13 +39,7 @@ public class CardView : MonoBehaviour
 
     private void StateChanged(IState cardState, bool pointerEnter)
     {
-        if(cardState is CardDefaultState&& pointerEnter)
-        {
-            //_anim.SetBool("Highlight", true);
-        }else if(cardState is CardDefaultState && !pointerEnter)
-        {
-            //_anim.SetBool("Highlight", false);
-        }
+        
     }
 
 

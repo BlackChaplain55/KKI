@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//Это изначальное состояние ячейки по умолчанию
+
 public class CellDefaultState : IState
 {
     private readonly StateMachine _stateMachine;

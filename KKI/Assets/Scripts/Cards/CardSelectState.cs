@@ -8,6 +8,8 @@ public class CardSelectState : IState
     private readonly Card _card;
     private readonly CardView _cardView;
 
+    //Это выделенное состояние карты
+
     public CardSelectState(StateMachine stateMachine, Card card, CardView view)
     {
         _stateMachine = stateMachine;
@@ -22,7 +24,7 @@ public class CardSelectState : IState
         }
         else
         {
-            _cardView.SelectedVFX.Play();
+            _cardView.SelectedVFX.Play(); //Эффект "горения" карты
         }
         _card.PointerClick += Deselect;
     }
@@ -31,7 +33,6 @@ public class CardSelectState : IState
     {
         _cardView.SelectedVFX.Stop();
         _card.PointerClick -= Deselect;
-        //_cardView.Anim.SetBool("Highlight", false);
     }
 
     public void Update()

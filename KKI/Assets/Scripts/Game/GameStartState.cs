@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//Это изначальное состояние игры
+
 public class GameStartState : IState
 {
     private readonly StateMachine _stateMachine;

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Это музыкальный проигрыватель, играет плейлисты по кругу
+
 public class MusicPlayer : MonoBehaviour
 {
     [SerializeField] private AudioSource _musicSource;
@@ -20,11 +22,6 @@ public class MusicPlayer : MonoBehaviour
         if(!_game) _game = FindObjectOfType<Game>();
     }
 
-    private void Awake()
-    {
-        
-    }
-
     public void SetMenuPlaylist()
     {
         Play(_musicMenu);
@@ -35,7 +32,7 @@ public class MusicPlayer : MonoBehaviour
         Play(_musicCombat, _ambient);
     }
 
-    public void SetDebuildPlaylist()
+    public void SetDeckbuildPlaylist()
     {
         Play(_musicDeckBuild);
     }

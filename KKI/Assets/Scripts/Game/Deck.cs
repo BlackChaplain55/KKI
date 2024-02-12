@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Этот класс отвечает за хранение колоды
 public class Deck : MonoBehaviour
 {
     [SerializeField] private List<string> _playerDeck = new();
-    [SerializeField] private List<string> _enemyDeck = new();
     [SerializeField] private Game _game;
-    private Card _selectedCard;
-    private bool _haveSelectedCard;
 
     public List<string> PlayerDeck => _playerDeck;
 

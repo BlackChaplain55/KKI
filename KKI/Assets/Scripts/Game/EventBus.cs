@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+//Ўина событий дл€ глобальных событий
 public class EventBus : MonoBehaviour
 {
     public UnityEvent<Unit> OnSelectUnit;

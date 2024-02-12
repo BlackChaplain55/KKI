@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 
+//Ётот класс управл€ет основным меню
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _settingsPanel;
@@ -15,6 +16,9 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private AudioClip _gameStart;
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _continueButton;
+    [SerializeField] private Button _returnButton;
+    [SerializeField] private Button _deckButton;
+    [SerializeField] private Button _mainMenuButton;
     [SerializeField] private Image _blankScreen;
     [SerializeField] private Slider _musicVol;    
     [SerializeField] private Slider _ambientVol;
@@ -29,8 +33,7 @@ public class MainMenu : MonoBehaviour
 
     private void OnValidate()
     {
-        if (!_settingsPanel) _settingsPanel = transform.Find("SettingsPanel").gameObject;
-        //if (!_audio) _audio = GetComponent<AudioSource>();
+        if (!_settingsPanel) _settingsPanel = transform.Find("SettingsPanel").gameObject;        
         if (!_game) _game = FindObjectOfType<Game>();
         if (!_menuPanel) _menuPanel = transform.Find("MainMenu").gameObject;
         if (!_musicPlayer) _musicPlayer = GetComponent<MusicPlayer>();
@@ -52,17 +55,50 @@ public class MainMenu : MonoBehaviour
     {
         _continueButton.enabled = false;
         _startButton.enabled = true;
+        _mainMenuButton.gameObject.SetActive(false);
+        _returnButton.gameObject.SetActive(false);
     }
 
     public void SetPlayState()
     {
         _continueButton.enabled = false;
         _startButton.enabled = true;
+        _mainMenuButton.gameObject.SetActive(true);
+        _continueButton.gameObject.SetActive(true);
+        _startButton.gameObject.SetActive(true);
+        _returnButton.gameObject.SetActive(true);
+        _deckButton.gameObject.SetActive(false);
+    }
+    public void SetMenuState()
+    {
+        _continueButton.enabled = true;
+        _startButton.enabled = true;
+        _continueButton.gameObject.SetActive(true);
+        _startButton.gameObject.SetActive(true);
+        _mainMenuButton.gameObject.SetActive(false);
+        _returnButton.gameObject.SetActive(false);
+        _deckButton.gameObject.SetActive(true);
+    }
+
+    public void SetDeckState()
+    {
+        _continueButton.enabled = true;
+        _startButton.enabled = true;
+        _mainMenuButton.gameObject.SetActive(true);
+        _returnButton.gameObject.SetActive(true);
+        _continueButton.gameObject.SetActive(false);
+        _startButton.gameObject.SetActive(false);
+        _deckButton.gameObject.SetActive(false);
     }
 
     public void GameStart()
     {
         FadeScreen(_game.PlayState, _gameStart);
+    }
+
+    public void GoToMainMenu()
+    {
+        FadeScreen(_game.MainMenuState);
     }
 
     public void ContinueGame()
@@ -75,10 +111,10 @@ public class MainMenu : MonoBehaviour
         FadeScreen(_game.PlayState, _gameStart);
     }
 
-    private void FadeScreen(IState state, AudioClip sound)
+    private void FadeScreen(IState state, AudioClip sound=null) //Ётот метод обеспечивает плавную смену сцен
     {
         float delay = sound.length;
-        _audio.PlayOneShot(sound);
+        if(sound!=null) _audio.PlayOneShot(sound);
         if (_blankScreen)
         {
             _blankScreen.color = new Color(0, 0, 0, 0);
@@ -101,7 +137,7 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void ToggleSound()
+    public void ToggleSound()   // —ледующие 4 метода обеспечивают работу экрана настроек
     {
         Settings settings = _game.GameSettings;
         settings.SoundEnabled = !settings.SoundEnabled;

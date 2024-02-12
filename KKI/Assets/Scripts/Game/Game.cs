@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
+//Это основная точка входа игры
 public class Game : MonoBehaviour
 {
     [SerializeField] private Color _availableMovesColor;
@@ -12,9 +13,12 @@ public class Game : MonoBehaviour
     [SerializeField] private UnitActions _unitActions;
     [SerializeField] private StateMachine _stateMachine;
     [SerializeField] private MainMenu _mainMenu;
+    [SerializeField] private CombatUIManager _combatUI;
     [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private CardCollection _cardCollection;
     [SerializeField] private Deck _deck;
+    [SerializeField] private Transform _playerDeckContainer;
+    [SerializeField] private AutoLayout3D.GridLayoutGroup3D _layoutGroup3D;
 
     private List<Cell> _cells = new List<Cell>();
     private List<Cell> _movingCells = new List<Cell>();
@@ -56,24 +60,29 @@ public class Game : MonoBehaviour
         if (!_unitsContainer) transform.Find("Units");
         if (!_grid) _grid = FindObjectOfType<Grid>();
         if (!_unitActions) _unitActions = GetComponent<UnitActions>();
-        if (!_mainMenu) _mainMenu = FindObjectOfType<MainMenu>(); 
+        if (!_mainMenu) _mainMenu = FindObjectOfType<MainMenu>();
+        if (!_combatUI) _combatUI = FindObjectOfType<CombatUIManager>();
         if (!_deck) _deck = GetComponent<Deck>();
+        if (!_playerDeckContainer) _playerDeckContainer = transform.Find("PlayerDeck");
+        if (!_layoutGroup3D) _layoutGroup3D = _playerDeckContainer.transform.GetComponent<AutoLayout3D.GridLayoutGroup3D>();
     }
 
     void Start()
     {
         DontDestroyOnLoad(gameObject);
 
-        if (GameInstance == null) GameInstance = gameObject;
-        else Destroy(gameObject);
+        if (GameInstance == null)
+        {
+            GameInstance = gameObject;
+            Initialize();
+        }
+        else Destroy(gameObject);    
     }
 
     void Awake()
     {
         Application.targetFrameRate = 60;
-        EventBus.Instance.OnSelectCell?.AddListener(OnSelectCell);
-
-        Initialize();
+        EventBus.Instance.OnSelectCell?.AddListener(OnSelectCell);  
     }
 
     private void Initialize()
@@ -97,7 +106,6 @@ public class Game : MonoBehaviour
         {
             _stateMachine.Initialize(_startState);
         }
-        
 
         _settings = SaveLoadManager.SettingsLoad();
         _mainMenu.SetSettingsUI(_settings);
@@ -114,9 +122,42 @@ public class Game : MonoBehaviour
     {
         _cells.AddRange(FindObjectsOfType<Cell>());
         _cellStep = _grid.CellSize.x + _grid.OffsetSize;
+        _deck.LoadDeck();
+        InitializePlayerDeck();
+        _combatUI.Initialize();
     }
 
-    private void TrySetSelected(Cell cell)
+    public void ExitCombatScene()
+    {
+        _combatUI.Exit();
+    }
+
+    private void InitializePlayerDeck() // Загружаем карты в руку игрока
+    {
+        foreach (string cardName in _deck.PlayerDeck)
+        {
+            Card card = _cardCollection.FindCard(cardName);
+            if (card != null)
+            {
+                GameObject newCard = Instantiate(card.GameObject, _playerDeckContainer);
+                //newCard.transform.localRotation = Quaternion.Euler(0, -100, 70);
+                newCard.GetComponent<Card>().IsInDeck = true;
+            }
+        }
+        SetLayoutSpacing();
+    }
+
+    private void SetLayoutSpacing() //Настраиваем плотность расположения карт в руке игрока
+    {
+        if (_playerDeckContainer.childCount <= 12)
+            _layoutGroup3D.spacing.x = 5;
+        else if (_playerDeckContainer.childCount <= 14)
+            _layoutGroup3D.spacing.x = 4;
+        else
+            _layoutGroup3D.spacing.x = 3;
+    }
+
+    private void TrySetSelected(Cell cell) //Обрабатываем нажатие на ячейку
     {
         if (cell != _selectedCell)
         {
@@ -157,11 +198,6 @@ public class Game : MonoBehaviour
         }
     }
 
-    private void OnDisable()
-    {
-
-    }
-
     private void OnSelectCell(Cell cell)
     {
         TrySetSelected(cell);
@@ -176,7 +212,7 @@ public class Game : MonoBehaviour
         _unitToSpawn = unit;
     }
 
-    public void SpawnUnit()
+    public void SpawnUnit() //Выставляем юнит на поле
     {
         Unit newUnit = Instantiate(_unitToSpawn, _unitsContainer);
         _selectedCell.SetUnit(newUnit);
@@ -186,10 +222,10 @@ public class Game : MonoBehaviour
         _selectedUnit = newUnit;
         _unitToSpawn = null;
         _selectedCell.ShowMoves(true);
-        Debug.Log("Unit Spawn at "+_selectedCell.name);
+        //Debug.Log("Unit Spawn at "+_selectedCell.name);
     }
 
-    private void SetVolumes()
+    private void SetVolumes() //установка громкости из насттроек в микшер
     {
         if (_settings.SoundEnabled)
         {
@@ -204,7 +240,7 @@ public class Game : MonoBehaviour
         }
     }
 
-    private float ValueToVolume(float value)
+    private float ValueToVolume(float value) //делаем регулировку гроскости более линейной
     {
         return Mathf.Log10(Mathf.Clamp(value,0.001f,1)) * 40;
     }

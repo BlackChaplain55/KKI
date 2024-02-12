@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//Это выделенное состояние ячейки
 public class CellSelectState : IState
 {
     private readonly StateMachine _stateMachine;

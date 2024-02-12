@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//Это подсвеченное состояние карты
+
 public class CardHighlightState : IState
 {
     private readonly StateMachine _stateMachine;
@@ -17,7 +19,7 @@ public class CardHighlightState : IState
     public void Enter()
     {
         _card.PointerClick += Select;
-        _cardView.Anim.SetBool("Highlight", true);
+        _cardView.Anim.SetBool("Highlight", true); // Анимация вылета карты со своего места
     }
 
     public void Exit()
@@ -25,7 +27,7 @@ public class CardHighlightState : IState
         _card.PointerClick -= Select;
         if(_stateMachine.CurrentState is CardDefaultState)
         {
-            _cardView.Anim.SetBool("Highlight", false);
+            _cardView.Anim.SetBool("Highlight", false); // Анимация возвращения карты на место
         }
     }
 

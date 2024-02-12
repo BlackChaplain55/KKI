@@ -2,6 +2,7 @@
 using UnityEngine;
 using System;
 
+//Этот класс отвечает за сохрание и загрузку настроек
 public static class SaveLoadManager
 {
     public static void SettingsSave(Settings settings)

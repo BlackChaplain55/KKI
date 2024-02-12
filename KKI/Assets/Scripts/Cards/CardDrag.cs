@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//Этот компонент предназначен для перетаскивания карт, в текущей версии прототипа не используется
+
 public class CardDrag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     [SerializeField] private Card _card;
@@ -10,7 +12,6 @@ public class CardDrag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     [SerializeField] private Camera _camera;
     [SerializeField] private bool _draggable;
     [SerializeField] private AutoLayout3D.LayoutElement3D _layoutElement;
-    private Vector2 _currentPositionOffset;
 
     public bool Draggable => _draggable;
 
@@ -35,17 +36,5 @@ public class CardDrag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
  
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

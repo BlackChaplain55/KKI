@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//Это базовый класс для ячеек тактического поля
+
 public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Vector2Int _position;
     [SerializeField] private GameObject _gameObject;
     [SerializeField] private Game _game;
+    [SerializeField] private StateMachine _stateMachine;
 
     public event PointerStateHandler PointerChanged;
     public event StateHandler StateChanged;
@@ -16,37 +19,23 @@ public class Cell : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public delegate void PointerStateHandler(bool pointerEnter, Cell sender);
     public delegate void PointerHandler(PointerEventData eventData);
     public delegate void StateHandler(IState state, IState oldState, Cell sender);
-
-    private bool _pointerEnter;
-
-    [SerializeField] private StateMachine _stateMachine;
-
+ 
     private CellDefaultState _defaultState;
     private CellSelectState _selectState;
     private CellHighlightState _highlightState;
-
     private Unit _unit;
     private bool _haveUnit;
-    //private Transform _transform;
+    private bool _pointerEnter;
 
     public CellDefaultState DefaultState => _defaultState;
     public CellSelectState SelectState => _selectState;
     public IState CurrentState => _stateMachine.CurrentState;
     Vector2Int Position => _position;
     public bool PointerEnter => _pointerEnter;
-
     public StateMachine StateMachine => _stateMachine;
     public GameObject GameObject => _gameObject;
-
     public bool HaveUnit => _haveUnit;
-
     public Unit Unit => _unit;
-
-
-    private void Start()
-    {
-
-    }
 
     private void OnValidate()
     {

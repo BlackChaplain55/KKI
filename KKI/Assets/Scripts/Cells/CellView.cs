@@ -2,6 +2,7 @@
 using UnityEngine;
 using TMPro;
 
+//Этот класс отвечает за визуал ячейки тактического поля
 public class CellView : MonoBehaviour
 {
     [SerializeField] private Color _defaultColor = Color.green;
@@ -13,11 +14,6 @@ public class CellView : MonoBehaviour
     [SerializeField] private Cell _cell;
     [SerializeField] private Game _game;
     [SerializeField] private TMP_Text _debugText;
-
-    private void Awake()
-    {
-        
-    }
 
     private void OnEnable()
     {
@@ -40,7 +36,7 @@ public class CellView : MonoBehaviour
         if (!_debugText) _debugText = transform.GetComponentInChildren<TMP_Text>();
     }
 
-    private void SetColorByState(IState cellState, bool pointerEnter)
+    private void SetColorByState(IState cellState, bool pointerEnter) //Перекраска ячейки при смене состояний
     {
         _debugText.text = cellState.ToString();
         var haveSelectedUnit = _game.HaveSelectedUnit;

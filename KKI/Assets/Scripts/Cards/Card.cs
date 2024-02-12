@@ -6,9 +6,10 @@ using TMPro;
 
 [RequireComponent(typeof(CardView))]
 
+//Ёто базовый класс дл€ всех карт
+
 public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Vector2Int _position;
     [SerializeField] private GameObject _gameObject;
     [SerializeField] private GameObject _cardModel;
     [SerializeField] private Game _game;
@@ -32,8 +33,6 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     private CardSelectState _selectState;
     private CardHighlightState _highlightState;
 
-    private Unit _unit;
-    private bool _haveUnit;
     private bool _isInDeck;
     private Vector3 _modelDefaultPosition;
     private Quaternion _modelDefaultRotation;
@@ -42,7 +41,6 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public CardSelectState SelectState => _selectState;
     public CardHighlightState HightLightState => _highlightState;
     public IState CurrentState => _stateMachine.CurrentState;
-    Vector2Int Position => _position;
     public bool PointerEnter => _pointerEnter;
 
     public StateMachine StateMachine => _stateMachine;
@@ -50,14 +48,9 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public GameObject CardModel => _cardModel;
     public Vector3 ModelDefaultPosition => _modelDefaultPosition;
     public Quaternion ModelDefaultRotation => _modelDefaultRotation;
-
-
     public Game CurrentGame => _game;
 
-    public bool HaveUnit => _haveUnit;
     public bool IsInDeck { get => _isInDeck; set => _isInDeck = value; } 
-
-    public Unit Unit => _unit;
 
     private void OnValidate()
     {
@@ -107,44 +100,33 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void Deselect()
     {
-        //if(_haveUnit) ShowMoves(false);
         if (CurrentState is CellSelectState|| CurrentState is CellHighlightState)
         {
             _stateMachine.ChangeState(_defaultState);
         }
     }
 
-    public void Initialize(Vector2Int position)
+    public void Initialize()
     {
-        _position = position;
+        
     }
 
-    public void ShowEffectArea(bool state)
+    public void ShowEffectArea(bool state, Cell cell) // Ётот метод подсвечивает €чейки, на которые распростран€етс€ эффект карты
     {
         int moveRadius = 0;
 
-        if (_unit)
-        {
-            moveRadius = _unit.MoveRadius;
-        }
-        else
-        {
-            return;
-        }
-
-
-        Collider[] colliders = Physics.OverlapSphere(transform.position, moveRadius * _game.CellStep, 1 << LayerMask.NameToLayer("Cell"));
+        Collider[] colliders = Physics.OverlapSphere(cell.transform.position, moveRadius * _game.CellStep, 1 << LayerMask.NameToLayer("Cell"));
 
         foreach (Collider collider in colliders)
         {
             Cell currentCell = collider.GetComponent<Cell>();
             if (state)
             {
-                currentCell.SetMoving();
+                
             }
             else
             {                
-                currentCell.Deselect();
+                
             }
         }
     }

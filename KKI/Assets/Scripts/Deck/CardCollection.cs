@@ -4,6 +4,8 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Card collection")]
 
+// Это SO для настройки коллекции карт
+
 public class CardCollection : ScriptableObject
 {
     [SerializeField] public List<GameObject> Cards;

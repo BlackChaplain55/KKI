@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Этот класс описывает Юнита
 public class Unit : MonoBehaviour
 {
     [Header("Unit stats")]
@@ -37,22 +38,7 @@ public class Unit : MonoBehaviour
         Transform spotTransform = transform.Find("Spot");
         if(spotTransform) _highlight = spotTransform.gameObject;
     }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        
-    }
-
+ 
     public void FindCells()
     {
         Collider[] colliders = Physics.OverlapBox(_transform.position, _transform.localScale, Quaternion.identity, 1<< LayerMask.NameToLayer("Cell"));

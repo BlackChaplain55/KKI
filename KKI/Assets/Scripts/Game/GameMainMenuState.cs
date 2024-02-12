@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//Это состояние игры при входе в меню
 public class GameMainMenuState : IState
 {
     private readonly StateMachine _stateMachine;
@@ -14,12 +15,13 @@ public class GameMainMenuState : IState
     }
     public void Enter()
     {
-        _game.MainMenu.gameObject.SetActive(false);
+        _game.MainMenu.gameObject.SetActive(true);
+        _game.MainMenu.SetMenuState();
     }
 
     public void Exit()
     {
-        
+        _game.MainMenu.gameObject.SetActive(false);
     }
 
     public void Update()

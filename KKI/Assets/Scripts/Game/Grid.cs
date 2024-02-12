@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Это генератор ячеек боевой сетки.Используется только из редактора
 public class Grid : MonoBehaviour
 {
     [SerializeField] private Vector2Int _gridSize;

@@ -18,9 +18,7 @@ public class StateMachine
         _oldState = _currentState;
         _currentState = state;
         _oldState.Exit();
-        //Debug.Log("Exit state "+_oldState.ToString());
         state.Enter();
-        //Debug.Log("Enter state " + state.ToString());
         OnStateChanged?.Invoke(CurrentState, OldState);
     }
 

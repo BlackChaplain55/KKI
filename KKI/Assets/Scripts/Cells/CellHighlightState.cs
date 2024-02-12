@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+//Это подсвеченное состояние ячейки
+
 public class CellHighlightState : IState
 {
     private readonly StateMachine _stateMachine;

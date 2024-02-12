@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+//Это класс отвечает за интерфес в основном игровом режиме
+
+public class CombatUIManager : MonoBehaviour
 {
-    [SerializeField] Game _game;
-    [SerializeField] GameObject _selectCellText;
+    [SerializeField] private Game _game;
+    [SerializeField] private GameObject _selectCellText;
+    [SerializeField] private GameObject _SpawnButton;
 
     private void OnValidate()
     {
@@ -16,6 +19,16 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         EventBus.Instance.OnSelectCell?.AddListener(OnSelectCell);
+    }
+
+    public void Initialize()
+    {
+        _SpawnButton.SetActive(true);
+    }
+
+    public void Exit()
+    {
+        _SpawnButton.SetActive(false);
     }
 
     public void SpawnUnit(Unit unitPrefab)

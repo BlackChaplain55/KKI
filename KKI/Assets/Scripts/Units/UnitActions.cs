@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Ёто класс отвечает за возможные действи€ юнита
+
 public class UnitActions : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 0.1f;

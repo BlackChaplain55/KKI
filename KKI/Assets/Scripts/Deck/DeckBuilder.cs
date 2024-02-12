@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//Этот класс отвечает за сборку колоды
 public class DeckBuilder : MonoBehaviour
 {
     [SerializeField] private CardCollection _cardCollection;
@@ -28,11 +29,11 @@ public class DeckBuilder : MonoBehaviour
         EventBus.Instance.OnSelectCard?.AddListener(OnSelectCard);
     }
 
-    private void InitializeCollection()
+    private void InitializeCollection() //Заполняем коллекцию карт из SO-библиотеки
     {
         int cardCount=0;
 
-        foreach (GameObject cardObject in _cardCollection.Cards)
+        foreach (GameObject cardObject in _cardCollection.Cards) //Заполняем известными картами
         {
             Card card = cardObject.GetComponent<Card>();
             GameObject newCard = Instantiate(cardObject,_collectionContainer);
@@ -40,14 +41,14 @@ public class DeckBuilder : MonoBehaviour
             cardCount++;
         }
 
-        for (int i = cardCount; i < _collectionSize; i++)
+        for (int i = cardCount; i < _collectionSize; i++) //Показываем неисследованные карты
         {
             GameObject newCard = Instantiate(_cardCollection.UnknownCard, _collectionContainer);
             newCard.transform.localRotation = Quaternion.Euler(0, -90, 70);
         }
     }
 
-    private void InitializeDeck()
+    private void InitializeDeck() //Загружаем колоду игрока
     {
         _game.CurrentDeck.LoadDeck();
         foreach (string cardName in _game.CurrentDeck.PlayerDeck)
@@ -64,7 +65,7 @@ public class DeckBuilder : MonoBehaviour
         _deckCounter.text = _playerDeck.childCount + "/" + _deckSize;
     }
 
-    private void OnSelectCard(Card card)
+    private void OnSelectCard(Card card) //При нажатии на карту создаем её копию в колоде игрока или удаляем оттуда
     {
         if (_playerDeck.childCount == _deckSize || card.name.Contains(Constants.UnknownCard)) return;
         if (!card.IsInDeck)
@@ -72,26 +73,26 @@ public class DeckBuilder : MonoBehaviour
             Vector3 position = card.CardModel.transform.position;
             Quaternion rotation = card.CardModel.transform.rotation;
             card.CardModel.transform.localPosition = card.ModelDefaultPosition;
-            card.CardModel.transform.localRotation = card.ModelDefaultRotation;
+            card.CardModel.transform.localRotation = card.ModelDefaultRotation;  //Возвращаем карту в изначальное положение перед копированием
             GameObject newCard = Instantiate(card.GameObject, _playerDeck);
             card.CardModel.transform.localPosition = position;
-            card.CardModel.transform.localRotation = rotation;
+            card.CardModel.transform.localRotation = rotation;  //Возвращаем карту в положение выделенной карты
             newCard.GetComponent<Card>().IsInDeck = true;
             newCard.transform.localRotation = Quaternion.Euler(0, -100, 70);
             SetLayoutSpacing();
             _game.CurrentDeck.AddToDeck(card);
-            _game.CurrentDeck.SaveDeck();
+            _game.CurrentDeck.SaveDeck();  // Сохраняем колоду с добавленной картой
             _deckCounter.text = _playerDeck.childCount+ "/"+ _deckSize;
         }
         else
         {
-            _game.CurrentDeck.RemoveFromDeck(card);
+            _game.CurrentDeck.RemoveFromDeck(card); // Удаление карты
             DestroyImmediate(card.gameObject);
             _deckCounter.text = _playerDeck.childCount + "/" + _deckSize;
         }
     }
 
-    private void SetLayoutSpacing()
+    private void SetLayoutSpacing() //Настраиваем плотность карт на панели колоды
     {
         if (_playerDeck.childCount <= 11)
             _layoutGroup3D.spacing.x = 5;

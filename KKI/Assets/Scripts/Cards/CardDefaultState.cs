@@ -8,6 +8,8 @@ public class CardDefaultState : IState
     private readonly Card _card;
     private readonly CardView _cardView;
 
+    //Это изначальное состояние карты
+
     public CardDefaultState(StateMachine stateMachine, Card card, CardView view)
     {
         _stateMachine = stateMachine;
@@ -17,7 +19,7 @@ public class CardDefaultState : IState
     public void Enter()
     {
         _card.PointerClick += Select;
-        _cardView.Anim.SetBool("Highlight", false);
+        _cardView.Anim.SetBool("Highlight", false);  // Делаем карту неактивной, если она таковой была
     }
 
     public void Exit()
