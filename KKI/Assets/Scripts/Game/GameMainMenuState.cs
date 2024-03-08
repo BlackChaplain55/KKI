@@ -15,13 +15,20 @@ public class GameMainMenuState : IState
     }
     public void Enter()
     {
-        _game.MainMenu.gameObject.SetActive(true);
-        _game.MainMenu.SetMenuState();
+        _game.MainMenu.Components.MenuPanel.SetActive(true);
+        if (_game.IsCombat)
+        {
+            _game.MainMenu.ChangeState(_game.MainMenu.PlayState);
+        }
+        else
+        {
+            _game.MainMenu.ChangeState(_game.MainMenu.DefaultState);
+        }
     }
 
     public void Exit()
     {
-        _game.MainMenu.gameObject.SetActive(false);
+        _game.MainMenu.Components.MenuPanel.SetActive(false);
     }
 
     public void Update()

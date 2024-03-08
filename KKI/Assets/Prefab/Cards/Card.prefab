@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2175237828052442729}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -206,7 +205,6 @@ RectTransform:
   m_Children:
   - {fileID: 2958159533607140703}
   m_Father: {fileID: 3514304076182075486}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 70, y: 90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -278,6 +276,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8042370180080501523}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -285,7 +284,6 @@ Transform:
   m_Children:
   - {fileID: 2726206008019353510}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4627947290752318534
 MonoBehaviour:
@@ -299,9 +297,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af07af7da4e903f4ea211cc747c0abbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _position: {x: 0, y: 0}
   _gameObject: {fileID: 8042370180080501523}
-  _cardPrefab: {fileID: 7708923606931195220}
+  _cardModel: {fileID: 7708923606931195220}
   _game: {fileID: 0}
   _cardView: {fileID: 2471223037025264950}
   _cardHeader: {fileID: 5770260361504788246}
@@ -318,11 +315,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8788b0f8fa16cd4687336feff81565b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultColor: {r: 0, g: 1, b: 0, a: 1}
-  _enterColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _selectColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _selectEnterColor: {r: 1, g: 0, b: 0, a: 1}
-  _highlightColor: {r: 0, g: 1, b: 0, a: 1}
   _meshRenderer: {fileID: 8275824366141739468}
   _card: {fileID: 4627947290752318534}
   _game: {fileID: 0}

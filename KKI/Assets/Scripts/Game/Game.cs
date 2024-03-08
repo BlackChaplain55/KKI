@@ -8,43 +8,31 @@ using UnityEngine.SceneManagement;
 public class Game : MonoBehaviour
 {
     [SerializeField] private Color _availableMovesColor;
-    [SerializeField] private Grid _grid;
-    [SerializeField] private Unit _selectedUnit;
-    [SerializeField] private UnitActions _unitActions;
+
     [SerializeField] private StateMachine _stateMachine;
     [SerializeField] private MainMenu _mainMenu;
-    [SerializeField] private CombatUIManager _combatUI;
     [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private CardCollection _cardCollection;
     [SerializeField] private Deck _deck;
+    [SerializeField] private CombatManager _combatManager;
     [SerializeField] private Transform _playerDeckContainer;
     [SerializeField] private AutoLayout3D.GridLayoutGroup3D _layoutGroup3D;
     [SerializeField] private Scene _currentScene;
-
-    private List<Cell> _cells = new List<Cell>();
-    private List<Cell> _movingCells = new List<Cell>();
-    private Cell _selectedCell;
-    private bool _haveSelectedCell;
-    private bool _haveSelectedUnit;
-    private Transform _unitsContainer;
     private float _cellStep;
-    private Unit _unitToSpawn;
+    private bool _isCombat;
     private Settings _settings;
+    private PuzzleController _puzzleController;
     
     private GameStartState _startState;
     private GameDeckBuildState _deckbuildState;
     private GameMainMenuState _mainMenuState;
     private GamePlayState _playState;
-    
+    private GameGlobalMapState _globalMapState;
 
-    private static GameObject GameInstance;
+    private static Game GameInstance;
+
     public StateMachine StateMachine => _stateMachine;
     public IState CurrentState => _stateMachine.CurrentState;
-    public Cell SelectedCell => _selectedCell;
-    public bool HaveSelectedCell => _haveSelectedCell;
-    public bool HaveSelectedUnit => _haveSelectedUnit;
-    public Transform UnitsContainer => _unitsContainer;
-    public float CellStep => _cellStep;
     public MainMenu MainMenu => _mainMenu;
     public Settings GameSettings => _settings;
     public AudioMixer GameAudioMixer => _audioMixer;
@@ -54,16 +42,16 @@ public class Game : MonoBehaviour
     public GameDeckBuildState DeckBuildState => _deckbuildState;
     public GameMainMenuState MainMenuState => _mainMenuState;
     public GamePlayState PlayState => _playState;
+    public GameGlobalMapState GlobalMapState => _globalMapState;
     public CardCollection CardCollection => _cardCollection;
     public Deck CurrentDeck => _deck;
+    public bool IsCombat { get => _isCombat; set => _isCombat = value; }
+    public CombatManager Combat => _combatManager;
+    public float CellStep { get => _cellStep; set => _cellStep = value; }
 
-    private void OnValidate()
+private void OnValidate()
     {
-        if (!_unitsContainer) transform.Find("Units");
-        if (!_grid) _grid = FindObjectOfType<Grid>();
-        if (!_unitActions) _unitActions = GetComponent<UnitActions>();
         if (!_mainMenu) _mainMenu = FindObjectOfType<MainMenu>();
-        if (!_combatUI) _combatUI = FindObjectOfType<CombatUIManager>();
         if (!_deck) _deck = GetComponent<Deck>();
         if (!_playerDeckContainer) _playerDeckContainer = transform.Find("PlayerDeck");
         if (!_layoutGroup3D) _layoutGroup3D = _playerDeckContainer.transform.GetComponent<AutoLayout3D.GridLayoutGroup3D>();
@@ -75,7 +63,7 @@ public class Game : MonoBehaviour
 
         if (GameInstance == null)
         {
-            GameInstance = gameObject;
+            GameInstance = this;
             Initialize();
         }
         else Destroy(gameObject);    
@@ -83,19 +71,21 @@ public class Game : MonoBehaviour
 
     void Awake()
     {
-        Application.targetFrameRate = 60;
-        
+        Application.targetFrameRate = 60;     
     }
 
     private void Initialize()
     {
-        EventBus.Instance.OnSelectCell?.AddListener(OnSelectCell);
-        _stateMachine = new StateMachine();
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
+        _currentScene = SceneManager.GetActiveScene();
+        _stateMachine = new StateMachine();
         _startState = new(_stateMachine, this);
         _playState = new(_stateMachine, this);
         _deckbuildState = new(_stateMachine, this);
         _mainMenuState = new(_stateMachine, this);
+        _globalMapState = new(_stateMachine, this);
+        _mainMenu.Initialize();
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Constants.DeckBuildSceneName))
         {
@@ -104,6 +94,12 @@ public class Game : MonoBehaviour
         else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Constants.CombatSceneName))
         {
             _stateMachine.Initialize(_playState);
+            InitializeCombatScene();
+        }
+        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Constants.GlobalMapSceneName))
+        {
+            _stateMachine.Initialize(_globalMapState);
+            InitializeGlobalMapScene();
         }
         else
         {
@@ -123,16 +119,38 @@ public class Game : MonoBehaviour
 
     public void InitializeCombatScene()
     {
-        _cells.AddRange(FindObjectsOfType<Cell>());
-        _cellStep = _grid.CellSize.x + _grid.OffsetSize;
+        // Действия при начале боя
+        _isCombat = true;
         _deck.LoadDeck();
         InitializePlayerDeck();
-        _combatUI.Initialize();
+        _combatManager = FindObjectOfType<CombatManager>();
+    }
+
+    public void InitializeGlobalMapScene()
+    {
+        _puzzleController = FindObjectOfType<PuzzleController>();
+        _puzzleController.Init(this);
     }
 
     public void ExitCombatScene()
     {
-        _combatUI.Exit();
+        // Действия при возврате в меню из боя
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
+    {     
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Constants.DeckBuildSceneName))
+        {
+            // Дополнительные дейсствия после загрузки сцены колодостроения
+        }
+        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Constants.CombatSceneName))
+        {
+            InitializeCombatScene();
+        }
+        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Constants.CombatSceneName))
+        {
+            InitializeGlobalMapScene();
+        }
     }
 
     private void InitializePlayerDeck() // Загружаем карты в руку игрока
@@ -143,7 +161,6 @@ public class Game : MonoBehaviour
             if (card != null)
             {
                 GameObject newCard = Instantiate(card.GameObject, _playerDeckContainer);
-                //newCard.transform.localRotation = Quaternion.Euler(0, -100, 70);
                 newCard.GetComponent<Card>().IsInDeck = true;
             }
         }
@@ -159,75 +176,7 @@ public class Game : MonoBehaviour
         else
             _layoutGroup3D.spacing.x = 3;
     }
-
-    private void TrySetSelected(Cell cell) //Обрабатываем нажатие на ячейку
-    {
-        if (cell != _selectedCell)
-        {
-            if (_haveSelectedUnit)
-            {
-                if(cell.CurrentState is CellHighlightState)
-                {
-                    _unitActions.MoveUnit(_selectedCell,cell);
-                    return;
-                }
-            }
-
-            if (_haveSelectedCell)
-            {
-                _selectedCell.Deselect();
-                if (_selectedCell.HaveUnit)
-                {
-                    _selectedCell.ShowMoves(false); ;
-                }
-            }
-
-            _selectedCell = cell;
-            _haveSelectedCell = true;
-            if (_selectedCell.HaveUnit)
-            {
-                _haveSelectedUnit = true;
-                _selectedUnit = _selectedCell.Unit;
-                _selectedCell.ShowMoves(true);
-            }
-        }
-        else if(_selectedCell)
-        {
-            _selectedCell.Deselect();
-            _selectedCell = null;
-            _haveSelectedCell = false;
-            _selectedUnit = null;
-            _haveSelectedUnit = false;
-        }
-    }
-
-    private void OnSelectCell(Cell cell)
-    {
-        TrySetSelected(cell);
-        if (!cell.HaveUnit && _unitToSpawn)
-        {
-            SpawnUnit();
-        }
-    }
-
-    public void BeginSpawnUnit(Unit unit)
-    {
-        _unitToSpawn = unit;
-    }
-
-    public void SpawnUnit() //Выставляем юнит на поле
-    {
-        Unit newUnit = Instantiate(_unitToSpawn, _unitsContainer);
-        _selectedCell.SetUnit(newUnit);
-        newUnit.SetCell(_selectedCell);
-        _haveSelectedUnit = true;
-        _haveSelectedUnit = true;
-        _selectedUnit = newUnit;
-        _unitToSpawn = null;
-        _selectedCell.ShowMoves(true);
-        //Debug.Log("Unit Spawn at "+_selectedCell.name);
-    }
-
+    
     private void SetVolumes() //установка громкости из насттроек в микшер
     {
         if (_settings.SoundEnabled)
@@ -242,7 +191,6 @@ public class Game : MonoBehaviour
             _audioMixer.SetFloat("Master", -80);
         }
     }
-
     private float ValueToVolume(float value) //делаем регулировку гроскости более линейной
     {
         return Mathf.Log10(Mathf.Clamp(value,0.001f,1)) * 40;

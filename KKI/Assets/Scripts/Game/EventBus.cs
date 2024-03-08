@@ -7,8 +7,11 @@ using UnityEngine.Events;
 public class EventBus : MonoBehaviour
 {
     public UnityEvent<Unit> OnSelectUnit;
-    public UnityEvent<Cell> OnSelectCell;
+    public UnityEvent DeselectUnits;
+    public UnityEvent<Unit> ActivateUnit;
     public UnityEvent<Card> OnSelectCard;
+    public UnityEvent OnMapTrigger;
+    public UnityEvent Tick;
 
     public static EventBus Instance;
 

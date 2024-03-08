@@ -98,36 +98,8 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         PointerChanged?.Invoke(_pointerEnter, this);
     }
 
-    public void Deselect()
-    {
-        if (CurrentState is CellSelectState|| CurrentState is CellHighlightState)
-        {
-            _stateMachine.ChangeState(_defaultState);
-        }
-    }
-
     public void Initialize()
     {
         
-    }
-
-    public void ShowEffectArea(bool state, Cell cell) // Ётот метод подсвечивает €чейки, на которые распростран€етс€ эффект карты
-    {
-        int moveRadius = 0;
-
-        Collider[] colliders = Physics.OverlapSphere(cell.transform.position, moveRadius * _game.CellStep, 1 << LayerMask.NameToLayer("Cell"));
-
-        foreach (Collider collider in colliders)
-        {
-            Cell currentCell = collider.GetComponent<Cell>();
-            if (state)
-            {
-                
-            }
-            else
-            {                
-                
-            }
-        }
     }
 }
