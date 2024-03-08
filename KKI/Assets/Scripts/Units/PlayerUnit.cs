@@ -17,7 +17,7 @@ public class PlayerUnit : Unit, IPointerClickHandler, IPointerEnterHandler, IPoi
     {
         if (_stateMachine.CurrentState == DefaultState)
         {
-            SelectUnit();
+            _stateMachine.ChangeState(HighlightState);
         }
     }
 
@@ -38,5 +38,11 @@ public class PlayerUnit : Unit, IPointerClickHandler, IPointerEnterHandler, IPoi
     public void DeselectUnit()
     {
         _stateMachine.ChangeState(DefaultState);
+    }
+
+    new public void Activate()
+    {
+        Debug.Log("Hero unit " + Name + " is activated!");
+        SetUnitAnimation("Slash", true, isTrigger: true);
     }
 }

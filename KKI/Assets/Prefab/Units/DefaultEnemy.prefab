@@ -2046,8 +2046,9 @@ GameObject:
   - component: {fileID: 1073352240043798423}
   - component: {fileID: 3119462034783205031}
   - component: {fileID: 854887283279405844}
+  - component: {fileID: 4271153088669819408}
   m_Layer: 0
-  m_Name: EnemyWarrior
+  m_Name: DefaultEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2141,6 +2142,18 @@ MonoBehaviour:
   _currentInitiative: 0
   _damageBonus: 0
   _defenceBonus: 0
+--- !u!114 &4271153088669819408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4169709697365084075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 563fea01e82ca0741a3ea828e8e5e7b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4206817579694275068
 GameObject:
   m_ObjectHideFlags: 0

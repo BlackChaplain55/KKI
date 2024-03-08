@@ -46,7 +46,8 @@ public class Unit : MonoBehaviour
     public UnitSelectState SelectState => _selectState;
     public UnitHighlightState HighlightState => _highlightState;
     public Transform Transform => _transform;
-    
+
+    public string Name { get => _name; }
     public float MaxHealth { get => _health;}
     public float MaxInitiative { get => _initiative; }
     public float CurrentHealth { get => _currentHealth; }
@@ -65,6 +66,17 @@ public class Unit : MonoBehaviour
         if (!_view) _view = GetComponent<UnitView>();
     }
 
+    public void Activate()
+    {
+        Debug.Log("Enemy unit " + _name + " is activated!");
+        SetUnitAnimation("Slash",true,isTrigger:true);
+    }
+
+    public void OnAttackOver()
+    {
+        EventBus.Instance.UnitActivationFinished?.Invoke();
+    }
+
     public void SetUnitAnimation(string animParameter, bool value, bool isTrigger = false)
     {
         if (!isTrigger)
@@ -79,7 +91,6 @@ public class Unit : MonoBehaviour
 
     private void Init()
     {
-        EventBus.Instance.Tick.AddListener(Tick);
         _currentHealth = _health;
         _currentInitiative = 0;
         _view.Init(this, _name);
@@ -94,8 +105,14 @@ public class Unit : MonoBehaviour
         _stateMachine.Initialize(_defaultState);
     }
 
-    private void Tick()
+    public void Tick()
     {
+        _currentInitiative++;
+        if (_currentInitiative >= _initiative)
+        {
+            EventBus.Instance.ActivateUnit?.Invoke(this);
+            _currentInitiative = 0;
+        }
         _view.UpdateUI();
     }
 }
