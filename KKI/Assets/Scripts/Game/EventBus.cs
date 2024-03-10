@@ -9,8 +9,9 @@ public class EventBus : MonoBehaviour
     public UnityEvent<Unit> OnSelectUnit;
     public UnityEvent DeselectUnits;
     public UnityEvent<Unit> ActivateUnit;
+    public UnityEvent<Unit,PlayerUnit> UnitDeath;
     public UnityEvent UnitActivationFinished;
-    public UnityEvent<Card> OnSelectCard;
+    public UnityEvent<Card> ActivateCard;
     public UnityEvent OnMapTrigger;
     public UnityEvent Tick;
 

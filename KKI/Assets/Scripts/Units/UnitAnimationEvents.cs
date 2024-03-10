@@ -11,8 +11,8 @@ public class UnitAnimationEvents : MonoBehaviour
         if (!_unit) _unit = GetComponent<Unit>();
     }
 
-    public void OnSlashFinished()
+    public void OnAnimationFinished()
     {
-        _unit.OnAttackOver();
+        _unit.AnimationFinished();
     }
 }

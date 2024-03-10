@@ -70,7 +70,6 @@ public class MainMenu : MonoBehaviour
         _playState = new(_stateMachine, this);
         if (state == null) _stateMachine.Initialize(_defaultState);
         else _stateMachine.Initialize(state);
-
     }
 
     public void ChangeState(IState state)

@@ -12,11 +12,18 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private float _tickInterval;
     [SerializeField] private List<PlayerUnit> _playerUnits;
     [SerializeField] private List<Unit> _enemyUnits;
+    [SerializeField] private Unit _currentTarget;
 
     private Unit _activeUnit;
+    private Card _activeCard;
     private float _tickTimer;
 
-    //public bool HaveSelectetUnit => _haveSelectedUnit;
+    public Unit CurrentTarget { get => _currentTarget; set => _currentTarget = value; }
+    
+    public Unit ActiveUnit  => _activeUnit;
+    public Card ActiveCard => _activeCard;
+    public List<PlayerUnit> PlayerUnits => _playerUnits;
+    public List<Unit> EnemyUnits => _enemyUnits;
 
     private void OnValidate()
     {
@@ -48,7 +55,6 @@ public class CombatManager : MonoBehaviour
     private void ActivateUnit(Unit unit)
     {
         _activeUnit = unit;
-        unit.Activate();
     }
 
     private void Tick()
@@ -67,8 +73,10 @@ public class CombatManager : MonoBehaviour
     {
         _tickTimer = 0;
         EventBus.Instance.ActivateUnit.AddListener(ActivateUnit);
+        EventBus.Instance.ActivateCard.AddListener(ActivateCard);
         EventBus.Instance.DeselectUnits.AddListener(DeselectUnits);
         EventBus.Instance.UnitActivationFinished.AddListener(UnitActivationFinished);
+        EventBus.Instance.UnitDeath.AddListener(UnitDeath);
         for (int i = 0; i < _unitsContainer.childCount; i++)
         {
             _playerUnits.Add(_unitsContainer.GetChild(i).GetComponent<PlayerUnit>());
@@ -89,11 +97,26 @@ public class CombatManager : MonoBehaviour
         _activeUnit = null;
     }
 
+    private void UnitDeath(Unit unit, PlayerUnit playerUnit)
+    {
+        _playerUnits.Remove(playerUnit);
+        _enemyUnits.Remove(unit);
+    }
+
     private void DeselectUnits()
     {
         foreach(PlayerUnit unit in _playerUnits)
         {
             unit.DeselectUnit();
+        }
+    }
+
+    private void ActivateCard(Card card)
+    {
+        _activeCard = card;
+        if(card.Type==CardTypes.attackMulti|| card.Type == CardTypes.bonusMulti|| card.Type == CardTypes.malusMulti)
+        {
+            ActiveUnit.SetUnitAnimation(card.AnimationName, true, true);
         }
     }
 }

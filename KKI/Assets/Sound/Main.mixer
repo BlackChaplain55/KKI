@@ -36,7 +36,7 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: f05e8dcc8c4dfe2409894147a611f9c3
-    name: AmbiexnVol
+    name: AmbientVol
   - guid: eba1c74fc23cf6143b635defdb2b2fe5
     name: EffectsVol
   - guid: ce15895b8d5f4fc4991672cce79a32c6

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using AutoLayout3D;
 
 //Это основная точка входа игры
 public class Game : MonoBehaviour
@@ -16,9 +17,12 @@ public class Game : MonoBehaviour
     [SerializeField] private Deck _deck;
     [SerializeField] private CombatManager _combatManager;
     [SerializeField] private Transform _playerDeckContainer;
-    [SerializeField] private AutoLayout3D.GridLayoutGroup3D _layoutGroup3D;
+    [SerializeField] private Transform _playerDeckDefaultPosition;
+    [SerializeField] private GridLayoutGroup3D _layoutGroup3D;
     [SerializeField] private Scene _currentScene;
-    private float _cellStep;
+    [SerializeField] private CardCollection _collection;
+
+    //private float _cellStep;
     private bool _isCombat;
     private Settings _settings;
     private PuzzleController _puzzleController;
@@ -47,36 +51,54 @@ public class Game : MonoBehaviour
     public Deck CurrentDeck => _deck;
     public bool IsCombat { get => _isCombat; set => _isCombat = value; }
     public CombatManager Combat => _combatManager;
-    public float CellStep { get => _cellStep; set => _cellStep = value; }
+    //public float CellStep { get => _cellStep; set => _cellStep = value; }
 
 private void OnValidate()
     {
-        if (!_mainMenu) _mainMenu = FindObjectOfType<MainMenu>();
+        if (!_mainMenu) _mainMenu = transform.Find("UI").GetComponent<MainMenu>();
         if (!_deck) _deck = GetComponent<Deck>();
         if (!_playerDeckContainer) _playerDeckContainer = transform.Find("PlayerDeck");
-        if (!_layoutGroup3D) _layoutGroup3D = _playerDeckContainer.transform.GetComponent<AutoLayout3D.GridLayoutGroup3D>();
+        if (!_layoutGroup3D) _layoutGroup3D = _playerDeckContainer.transform.GetComponent<GridLayoutGroup3D>();
     }
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
+        //if (GameInstance == null)
+        //{
+        //    GameInstance = this;
+        //    Initialize();
+        //}
+        //else Destroy(gameObject);    
+    }
+
+    void Awake()
+    {
+        
+        Application.targetFrameRate = 60;
+        DontDestroyOnLoad(gameObject);
+        
         if (GameInstance == null)
         {
             GameInstance = this;
             Initialize();
         }
-        else Destroy(gameObject);    
+        else Destroy(gameObject);
     }
 
-    void Awake()
+    private void OnEnable()
     {
-        Application.targetFrameRate = 60;     
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void Initialize()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
 
         _currentScene = SceneManager.GetActiveScene();
         _stateMachine = new StateMachine();
@@ -94,7 +116,7 @@ private void OnValidate()
         else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Constants.CombatSceneName))
         {
             _stateMachine.Initialize(_playState);
-            InitializeCombatScene();
+            //InitializeCombatScene();
         }
         else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Constants.GlobalMapSceneName))
         {
@@ -109,6 +131,7 @@ private void OnValidate()
         _settings = SaveLoadManager.SettingsLoad();
         _mainMenu.SetSettingsUI(_settings);
         SetVolumes();
+        //InitializePlayerDeck();
     }
 
     public void SetSettings(Settings newSettings)
@@ -155,26 +178,36 @@ private void OnValidate()
 
     private void InitializePlayerDeck() // Загружаем карты в руку игрока
     {
-        foreach (string cardName in _deck.PlayerDeck)
+        //foreach (string cardName in _deck.PlayerDeck)
+        //{
+        //    Card card = _cardCollection.FindCard(cardName);
+        //    if (card != null)
+        //    {
+        //        GameObject newCard = Instantiate(card.GameObject, _playerDeckContainer);
+        //        newCard.GetComponent<Card>().IsInDeck = true;
+        //    }
+        //}
+        //Это временное добавление всех карт из коллекции
+        foreach (GameObject card in _collection.Cards)
         {
-            Card card = _cardCollection.FindCard(cardName);
-            if (card != null)
-            {
-                GameObject newCard = Instantiate(card.GameObject, _playerDeckContainer);
-                newCard.GetComponent<Card>().IsInDeck = true;
-            }
+            GameObject newCard = Instantiate(card, _playerDeckContainer);
+            newCard.GetComponent<Card>().Initialize(this);
+            newCard.GetComponent<Card>().IsInDeck = true;
         }
         SetLayoutSpacing();
     }
 
     private void SetLayoutSpacing() //Настраиваем плотность расположения карт в руке игрока
     {
-        if (_playerDeckContainer.childCount <= 12)
-            _layoutGroup3D.spacing.x = 5;
-        else if (_playerDeckContainer.childCount <= 14)
-            _layoutGroup3D.spacing.x = 4;
+        if (_playerDeckContainer.childCount <= 8)
+            _layoutGroup3D.spacing.z = 1f;
+        else if (_playerDeckContainer.childCount <= 12)
+            _layoutGroup3D.spacing.z = 0.6f;
         else
-            _layoutGroup3D.spacing.x = 3;
+            _layoutGroup3D.spacing.z = 0.3f;
+        _playerDeckContainer.transform.position = new Vector3(_playerDeckContainer.transform.position.x, _playerDeckContainer.transform.position.y,
+            _playerDeckDefaultPosition.transform.position.z + (_layoutGroup3D.cellSize.z / 2 + _layoutGroup3D.spacing.z/2) * _playerDeckContainer.childCount - 1);
+        _layoutGroup3D.UpdateLayout();
     }
     
     private void SetVolumes() //установка громкости из насттроек в микшер

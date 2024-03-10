@@ -26,7 +26,9 @@ public class CardSelectState : IState
         {
             _cardView.SelectedVFX.Play(); //Эффект "горения" карты
         }
+        EventBus.Instance.ActivateCard?.Invoke(_card);
         _card.PointerClick += Deselect;
+        
     }
 
     public void Exit()

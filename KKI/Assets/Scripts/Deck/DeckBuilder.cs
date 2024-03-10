@@ -26,7 +26,7 @@ public class DeckBuilder : MonoBehaviour
         _game = FindObjectOfType<Game>();
         InitializeCollection();
         InitializeDeck();
-        EventBus.Instance.OnSelectCard?.AddListener(OnSelectCard);
+        EventBus.Instance.ActivateCard?.AddListener(OnSelectCard);
     }
 
     private void InitializeCollection() //Заполняем коллекцию карт из SO-библиотеки

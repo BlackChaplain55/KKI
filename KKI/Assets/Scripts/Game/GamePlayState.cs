@@ -16,7 +16,7 @@ public class GamePlayState : IState
     public void Enter()
     {
         if(_game.CurrentScene.name!= Constants.CombatSceneName)  _game.LoadScene(Constants.CombatSceneName);
-        _game.MainMenu.GameMusicPlayer.SetCombatPlaylist();
+        _game.MainMenu.GameMusicPlayer?.SetCombatPlaylist();
         _game.MainMenu.ChangeState(_game.MainMenu.CombatState);
         _game.MainMenu.Components.MenuPanel.SetActive(false);
     }

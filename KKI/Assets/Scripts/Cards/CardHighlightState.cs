@@ -38,10 +38,16 @@ public class CardHighlightState : IState
 
     private void Select(PointerEventData eventData)
     {
-        EventBus.Instance.OnSelectCard?.Invoke(_card);
         if (_card.CurrentGame.CurrentState is GamePlayState)
         {
-            _stateMachine.ChangeState(_card.SelectState);
+            if (_card.Type == CardTypes.attackMulti || _card.Type == CardTypes.bonusMulti || _card.Type == CardTypes.malusMulti)
+            {
+                EventBus.Instance.ActivateCard?.Invoke(_card);
+            }
+            else
+            {
+                _stateMachine.ChangeState(_card.SelectState);
+            }
         }
     }
 }

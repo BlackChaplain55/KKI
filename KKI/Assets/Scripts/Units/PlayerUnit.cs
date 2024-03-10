@@ -7,25 +7,17 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(UnitView))]
 public class PlayerUnit : Unit, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        EventBus.Instance.DeselectUnits?.Invoke();
-        _stateMachine.ChangeState(SelectState);
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
+    new public void OnPointerClick(PointerEventData eventData)
     {
         if (_stateMachine.CurrentState == DefaultState)
         {
             _stateMachine.ChangeState(HighlightState);
         }
-    }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (_stateMachine.CurrentState == HighlightState)
+        if (Combat.ActiveCard != null)
         {
-            _stateMachine.ChangeState(DefaultState);
+            Combat.ActiveUnit.SetUnitAnimation(Combat.ActiveCard.AnimationName, true, true);
+            Combat.CurrentTarget = this;
         }
     }
 
@@ -38,11 +30,5 @@ public class PlayerUnit : Unit, IPointerClickHandler, IPointerEnterHandler, IPoi
     public void DeselectUnit()
     {
         _stateMachine.ChangeState(DefaultState);
-    }
-
-    new public void Activate()
-    {
-        Debug.Log("Hero unit " + Name + " is activated!");
-        SetUnitAnimation("Slash", true, isTrigger: true);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,18 @@ using TMPro;
 
 public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+
+    [Space]
+    [Header("Card game data")]
+
+    [SerializeField] private CardTypes _type;
+    [SerializeField] private CardEffect _effect;
+    [SerializeField] private AnimationConstants _animationName;
+    [SerializeField] private bool _isCloseCombat;
+
+    [Space]
+    [Header("Tech data")]
+
     [SerializeField] private GameObject _gameObject;
     [SerializeField] private GameObject _cardModel;
     [SerializeField] private Game _game;
@@ -24,6 +37,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public delegate void StateHandler(IState state, IState oldState, Card sender);
 
     private bool _pointerEnter;
+    private CombatManager _combatManager;
 
     [SerializeField] private StateMachine _stateMachine;
     [SerializeField] private TMP_Text _cardHeader;
@@ -37,6 +51,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     private Vector3 _modelDefaultPosition;
     private Quaternion _modelDefaultRotation;
 
+    public string AnimationName { get => _animationName.ToString(); }
     public CardDefaultState DefaultState => _defaultState;
     public CardSelectState SelectState => _selectState;
     public CardHighlightState HightLightState => _highlightState;
@@ -50,12 +65,13 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public Quaternion ModelDefaultRotation => _modelDefaultRotation;
     public Game CurrentGame => _game;
 
-    public bool IsInDeck { get => _isInDeck; set => _isInDeck = value; } 
+    public bool IsInDeck { get => _isInDeck; set => _isInDeck = value; }
+    public CardTypes Type => _type;
 
     private void OnValidate()
     {
         if (!_gameObject) _gameObject = gameObject;
-        if (!_game) _game = FindObjectOfType<Game>();
+        //if (!_game) _game = FindObjectOfType<Game>();0
         if (!_cardView) _cardView = GetComponent<CardView>();
         if (!_cardModel) _cardModel = transform.Find("CardModel").gameObject;
     }
@@ -72,6 +88,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         _modelDefaultRotation = _cardModel.transform.localRotation;
 
         _stateMachine.Initialize(_defaultState);
+        _combatManager = FindObjectOfType<CombatManager>();
     }
 
     private void OnDestroy()
@@ -81,6 +98,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (_combatManager.ActiveUnit == null) return;
         PointerClick?.Invoke(eventData);
     }
 
@@ -98,8 +116,49 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         PointerChanged?.Invoke(_pointerEnter, this);
     }
 
-    public void Initialize()
+    public void Initialize(Game game)
     {
-        
+        _game = game;
     }
+
+    public void ApplyEffect(List<Unit> targets=null)
+    {
+        if (targets == null) {
+            targets = new();
+            targets.AddRange(_combatManager.EnemyUnits);
+        } 
+        foreach (var unit in targets)
+        {
+            if (_effect.Damage > 0) unit.DealInstantEffect(-_effect.Damage*_combatManager.ActiveUnit.Damage, _effect.InitiativeBonus);
+            if (_effect.Heal > 0) unit.DealInstantEffect(_effect.Heal, _effect.InitiativeBonus);
+            if(_effect.MovesCount>0) unit.AddEffect(_effect);
+        }
+        EventBus.Instance.DeselectUnits?.Invoke();
+        EventBus.Instance.UnitActivationFinished?.Invoke();
+        _stateMachine.ChangeState(_defaultState);
+    }
+}
+
+public enum CardTypes
+{
+    attackSingle,
+    attackMulti,
+    bonusSingle,
+    malusSingle,
+    bonusMulti,
+    malusMulti
+}
+
+[Serializable]
+public struct CardEffect
+{
+    public float Damage;
+    public float Heal;
+    public float InitiativeBonus;
+    public float MaxHealthBonus;
+    public float MaxInitiativeBonus;
+    public float DamageBonus;
+    public float DefenceBonus;
+    public int MovesCount;
+    public int CurrentMovesCount;
 }

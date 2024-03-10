@@ -34,6 +34,6 @@ public class CardDefaultState : IState
 
     private void Select(PointerEventData eventData)
     {
-        _stateMachine.ChangeState(_card.SelectState);
+        //_stateMachine.ChangeState(_card.SelectState);
     }
 }
