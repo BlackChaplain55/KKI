@@ -8,13 +8,16 @@ using AutoLayout3D;
 //Это основная точка входа игры
 public class Game : MonoBehaviour
 {
-    [SerializeField] private Color _availableMovesColor;
 
+    [Space]
+    [Header("Game components")]
+    [SerializeField] private Color _availableMovesColor;
     [SerializeField] private StateMachine _stateMachine;
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private CardCollection _cardCollection;
     [SerializeField] private Deck _deck;
+    [SerializeField] private DeckBuilder _deckBuilder;
     [SerializeField] private CombatManager _combatManager;
     [SerializeField] private Transform _playerDeckContainer;
     [SerializeField] private Transform _playerDeckDefaultPosition;
@@ -49,9 +52,11 @@ public class Game : MonoBehaviour
     public GameGlobalMapState GlobalMapState => _globalMapState;
     public CardCollection CardCollection => _cardCollection;
     public Deck CurrentDeck => _deck;
+    public DeckBuilder DeckBuider => _deckBuilder;
     public bool IsCombat { get => _isCombat; set => _isCombat = value; }
     public CombatManager Combat => _combatManager;
-    //public float CellStep { get => _cellStep; set => _cellStep = value; }
+
+    public float ActionPoints { get => _combatManager.ActionPoints; }
 
 private void OnValidate()
     {
@@ -99,7 +104,6 @@ private void OnValidate()
 
     private void Initialize()
     {
-
         _currentScene = SceneManager.GetActiveScene();
         _stateMachine = new StateMachine();
         _startState = new(_stateMachine, this);
@@ -131,7 +135,6 @@ private void OnValidate()
         _settings = SaveLoadManager.SettingsLoad();
         _mainMenu.SetSettingsUI(_settings);
         SetVolumes();
-        //InitializePlayerDeck();
     }
 
     public void SetSettings(Settings newSettings)
@@ -144,9 +147,10 @@ private void OnValidate()
     {
         // Действия при начале боя
         _isCombat = true;
+        _combatManager = FindObjectOfType<CombatManager>();
         _deck.LoadDeck();
         InitializePlayerDeck();
-        _combatManager = FindObjectOfType<CombatManager>();
+        
     }
 
     public void InitializeGlobalMapScene()
@@ -164,13 +168,14 @@ private void OnValidate()
     {     
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Constants.DeckBuildSceneName))
         {
-            // Дополнительные дейсствия после загрузки сцены колодостроения
+            _deckBuilder = FindAnyObjectByType<DeckBuilder>();
+            _deckBuilder.Init(this);
         }
         else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Constants.CombatSceneName))
         {
             InitializeCombatScene();
         }
-        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Constants.CombatSceneName))
+        else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Constants.GlobalMapSceneName))
         {
             InitializeGlobalMapScene();
         }
@@ -178,22 +183,31 @@ private void OnValidate()
 
     private void InitializePlayerDeck() // Загружаем карты в руку игрока
     {
-        //foreach (string cardName in _deck.PlayerDeck)
-        //{
-        //    Card card = _cardCollection.FindCard(cardName);
-        //    if (card != null)
-        //    {
-        //        GameObject newCard = Instantiate(card.GameObject, _playerDeckContainer);
-        //        newCard.GetComponent<Card>().IsInDeck = true;
-        //    }
-        //}
-        //Это временное добавление всех карт из коллекции
-        foreach (GameObject card in _collection.Cards)
+        _deck.Init();
+        _deck.AddToHand(_deck.GetRandomCards(_combatManager.InitialHandSize));
+
+        for (int i = _playerDeckContainer.childCount-1; i >=0 ; i--)
         {
-            GameObject newCard = Instantiate(card, _playerDeckContainer);
-            newCard.GetComponent<Card>().Initialize(this);
-            newCard.GetComponent<Card>().IsInDeck = true;
+            DestroyImmediate(_playerDeckContainer.GetChild(i));
         }
+
+        foreach (string cardName in _deck.PlayerHand)
+        {
+            Card card = _cardCollection.FindCard(cardName);
+            if (card != null)
+            {
+                GameObject newCard = Instantiate(card.GameObject, _playerDeckContainer);
+                newCard.GetComponent<Card>().IsInDeck = true;
+                newCard.GetComponent<Card>().Initialize(this);
+            }
+        }
+        //Это временное добавление всех карт из коллекции
+        //foreach (GameObject card in _collection.Cards)
+        //{
+        //    GameObject newCard = Instantiate(card, _playerDeckContainer);
+        //    newCard.GetComponent<Card>().Initialize(this);
+        //    newCard.GetComponent<Card>().IsInDeck = true;
+        //}
         SetLayoutSpacing();
     }
 

@@ -12,12 +12,14 @@ public class CardView : MonoBehaviour
     [SerializeField] private Game _game;
     [SerializeField] private ParticleSystem _selectedVFX;
     [SerializeField] private Animator _anim;
+    [SerializeField] private GameObject _fullViewPanel;
 
     public Animator Anim => _anim;
     public ParticleSystem SelectedVFX => _selectedVFX;
 
     private void OnEnable()
     {
+        _fullViewPanel.SetActive(false);
         _card.StateChanged += (state, oldState, sender) => StateChanged(state, sender.PointerEnter);
         _card.PointerChanged += (pointerEnter, sender) => StateChanged(sender.CurrentState, pointerEnter);
     }
@@ -30,6 +32,7 @@ public class CardView : MonoBehaviour
 
     private void OnValidate()
     {
+        if (!_fullViewPanel) _fullViewPanel = transform.Find("CardModel")?.Find("Card")?.Find("CardInfoCanvas")?.Find("FullView")?.gameObject;
         if (!_meshRenderer) _meshRenderer = GetComponent<MeshRenderer>();
         if (!_card) _card = GetComponent<Card>();
         if (!_game) _game = FindObjectOfType<Game>();
@@ -42,5 +45,21 @@ public class CardView : MonoBehaviour
         
     }
 
+    public void SetFullView()
+    {
+        _fullViewPanel.SetActive(true);
+        _anim.SetTrigger("FullView");
+    }
 
+    public void SetAnimation(string animation, bool value, bool isTrigger)
+    {
+        if (!isTrigger)
+        {
+            _anim.SetBool(animation, value);
+        }
+        else
+        {
+            _anim.SetTrigger(animation);
+        }
+    }
 }

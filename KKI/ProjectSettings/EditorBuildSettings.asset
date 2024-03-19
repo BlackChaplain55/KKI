@@ -5,15 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/CombatScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
     path: Assets/Scenes/MainMenuScene.unity
     guid: eb33a4fce7fdead4c9e2fb102a3e98ba
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/DeckBuildScene.unity
     guid: 8c33f05524fed9d4c926f238a392913f
+  - enabled: 1
+    path: Assets/Scenes/CombatScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
     path: Assets/Scenes/GlobalMapScene.unity
     guid: 525529fe12f05754da8b13bb7f4f9565

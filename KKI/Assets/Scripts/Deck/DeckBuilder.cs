@@ -13,7 +13,10 @@ public class DeckBuilder : MonoBehaviour
     [SerializeField] private Transform _playerDeck;
     [SerializeField] private AutoLayout3D.GridLayoutGroup3D _layoutGroup3D;
     [SerializeField] private Game _game;
-    [SerializeField] private int _deckSize = 20;
+    [SerializeField] private int _deckSize = 25;
+    [SerializeField] private bool _haveActiveCard=false;
+
+    public bool HaveActiveCard => _haveActiveCard;
 
     private void OnValidate()
     {
@@ -21,12 +24,33 @@ public class DeckBuilder : MonoBehaviour
         if (!_layoutGroup3D) _layoutGroup3D = _playerDeck.GetComponent<AutoLayout3D.GridLayoutGroup3D>();
     }
 
-    private void Awake()
+    //private void Awake()
+    public void Init(Game game)
     {
-        _game = FindObjectOfType<Game>();
+        _game = game;
+        //_game = FindObjectOfType<Game>();
         InitializeCollection();
         InitializeDeck();
         EventBus.Instance.ActivateCard?.AddListener(OnSelectCard);
+    }
+
+    public void ActivateCard(bool state)
+    {
+        _haveActiveCard = state;
+    }
+
+    public void AddCardToDeck(string cardName) {
+        if (_playerDeck.childCount == _deckSize || cardName.Contains(Constants.UnknownCard)) return;
+        
+        Card card = _cardCollection.FindCard(cardName);
+        GameObject newCardGO = GameObject.Instantiate(card.gameObject, _playerDeck);
+        newCardGO.transform.localRotation = Quaternion.Euler(0, -100, 70);
+        Card newCard = newCardGO.GetComponent<Card>();
+        newCard.IsInDeck = true;
+        SetLayoutSpacing();
+        _game.CurrentDeck.AddToDeck(card);
+        _game.CurrentDeck.SaveDeck();  // Сохраняем колоду с добавленной картой
+        _deckCounter.text = _playerDeck.childCount + "/" + _deckSize;
     }
 
     private void InitializeCollection() //Заполняем коллекцию карт из SO-библиотеки
@@ -38,27 +62,38 @@ public class DeckBuilder : MonoBehaviour
             Card card = cardObject.GetComponent<Card>();
             GameObject newCard = Instantiate(cardObject,_collectionContainer);
             newCard.transform.localRotation = Quaternion.Euler(0, -90, 70);
+            card.Initialize(_game);
             cardCount++;
         }
 
         for (int i = cardCount; i < _collectionSize; i++) //Показываем неисследованные карты
         {
-            GameObject newCard = Instantiate(_cardCollection.UnknownCard, _collectionContainer);
-            newCard.transform.localRotation = Quaternion.Euler(0, -90, 70);
+            GameObject newCardGO = Instantiate(_cardCollection.UnknownCard, _collectionContainer);            
+            newCardGO.transform.localRotation = Quaternion.Euler(0, -90, 70);
+            Card newCard = newCardGO.GetComponent<Card>();
+            newCard.Initialize(_game);
         }
     }
 
     private void InitializeDeck() //Загружаем колоду игрока
     {
         _game.CurrentDeck.LoadDeck();
+
+        for (int i = _playerDeck.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(_playerDeck.GetChild(i));
+        }
+
         foreach (string cardName in _game.CurrentDeck.PlayerDeck)
         {
             Card card = _cardCollection.FindCard(cardName);
             if (card != null)
             {
-                GameObject newCard = Instantiate(card.GameObject, _playerDeck);
-                newCard.transform.localRotation = Quaternion.Euler(0, -100, 70);
-                newCard.GetComponent<Card>().IsInDeck = true;
+                GameObject newCardGO = Instantiate(card.GameObject, _playerDeck);
+                newCardGO.transform.localRotation = Quaternion.Euler(0, -100, 70);
+                Card newCard = newCardGO.GetComponent<Card>();
+                newCard.IsInDeck = true;
+                newCard.Initialize(_game);
             }
         }
         SetLayoutSpacing();
@@ -67,26 +102,10 @@ public class DeckBuilder : MonoBehaviour
 
     private void OnSelectCard(Card card) //При нажатии на карту создаем её копию в колоде игрока или удаляем оттуда
     {
-        if (_playerDeck.childCount == _deckSize || card.name.Contains(Constants.UnknownCard)) return;
-        if (!card.IsInDeck)
-        {
-            Vector3 position = card.CardModel.transform.position;
-            Quaternion rotation = card.CardModel.transform.rotation;
-            card.CardModel.transform.localPosition = card.ModelDefaultPosition;
-            card.CardModel.transform.localRotation = card.ModelDefaultRotation;  //Возвращаем карту в изначальное положение перед копированием
-            GameObject newCard = Instantiate(card.GameObject, _playerDeck);
-            card.CardModel.transform.localPosition = position;
-            card.CardModel.transform.localRotation = rotation;  //Возвращаем карту в положение выделенной карты
-            newCard.GetComponent<Card>().IsInDeck = true;
-            newCard.transform.localRotation = Quaternion.Euler(0, -100, 70);
-            SetLayoutSpacing();
-            _game.CurrentDeck.AddToDeck(card);
-            _game.CurrentDeck.SaveDeck();  // Сохраняем колоду с добавленной картой
-            _deckCounter.text = _playerDeck.childCount+ "/"+ _deckSize;
-        }
-        else
-        {
+        if (card.IsInDeck)
+        { 
             _game.CurrentDeck.RemoveFromDeck(card); // Удаление карты
+            _game.CurrentDeck.SaveDeck();
             DestroyImmediate(card.gameObject);
             _deckCounter.text = _playerDeck.childCount + "/" + _deckSize;
         }
@@ -98,7 +117,13 @@ public class DeckBuilder : MonoBehaviour
             _layoutGroup3D.spacing.x = 5;
         else if (_playerDeck.childCount <= 13)
             _layoutGroup3D.spacing.x = 4;
-        else
+        else if (_playerDeck.childCount <= 16)
             _layoutGroup3D.spacing.x = 3;
+        else if (_playerDeck.childCount <= 19)
+            _layoutGroup3D.spacing.x = 2.5f;
+        else if (_playerDeck.childCount <= 22)
+            _layoutGroup3D.spacing.x = 2;
+        else 
+            _layoutGroup3D.spacing.x = 1.5f;
     }
 }

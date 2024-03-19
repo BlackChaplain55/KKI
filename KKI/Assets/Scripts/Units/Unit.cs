@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 //Этот класс описывает Юнита
 [RequireComponent(typeof(UnitView))]
@@ -28,10 +29,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     [Header("Runtime stats")]
     [SerializeField] private float _currentHealth;
     [SerializeField] private float _currentInitiative;
-    [SerializeField] private float _healthBonus;
-    [SerializeField] private float _initiativeBonus;
-    [SerializeField] private float _damageBonus;
-    [SerializeField] private float _defenceBonus;
+    [SerializeField] private StatsBonus _bonus;
     [SerializeField] private PlayerUnit _AItarget;
     [SerializeField] private Unit _playerTarget;
 
@@ -56,11 +54,12 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public Transform Transform => _transform;
 
     public CombatManager Combat { get => _combatManager; }
+    public UnitView View { get => _view; }
     public string Name { get => _name; }
     public float Damage { get => _damage; }
     public float Defence { get => _defence; }
-    public float MaxHealth { get => _health;}
-    public float MaxInitiative { get => _initiative; }
+    public float MaxHealth { get => _health+_bonus.Health;}
+    public float MaxInitiative { get => _initiative-_bonus.Initiative; }
     public float CurrentHealth { get => _currentHealth; }
     public float CurrentInitiative { get => _currentInitiative; }
     // Start is called before the first frame update
@@ -106,6 +105,9 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void Activate()
     {
+        _effects.CheckEffects();
+        _bonus = _effects.SetBonus();
+        _view.UpdateUI();
         if (_AI)
         {
             Debug.Log("Enemy unit " + _name + " is activated!");
@@ -163,7 +165,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public void Tick()
     {
         _currentInitiative++;
-        if (_currentInitiative >= _initiative - _initiativeBonus)
+        if (_currentInitiative >= _initiative - _bonus.Initiative)
         {
             EventBus.Instance.ActivateUnit?.Invoke(this);
             Activate();
@@ -181,17 +183,17 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
         if (health < 0) //Damage
         {
-            health -= health * (_defence + _defenceBonus) / 100;
+            health -= health * (_defence + _bonus.Defence) / 100;
             _view.Indicators(health, 0, 0);
             SetUnitAnimation("Impact", true, isTrigger: true);
         }
             
         _currentHealth += health;       
-        _currentHealth = Mathf.Clamp(_currentHealth, 0, _health + _healthBonus);
+        _currentHealth = Mathf.Clamp(_currentHealth, 0, _health + _bonus.Health);
         if (_currentHealth <= 0) Death();
         
         _currentInitiative += initiative;
-        _currentInitiative = Mathf.Clamp(_currentInitiative, 0, _initiative + _initiativeBonus);
+        _currentInitiative = Mathf.Clamp(_currentInitiative, 0, _initiative - _bonus.Initiative);
 
         if (initiative != 0) _view.Indicators(0, initiative, 0);
 
@@ -208,16 +210,19 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     {
         effect.CurrentMovesCount = effect.MovesCount;
         _effects.AddEffect(effect);
+        _bonus = _effects.SetBonus();
+        _view.UpdateUI();
     }
 
     private void Init(CombatManager combatManager)
     {
         _currentHealth = _health;
         _currentInitiative = 0;
-        _healthBonus = 0;
-        _initiativeBonus = 0;
-        _damageBonus = 0;
-        _defenceBonus = 0;
+        _bonus = new StatsBonus();
+        _bonus.Initiative = 0;
+        _bonus.Health = 0;
+        _bonus.Damage = 0;
+        _bonus.Defence = 0;
         _view.Init(this, _name);
 
         _stateMachine = new StateMachine();
@@ -228,8 +233,9 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         _highlightState = new(_stateMachine, this, _view);
 
         _stateMachine.Initialize(_defaultState);
-        _combatManager = FindObjectOfType<CombatManager>();
+        _combatManager = combatManager;
         if (_AI) _AI.Init(_combatManager);
+        _effects.Init(_combatManager.GetGame.CardCollection);
     }
 }
 
@@ -244,6 +250,7 @@ public enum AnimationConstants
     ReceiveHeal
 }
 
+[Serializable]
 public struct StatsBonus
 {
     public float Initiative;

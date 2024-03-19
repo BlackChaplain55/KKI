@@ -2259,6 +2259,7 @@ GameObject:
   - component: {fileID: 4271153088669819408}
   - component: {fileID: 2164154271165931422}
   - component: {fileID: 6505003678880924222}
+  - component: {fileID: 4510071048091761165}
   m_Layer: 0
   m_Name: DefaultEnemy
   m_TagString: Untagged
@@ -2276,7 +2277,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 9.96, y: 10.21, z: 45.46}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 287010892981603293}
@@ -2351,7 +2352,7 @@ MonoBehaviour:
   _initiative: 80
   _damage: 20
   _defence: 20
-  _temporaryEffects: []
+  _effects: {fileID: 4510071048091761165}
   _gameObject: {fileID: 0}
   _transform: {fileID: 8826832687372877354}
   _anim: {fileID: 1073352240043798423}
@@ -2359,10 +2360,13 @@ MonoBehaviour:
   _AI: {fileID: 2164154271165931422}
   _currentHealth: 0
   _currentInitiative: 0
-  _healthBonus: 0
-  _initiativeBonus: 0
-  _damageBonus: 0
-  _defenceBonus: 0
+  _bonus:
+    Initiative: 0
+    Health: 0
+    Defence: 0
+    Damage: 0
+  _AItarget: {fileID: 0}
+  _playerTarget: {fileID: 0}
 --- !u!114 &4271153088669819408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2412,6 +2416,24 @@ CapsuleCollider:
   m_Height: 1.8790481
   m_Direction: 1
   m_Center: {x: 0, y: 0.6536617, z: 0}
+--- !u!114 &4510071048091761165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4169709697365084075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 325cc8179b60cf64b98a56c8dff0f3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unit: {fileID: 0}
+  _collection: {fileID: 0}
+  _temporaryEffects: []
+  _effectsContainer: {fileID: 425263144770289004}
+  _effectPrefab: {fileID: 4913974328274419541, guid: 6d2cbe7f66d67bd48973e7ef9cde3788,
+    type: 3}
 --- !u!1 &4334120162968947569
 GameObject:
   m_ObjectHideFlags: 0
@@ -4140,6 +4162,7 @@ RectTransform:
   - {fileID: 2817569259373261331}
   - {fileID: 4884738013478829902}
   - {fileID: 7008784667530892928}
+  - {fileID: 425263144770289004}
   m_Father: {fileID: 287010892981603293}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4320,6 +4343,66 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &8410423307913104700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 425263144770289004}
+  - component: {fileID: 8250406828353494098}
+  m_Layer: 0
+  m_Name: EffectsContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &425263144770289004
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8410423307913104700}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4345640580336303238}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.2, y: 46.8}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8250406828353494098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8410423307913104700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_StartCorner: 0
+  m_StartAxis: 1
+  m_CellSize: {x: 32, y: 32}
+  m_Spacing: {x: 2, y: 2}
+  m_Constraint: 2
+  m_ConstraintCount: 1
 --- !u!1 &8477581244559836226
 GameObject:
   m_ObjectHideFlags: 0

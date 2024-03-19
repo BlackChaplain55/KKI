@@ -16,9 +16,10 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     [Header("Card game data")]
 
     [SerializeField] private CardTypes _type;
+    [SerializeField] private int _actionPointCost = 0;
     [SerializeField] private CardEffect _effect;
     [SerializeField] private AnimationConstants _animationName;
-    [SerializeField] private bool _isCloseCombat;
+    [SerializeField] private bool isDark = false;
 
     [Space]
     [Header("Tech data")]
@@ -46,6 +47,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     private CardDefaultState _defaultState;
     private CardSelectState _selectState;
     private CardHighlightState _highlightState;
+    private CardDescriptionState _descriptionState;
 
     private bool _isInDeck;
     private Vector3 _modelDefaultPosition;
@@ -55,8 +57,10 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public CardDefaultState DefaultState => _defaultState;
     public CardSelectState SelectState => _selectState;
     public CardHighlightState HightLightState => _highlightState;
+    public CardDescriptionState DescriptionState => _descriptionState;
     public IState CurrentState => _stateMachine.CurrentState;
     public bool PointerEnter => _pointerEnter;
+    public int APCost => _actionPointCost;
 
     public StateMachine StateMachine => _stateMachine;
     public GameObject GameObject => _gameObject;
@@ -84,11 +88,13 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         _defaultState = new(_stateMachine,this, _cardView);
         _selectState = new(_stateMachine, this, _cardView);
         _highlightState = new(_stateMachine, this, _cardView);
+        _descriptionState = new(_stateMachine, this, _cardView);
         _modelDefaultPosition = _cardModel.transform.localPosition;
         _modelDefaultRotation = _cardModel.transform.localRotation;
 
         _stateMachine.Initialize(_defaultState);
-        _combatManager = FindObjectOfType<CombatManager>();
+        if (!_combatManager) _combatManager = FindObjectOfType<CombatManager>();
+        if (!_game) _game = FindFirstObjectByType<Game>();
     }
 
     private void OnDestroy()
@@ -98,13 +104,17 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (_combatManager.ActiveUnit == null) return;
+        if (_game.CurrentState is GamePlayState) 
+        {
+            if (_combatManager.ActiveUnit == null) return;
+        }
         PointerClick?.Invoke(eventData);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         _pointerEnter = true;
+        if (_game.CurrentState is GameDeckBuildState && _game.DeckBuider.HaveActiveCard) return;
         if (_stateMachine.CurrentState is CardDefaultState) _stateMachine.ChangeState(_highlightState);
         PointerChanged?.Invoke(_pointerEnter, this);
     }
@@ -118,7 +128,18 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void Initialize(Game game)
     {
+        if (game == null)
+        {
+            Debug.Log("CARD INITIALIZATION ERROR");
+        }
         _game = game;
+        float rnd = UnityEngine.Random.Range(0.5f, 1.2f);
+        _cardView.Anim.SetFloat("IdleSpeed", rnd);
+    }
+
+    public void SetFullView()
+    {
+        _cardView.SetFullView();
     }
 
     public void ApplyEffect(List<Unit> targets=null)
@@ -129,13 +150,33 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         } 
         foreach (var unit in targets)
         {
-            if (_effect.Damage > 0) unit.DealInstantEffect(-_effect.Damage*_combatManager.ActiveUnit.Damage, _effect.InitiativeBonus);
+            if (_effect.Damage > 0||_effect.InitiativeBonus >0) unit.DealInstantEffect(-_effect.Damage*_combatManager.ActiveUnit.Damage, _effect.InitiativeBonus);
             if (_effect.Heal > 0) unit.DealInstantEffect(_effect.Heal, _effect.InitiativeBonus);
             if(_effect.MovesCount>0) unit.AddEffect(_effect);
         }
+        EventBus.Instance.DiscardCard?.Invoke(this);
         EventBus.Instance.DeselectUnits?.Invoke();
         EventBus.Instance.UnitActivationFinished?.Invoke();
-        _stateMachine.ChangeState(_defaultState);
+        _combatManager.ActionPoints -= _actionPointCost;
+        _combatManager.UpdateUI();
+        DestroyCard();
+        //_stateMachine.ChangeState(_defaultState);
+    }
+
+    public void ToDeck()
+    {
+        _game.DeckBuider.AddCardToDeck(this.name);
+    }
+
+    public void SetState(IState state)
+    {
+        _stateMachine.ChangeState(state);
+    }
+
+    public void DestroyCard()
+    {
+        if (_game.DeckBuider) _game.DeckBuider.ActivateCard(false);
+        Destroy(this.gameObject);
     }
 }
 
@@ -147,6 +188,15 @@ public enum CardTypes
     malusSingle,
     bonusMulti,
     malusMulti
+}
+
+public enum EffectTypes
+{
+    speed,
+    damage,
+    fire,
+    ice,
+    shield
 }
 
 [Serializable]
@@ -161,4 +211,5 @@ public struct CardEffect
     public float DefenceBonus;
     public int MovesCount;
     public int CurrentMovesCount;
+    public EffectTypes type;
 }

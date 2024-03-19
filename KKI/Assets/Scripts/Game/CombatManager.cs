@@ -3,33 +3,53 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Это класс отвечает за интерфес в основном игровом режиме
+[RequireComponent(typeof(CombatUI))]
 
 public class CombatManager : MonoBehaviour
 {
+    [Header("Game settings")]
+    [SerializeField] private int _initialHandSize = 6;
+    [SerializeField] private int _cardsPerTurn = 3;
+    [SerializeField] private int _initialAP = 2;
+    [SerializeField] private int _initialAPPerTurn = 3;
+    [SerializeField] private float _turnLength;
+    [SerializeField] private int _actionPoints;
+    [SerializeField] private float _tickInterval;
+    [Space]
+    [Header("Game components")]
     [SerializeField] private Game _game;
+    [SerializeField] private CombatUI _combatUI;
     [SerializeField] private Transform _unitsContainer;
     [SerializeField] private Transform _enemiesContainer;
-    [SerializeField] private float _tickInterval;
     [SerializeField] private List<PlayerUnit> _playerUnits;
     [SerializeField] private List<Unit> _enemyUnits;
     [SerializeField] private Unit _currentTarget;
 
+
     private Unit _activeUnit;
     private Card _activeCard;
     private float _tickTimer;
+    private float _currentTurnLength;
+    private int _bonusAPPerTurn;
 
     public Unit CurrentTarget { get => _currentTarget; set => _currentTarget = value; }
-    
-    public Unit ActiveUnit  => _activeUnit;
+    public int ActionPoints { get => _actionPoints; set => _actionPoints = value; }
+    public int InitialHandSize { get => _initialHandSize; }
+
+    public Game GetGame => _game;
+    public Unit ActiveUnit => _activeUnit;
     public Card ActiveCard => _activeCard;
     public List<PlayerUnit> PlayerUnits => _playerUnits;
     public List<Unit> EnemyUnits => _enemyUnits;
+    public float CurrentTurnLength { get => _currentTurnLength; }
+    public float TurnLength { get => _turnLength; }
 
     private void OnValidate()
     {
         if (!_game) _game = FindObjectOfType<Game>();
         if (!_unitsContainer) _unitsContainer = transform.Find("PlayerUnits");
         if (!_enemiesContainer) _enemiesContainer = transform.Find("EnemyUnits");
+        if (!_combatUI) _combatUI = GetComponent<CombatUI>();
     }
 
     private void Start()
@@ -67,11 +87,19 @@ public class CombatManager : MonoBehaviour
         {
             if (_activeUnit == null) unit.Tick();
         }
+        _currentTurnLength++;
+        if (_currentTurnLength >= _turnLength)
+        {
+            _currentTurnLength = 0;
+            Turn();
+        }
+        _combatUI.UpdateUI();
     }
 
     public void Initialize()
     {
         _tickTimer = 0;
+        _actionPoints = _initialAP;
         EventBus.Instance.ActivateUnit.AddListener(ActivateUnit);
         EventBus.Instance.ActivateCard.AddListener(ActivateCard);
         EventBus.Instance.DeselectUnits.AddListener(DeselectUnits);
@@ -85,11 +113,18 @@ public class CombatManager : MonoBehaviour
         {
             _enemyUnits.Add(_enemiesContainer.GetChild(i).GetComponent<Unit>());
         }
+        _combatUI.Init(this);
     }
 
     public void Exit()
     {
-       
+
+    }
+
+    private void Turn()
+    {
+        _actionPoints += _initialAPPerTurn+ _bonusAPPerTurn;
+        _game.CurrentDeck.AddToHand(_game.CurrentDeck.GetRandomCards(_cardsPerTurn));
     }
 
     private void UnitActivationFinished()
@@ -118,5 +153,10 @@ public class CombatManager : MonoBehaviour
         {
             ActiveUnit.SetUnitAnimation(card.AnimationName, true, true);
         }
+    }
+
+    public void UpdateUI()
+    {
+        _combatUI.UpdateUI();
     }
 }

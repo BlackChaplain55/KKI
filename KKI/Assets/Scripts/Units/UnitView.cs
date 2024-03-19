@@ -65,8 +65,8 @@ public class UnitView : MonoBehaviour
 
     public void UpdateUI()
     {
-        _healthSlider.fillAmount = _unit.CurrentHealth /_unit.MaxHealth;
-        _initiativeSlider.fillAmount = _unit.CurrentInitiative/_unit.MaxInitiative;
+        _healthSlider.fillAmount = _unit.CurrentHealth /(_unit.MaxHealth);
+        _initiativeSlider.fillAmount = _unit.CurrentInitiative/(_unit.MaxInitiative);
         _healthText.text = _unit.CurrentHealth.ToString() + "/" + _unit.MaxHealth.ToString();
         _initiativeText.text = _unit.CurrentInitiative.ToString() + "/" + _unit.MaxInitiative.ToString();
     }

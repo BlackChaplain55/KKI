@@ -22,7 +22,8 @@ public class MenuCombatState : IState
         _mainMenu.Components.ContinueButton.gameObject.SetActive(true);
         _mainMenu.Components.StartButton.gameObject.SetActive(true);
         _mainMenu.Components.ReturnButton.gameObject.SetActive(true);
-        _mainMenu.Components.DeckButton.gameObject.SetActive(false);
+        //Доступ к колоде временно доступен
+        _mainMenu.Components.DeckButton.gameObject.SetActive(true);
     }
 
     public void Exit()

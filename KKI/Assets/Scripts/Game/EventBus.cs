@@ -12,6 +12,7 @@ public class EventBus : MonoBehaviour
     public UnityEvent<Unit,PlayerUnit> UnitDeath;
     public UnityEvent UnitActivationFinished;
     public UnityEvent<Card> ActivateCard;
+    public UnityEvent<Card> DiscardCard;
     public UnityEvent OnMapTrigger;
     public UnityEvent Tick;
 
