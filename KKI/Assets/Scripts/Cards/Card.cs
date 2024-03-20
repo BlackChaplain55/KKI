@@ -22,7 +22,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     [SerializeField] private CardEffect _effect;
     [SerializeField] private AnimationConstants _animationName;
     [SerializeField] private bool isDark = false;
-    [SerializeField] private SerializedDictionary<Unit,CardEffect> _personalEffects;
+    [SerializeField] private SerializedDictionary<Unit,List<CardEffect>> _personalEffects;
 
     [Space]
     [Header("Tech data")]
@@ -177,8 +177,8 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         ApplyEffect(_effect, cardUser, targets);
         foreach(var personalEffect in _personalEffects)
         {
-            if(personalEffect.Value.isAOE) ApplyEffect(personalEffect.Value, cardUser);
-            else ApplyEffect(personalEffect.Value, cardUser, targets);
+            //if(personalEffect.Value.isAOE) ApplyEffect(personalEffect.Value, cardUser);
+           // else ApplyEffect(personalEffect.Value, cardUser, targets);
         }
 
         EventBus.Instance.DiscardCard?.Invoke(this);

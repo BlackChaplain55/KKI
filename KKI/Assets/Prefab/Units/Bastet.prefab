@@ -2886,6 +2886,16 @@ PrefabInstance:
       propertyPath: _name
       value: "\u0411\u0430\u0441\u0442\u0435\u0442"
       objectReference: {fileID: 0}
+    - target: {fileID: 7959832680519910696, guid: 0ec5669bc45ff9f49a99a13e6bd66f7f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.27984816
+      objectReference: {fileID: 0}
+    - target: {fileID: 7959832680519910696, guid: 0ec5669bc45ff9f49a99a13e6bd66f7f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.1159169
+      objectReference: {fileID: 0}
     - target: {fileID: 8826832687372877354, guid: 0ec5669bc45ff9f49a99a13e6bd66f7f,
         type: 3}
       propertyPath: m_LocalScale.x
