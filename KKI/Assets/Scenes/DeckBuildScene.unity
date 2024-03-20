@@ -685,6 +685,7 @@ MonoBehaviour:
   _collectionSize: 25
   _playerDeck: {fileID: 1187316074}
   _layoutGroup3D: {fileID: 1187316075}
+  _collectionlayoutGroup3D: {fileID: 1249222742}
   _game: {fileID: 0}
   _deckSize: 25
   _haveActiveCard: 0
@@ -1327,6 +1328,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1675627231}
   m_CullTransparentMesh: 1
+--- !u!114 &1772737540 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6525791134401825208, guid: 624774a931f2a4248ba0dce2ddcdee77,
+    type: 3}
+  m_PrefabInstance: {fileID: 1963975785}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f63ddc072c78c53449c7614bdc9da164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1847005080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,17 +1553,17 @@ PrefabInstance:
     - target: {fileID: 6371326859040653474, guid: 624774a931f2a4248ba0dce2ddcdee77,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.264343
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6371326859040653474, guid: 624774a931f2a4248ba0dce2ddcdee77,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.885208
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6371326859040653474, guid: 624774a931f2a4248ba0dce2ddcdee77,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 26.26425
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6371326859040653474, guid: 624774a931f2a4248ba0dce2ddcdee77,
         type: 3}
@@ -1587,11 +1600,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8742402801560231205, guid: 624774a931f2a4248ba0dce2ddcdee77,
+    - target: {fileID: 9118707446766679486, guid: 624774a931f2a4248ba0dce2ddcdee77,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: _game
+      value: 
+      objectReference: {fileID: 1772737540}
     - target: {fileID: 9121982864428074093, guid: 624774a931f2a4248ba0dce2ddcdee77,
         type: 3}
       propertyPath: m_AnchorMax.y

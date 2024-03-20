@@ -16,7 +16,7 @@ public class GameDeckBuildState : IState
     public void Enter()
     {
         if (_game.CurrentScene.name != Constants.DeckBuildSceneName) _game.LoadScene(Constants.DeckBuildSceneName);
-        _game.MainMenu.GameMusicPlayer.SetDeckbuildPlaylist();
+        _game.MainMenu.GameMusicPlayer?.SetDeckbuildPlaylist();
         _game.MainMenu.ChangeState(_game.MainMenu.DeckBuildState);
         _game.MainMenu.Components.MenuPanel.SetActive(false);
     }

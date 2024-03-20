@@ -13,6 +13,7 @@ public class UnitView : MonoBehaviour
     [SerializeField] private TMP_Text _name;
     [SerializeField] private TMP_Text _healthText;
     [SerializeField] private TMP_Text _initiativeText;
+    [SerializeField] private TMP_Text _skillText;
     [SerializeField] private GameObject _healthDamage;
     [SerializeField] private GameObject _heal;
     [SerializeField] private GameObject _initiativeDamage;

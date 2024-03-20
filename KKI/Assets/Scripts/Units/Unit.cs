@@ -15,6 +15,8 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     [SerializeField] private float _initiative;
     [SerializeField] private float _damage;
     [SerializeField] private float _defence;
+    [SerializeField] private float _magicPower;
+    [SerializeField] private float _magicResist;
 
     [Space]
     [Header("Unit Data")]
@@ -139,11 +141,11 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             {
                 List < Unit > targets = new List<Unit>();
                 targets.Add(_combatManager.CurrentTarget);
-                _combatManager.ActiveCard.ApplyEffect(targets);
+                _combatManager.ActiveCard.ApplyCardEffects(this, targets);
             }
             else
             {
-                _combatManager.ActiveCard.ApplyEffect();
+                _combatManager.ActiveCard.ApplyCardEffects(this);
             }
             _combatManager.CurrentTarget = null;
             EventBus.Instance.UnitActivationFinished?.Invoke();
@@ -174,29 +176,35 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         _view.UpdateUI();
     }
 
-    public void DealInstantEffect(float health, float initiative)
+    public float DealInstantEffect(float healthEffect, float initiativeEffect)
     {
-        if (health > 0) //Heal
+        float appliedEffect = 0;
+
+        if (healthEffect > 0) //Heal
         {
-            _view.Indicators(0, 0, health);
+            _view.Indicators(0, 0, healthEffect);
         }
 
-        if (health < 0) //Damage
-        {
-            health -= health * (_defence + _bonus.Defence) / 100;
-            _view.Indicators(health, 0, 0);
+        if (healthEffect < 0) //Damage
+        { 
+            healthEffect -= healthEffect * (_defence + _bonus.Defence) / 100;
+            appliedEffect = healthEffect;
+            _view.Indicators(healthEffect, 0, 0);
             SetUnitAnimation("Impact", true, isTrigger: true);
         }
             
-        _currentHealth += health;       
+        _currentHealth += healthEffect;       
         _currentHealth = Mathf.Clamp(_currentHealth, 0, _health + _bonus.Health);
         if (_currentHealth <= 0) Death();
         
-        _currentInitiative += initiative;
-        _currentInitiative = Mathf.Clamp(_currentInitiative, 0, _initiative - _bonus.Initiative);
+        if (initiativeEffect != 0)
+        {
+            _currentInitiative += initiativeEffect;
+            _currentInitiative = Mathf.Clamp(_currentInitiative, 0, _initiative - _bonus.Initiative);
+            _view.Indicators(0, initiativeEffect, 0);
+        }
 
-        if (initiative != 0) _view.Indicators(0, initiative, 0);
-
+        return appliedEffect;
         _view.UpdateUI();
     }
 

@@ -14,6 +14,7 @@ public class CardCollection : ScriptableObject
     [SerializeField] public SerializedDictionary<EffectTypes, Sprite> EffectIcons;
     [SerializeField] public SerializedDictionary<EffectTypes, string> EffectDescriptions;
     [SerializeField] public SerializedDictionary<CardTypes, string> CardTypesDescriptions;
+    [SerializeField] public SerializedDictionary<CardColors, Material> CardMaterials;
 
     [SerializeField] public GameObject UnknownCard;
     [SerializeField] public Sprite _defaultSprite;

@@ -22,8 +22,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Toggle _toggleSound;
     [SerializeField] private StateMachine _stateMachine;
 
-    private MusicPlayer _musicPlayer;
-    private Game _game;
+    [SerializeField] private MusicPlayer _musicPlayer;
+    [SerializeField] private Game _game;
 
     private MenuCombatState _combatState;
     private MenuDeckBuildState _deckbuildState;
@@ -46,7 +46,7 @@ public class MainMenu : MonoBehaviour
         if (!_settingsPanel) _settingsPanel = transform.Find("SettingsPanel").gameObject;        
         if (!_game) _game = FindObjectOfType<Game>();
         if (!_musicPlayer) _musicPlayer = GetComponent<MusicPlayer>();
-        if(!_menuComponents) _menuComponents = GetComponent<MenuComponents>();
+        if (!_menuComponents) _menuComponents = GetComponent<MenuComponents>();
     }
 
     private void Awake()
@@ -99,6 +99,11 @@ public class MainMenu : MonoBehaviour
 
     public void ShowMenu()
     {
+        Debug.Log("ShowMenu");
+        Debug.Log(_game.ToString());
+        Debug.Log(_game.MainMenu.ToString());
+        Debug.Log(_game.MainMenu.Components.ToString());
+        Debug.Log(_game.MainMenu.Components.MenuPanel.ToString());
         _game.MainMenu.Components.MenuPanel.SetActive(true);
         OnButtonClick();
     }

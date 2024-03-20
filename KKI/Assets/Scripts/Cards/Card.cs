@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
+using AYellowpaper.SerializedCollections;
 
 [RequireComponent(typeof(CardView))]
 
@@ -16,10 +17,12 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     [Header("Card game data")]
 
     [SerializeField] private CardTypes _type;
+    [SerializeField] private CardColors _color;
     [SerializeField] private int _actionPointCost = 0;
     [SerializeField] private CardEffect _effect;
     [SerializeField] private AnimationConstants _animationName;
     [SerializeField] private bool isDark = false;
+    [SerializeField] private SerializedDictionary<Unit,CardEffect> _personalEffects;
 
     [Space]
     [Header("Tech data")]
@@ -142,7 +145,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         _cardView.SetFullView();
     }
 
-    public void ApplyEffect(List<Unit> targets=null)
+    private void ApplyEffect(CardEffect effect, Unit cardUser, List<Unit> targets=null)
     {
         if (targets == null) {
             targets = new();
@@ -150,17 +153,40 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         } 
         foreach (var unit in targets)
         {
-            if (_effect.Damage > 0||_effect.InitiativeBonus >0) unit.DealInstantEffect(-_effect.Damage*_combatManager.ActiveUnit.Damage, _effect.InitiativeBonus);
-            if (_effect.Heal > 0) unit.DealInstantEffect(_effect.Heal, _effect.InitiativeBonus);
-            if(_effect.MovesCount>0) unit.AddEffect(_effect);
+            if (effect.Damage > 0 || effect.InitiativeBonus > 0)
+            {
+                float damageDone = unit.DealInstantEffect(-_effect.Damage * _combatManager.ActiveUnit.Damage, _effect.InitiativeBonus);
+                if (_effect.Vampiric != 0)
+                {
+                    cardUser.DealInstantEffect(damageDone, 0);
+                }
+            }
+            if (effect.InitiativeBonus > 0)
+            {
+                float damageDone = unit.DealInstantEffect(0, effect.InitiativeBonus);
+            }
+            if (effect.Heal > 0) unit.DealInstantEffect(effect.Heal, 0);
+            if(effect.MovesCount>0) unit.AddEffect(effect);
         }
+        
+        //_stateMachine.ChangeState(_defaultState);
+    }
+
+    public void ApplyCardEffects(Unit cardUser, List<Unit> targets = null)
+    {
+        ApplyEffect(_effect, cardUser, targets);
+        foreach(var personalEffect in _personalEffects)
+        {
+            if(personalEffect.Value.isAOE) ApplyEffect(personalEffect.Value, cardUser);
+            else ApplyEffect(personalEffect.Value, cardUser, targets);
+        }
+
         EventBus.Instance.DiscardCard?.Invoke(this);
         EventBus.Instance.DeselectUnits?.Invoke();
         EventBus.Instance.UnitActivationFinished?.Invoke();
         _combatManager.ActionPoints -= _actionPointCost;
         _combatManager.UpdateUI();
         DestroyCard();
-        //_stateMachine.ChangeState(_defaultState);
     }
 
     public void ToDeck()
@@ -202,6 +228,7 @@ public enum EffectTypes
 [Serializable]
 public struct CardEffect
 {
+    public string EffectName;
     public float Damage;
     public float Heal;
     public float InitiativeBonus;
@@ -209,7 +236,20 @@ public struct CardEffect
     public float MaxInitiativeBonus;
     public float DamageBonus;
     public float DefenceBonus;
+    public float Vampiric;
     public int MovesCount;
     public int CurrentMovesCount;
+    public bool isAOE;
     public EffectTypes type;
+}
+
+public enum CardColors
+{
+    delault,
+    red,
+    green,
+    blue,
+    orange,
+    yellow,
+    violet
 }

@@ -27,7 +27,7 @@ public class Deck : MonoBehaviour
     public void Init()
     {
         EventBus.Instance.DiscardCard.AddListener(DiscardCard);
-
+        _playerDiscard.Clear();
         ResetCurrentDeck();
         _deckUI.Init(this);
     }
@@ -65,6 +65,7 @@ public class Deck : MonoBehaviour
     {
         string deck = PlayerPrefs.GetString("PlayerDeck", "");
         string[] cards = deck.Split(',');
+        _playerDeck.Clear();
         foreach (string card in cards)
         {
             if(card!="") _playerDeck.Add(card);

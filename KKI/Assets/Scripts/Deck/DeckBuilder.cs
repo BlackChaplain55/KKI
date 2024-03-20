@@ -12,6 +12,7 @@ public class DeckBuilder : MonoBehaviour
     [SerializeField] private int _collectionSize;
     [SerializeField] private Transform _playerDeck;
     [SerializeField] private AutoLayout3D.GridLayoutGroup3D _layoutGroup3D;
+    [SerializeField] private AutoLayout3D.GridLayoutGroup3D _collectionlayoutGroup3D;
     [SerializeField] private Game _game;
     [SerializeField] private int _deckSize = 25;
     [SerializeField] private bool _haveActiveCard=false;
@@ -22,6 +23,7 @@ public class DeckBuilder : MonoBehaviour
     {
         if (!_playerDeck) _playerDeck = transform.Find("PlayerDeckBuild").transform;
         if (!_layoutGroup3D) _layoutGroup3D = _playerDeck.GetComponent<AutoLayout3D.GridLayoutGroup3D>();
+        if (!_collectionlayoutGroup3D) _collectionlayoutGroup3D = _collectionContainer.GetComponent<AutoLayout3D.GridLayoutGroup3D>();
     }
 
     //private void Awake()
@@ -73,6 +75,7 @@ public class DeckBuilder : MonoBehaviour
             Card newCard = newCardGO.GetComponent<Card>();
             newCard.Initialize(_game);
         }
+        _collectionlayoutGroup3D.UpdateLayout();
     }
 
     private void InitializeDeck() //Загружаем колоду игрока
@@ -125,5 +128,6 @@ public class DeckBuilder : MonoBehaviour
             _layoutGroup3D.spacing.x = 2;
         else 
             _layoutGroup3D.spacing.x = 1.5f;
+        _layoutGroup3D.UpdateLayout();
     }
 }

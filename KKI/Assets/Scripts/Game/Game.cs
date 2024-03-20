@@ -188,7 +188,7 @@ private void OnValidate()
 
         for (int i = _playerDeckContainer.childCount-1; i >=0 ; i--)
         {
-            DestroyImmediate(_playerDeckContainer.GetChild(i));
+            Destroy(_playerDeckContainer.GetChild(i).gameObject);
         }
 
         foreach (string cardName in _deck.PlayerHand)
