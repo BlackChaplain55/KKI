@@ -2886,6 +2886,36 @@ PrefabInstance:
       propertyPath: _name
       value: "\u0411\u0430\u0441\u0442\u0435\u0442"
       objectReference: {fileID: 0}
+    - target: {fileID: 4780215742169294259, guid: 0ec5669bc45ff9f49a99a13e6bd66f7f,
+        type: 3}
+      propertyPath: _damage
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780215742169294259, guid: 0ec5669bc45ff9f49a99a13e6bd66f7f,
+        type: 3}
+      propertyPath: _health
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780215742169294259, guid: 0ec5669bc45ff9f49a99a13e6bd66f7f,
+        type: 3}
+      propertyPath: _defence
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780215742169294259, guid: 0ec5669bc45ff9f49a99a13e6bd66f7f,
+        type: 3}
+      propertyPath: _initiative
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780215742169294259, guid: 0ec5669bc45ff9f49a99a13e6bd66f7f,
+        type: 3}
+      propertyPath: _magicPower
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780215742169294259, guid: 0ec5669bc45ff9f49a99a13e6bd66f7f,
+        type: 3}
+      propertyPath: _magicResist
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8826832687372877354, guid: 0ec5669bc45ff9f49a99a13e6bd66f7f,
         type: 3}
       propertyPath: m_LocalScale.x

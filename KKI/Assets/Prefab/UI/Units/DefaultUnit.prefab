@@ -59,7 +59,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 354313068334265766}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalRotation: {x: 0.24184473, y: -0.66446304, z: 0.24184473, w: 0.66446304}
   m_LocalPosition: {x: 0, y: 0, z: 0.142}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 1
@@ -2774,6 +2774,7 @@ MonoBehaviour:
   _name: {fileID: 479246632777416631}
   _healthText: {fileID: 2032640757589185693}
   _initiativeText: {fileID: 6091217288532824868}
+  _skillText: {fileID: 0}
   _healthDamage: {fileID: 7214274123148247242}
   _heal: {fileID: 7436851897095037974}
   _initiativeDamage: {fileID: 5704460666725762982}

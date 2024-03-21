@@ -23,6 +23,44 @@ PrefabInstance:
       propertyPath: _isCloseCombat
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[0].Key
+      value: 
+      objectReference: {fileID: 4345979496235505620, guid: 71cbf5877217cc0448b04f4457329e30,
+        type: 3}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[1].Key
+      value: 
+      objectReference: {fileID: 7327813753202017654, guid: e6e5d4b161ea22345a20fde6c6a8cd15,
+        type: 3}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[2].Key
+      value: 
+      objectReference: {fileID: 1596295167812092877, guid: 1048829f7b6763f4e905787babed10c9,
+        type: 3}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[0].Value.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4885318259277563448, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_RootOrder
@@ -81,7 +119,7 @@ PrefabInstance:
     - target: {fileID: 5770260361504788246, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: "\u0410\u0442\u0430\u043A\u0430"
+      value: "\u041E\u0431\u044B\u0447 \u0424\u0438\u0437 \u0410\u0442"
       objectReference: {fileID: 0}
     - target: {fileID: 8042370180080501523, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
