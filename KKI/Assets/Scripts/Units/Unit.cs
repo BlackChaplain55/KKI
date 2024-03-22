@@ -17,6 +17,8 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     [SerializeField] private float _defence;
     [SerializeField] private float _magicPower;
     [SerializeField] private float _magicResist;
+    [SerializeField] private float _archer;
+    [SerializeField] private float _closeCombat;
 
     [Space]
     [Header("Unit Data")]

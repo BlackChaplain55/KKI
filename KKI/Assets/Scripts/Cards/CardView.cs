@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
@@ -8,6 +9,7 @@ using DG.Tweening;
 public class CardView : MonoBehaviour
 {
     [SerializeField] private MeshRenderer _meshRenderer;
+    //[SerializeField] private MeshRenderer _cardFront;
     [SerializeField] private Card _card;
     [SerializeField] private Game _game;
     [SerializeField] private ParticleSystem _selectedVFX;
@@ -38,6 +40,16 @@ public class CardView : MonoBehaviour
         if (!_game) _game = FindObjectOfType<Game>();
         if (!_anim) _anim = GetComponent<Animator>();
         if (!_selectedVFX) _selectedVFX = transform.Find("CardModel").Find("SelectedVFX").GetComponent<ParticleSystem>();
+    }
+
+    public void Init(Card card)
+    {
+        _card = card;
+        List<Material> materials = new();
+        materials.Add(_meshRenderer.sharedMaterials[0]);
+        materials.Add(_card.CurrentGame.CardCollection.GetMaterial(_card.Color));
+
+        _meshRenderer.SetMaterials(materials);
     }
 
     private void StateChanged(IState cardState, bool pointerEnter)

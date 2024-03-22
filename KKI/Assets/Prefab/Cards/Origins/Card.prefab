@@ -49,8 +49,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
+  _color: 0
   _actionPointCost: 0
   _effect:
+    EffectName: 
     Damage: 0
     Heal: 0
     InitiativeBonus: 0
@@ -58,11 +60,15 @@ MonoBehaviour:
     MaxInitiativeBonus: 0
     DamageBonus: 0
     DefenceBonus: 0
+    Vampiric: 0
     MovesCount: 0
     CurrentMovesCount: 0
+    isAOE: 0
     type: 0
   _animationName: 0
   isDark: 0
+  _personalEffects:
+    _serializedList: []
   _gameObject: {fileID: 8042370180080501523}
   _cardModel: {fileID: 7708923606931195220}
   _game: {fileID: 0}
@@ -81,7 +87,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8788b0f8fa16cd4687336feff81565b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meshRenderer: {fileID: 0}
+  _meshRenderer: {fileID: 5793464973898975967}
+  _cardFront: {fileID: 7807368675564291543}
   _card: {fileID: 4627947290752318534}
   _game: {fileID: 0}
   _selectedVFX: {fileID: 7856371652827225527}
@@ -247,6 +254,11 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4278192403
       objectReference: {fileID: 0}
+    - target: {fileID: 3347078379919864336, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c8f6b4d6aa1889419489c1aff3e7045, type: 2}
     - target: {fileID: 3381457002201058598, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -457,6 +469,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!23 &5793464973898975967 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3347078379919864336, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
+    type: 3}
+  m_PrefabInstance: {fileID: 9085365457642977487}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6999536694755305192 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2249242584760868391, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
@@ -466,6 +484,12 @@ GameObject:
 --- !u!1 &7708923606931195220 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1508189732082302363, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
+    type: 3}
+  m_PrefabInstance: {fileID: 9085365457642977487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7807368675564291543 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1318688063809682712, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
     type: 3}
   m_PrefabInstance: {fileID: 9085365457642977487}
   m_PrefabAsset: {fileID: 0}

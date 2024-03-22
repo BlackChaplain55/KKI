@@ -124,7 +124,9 @@ public class CombatManager : MonoBehaviour
     private void Turn()
     {
         _actionPoints += _initialAPPerTurn+ _bonusAPPerTurn;
-        _game.CurrentDeck.AddToHand(_game.CurrentDeck.GetRandomCards(_cardsPerTurn));
+        List<string> newCards = _game.CurrentDeck.GetRandomCards(_cardsPerTurn);
+        _game.CurrentDeck.AddToHand(newCards);
+        _game.InstantinateCardsToDeck(newCards);
     }
 
     private void UnitActivationFinished()

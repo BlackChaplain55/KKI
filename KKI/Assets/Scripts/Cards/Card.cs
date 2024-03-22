@@ -64,6 +64,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public IState CurrentState => _stateMachine.CurrentState;
     public bool PointerEnter => _pointerEnter;
     public int APCost => _actionPointCost;
+    public CardColors Color => _color;
 
     public StateMachine StateMachine => _stateMachine;
     public GameObject GameObject => _gameObject;
@@ -137,6 +138,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         }
         _game = game;
         float rnd = UnityEngine.Random.Range(0.5f, 1.2f);
+        _cardView.Init(this);
         _cardView.Anim.SetFloat("IdleSpeed", rnd);
     }
 
@@ -175,10 +177,13 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public void ApplyCardEffects(Unit cardUser, List<Unit> targets = null)
     {
         ApplyEffect(_effect, cardUser, targets);
-        foreach(var personalEffect in _personalEffects)
+        foreach(var personalEffectGroup in _personalEffects)
         {
-            //if(personalEffect.Value.isAOE) ApplyEffect(personalEffect.Value, cardUser);
-           // else ApplyEffect(personalEffect.Value, cardUser, targets);
+            foreach (CardEffect personalEffect in personalEffectGroup.Value)
+            {
+                if (personalEffect.isAOE) ApplyEffect(personalEffect, cardUser);
+                else ApplyEffect(personalEffect, cardUser, targets);
+            }
         }
 
         EventBus.Instance.DiscardCard?.Invoke(this);

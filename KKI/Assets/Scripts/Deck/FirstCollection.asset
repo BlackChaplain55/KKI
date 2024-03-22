@@ -41,15 +41,37 @@ MonoBehaviour:
   EffectIcons:
     _serializedList:
     - Key: 0
-      Value: {fileID: 21300000, guid: 7e2ad94a5cfdecc47ba3397663bd31e8, type: 3}
+      Value: {fileID: 21300000, guid: d622d98c877ab384a948ee50a367a505, type: 3}
     - Key: 4
-      Value: {fileID: 21300000, guid: bf47fa78a4762bc4db6cc13aa0acc21e, type: 3}
+      Value: {fileID: 21300000, guid: fa6e1ec919b396246a12edccbfd903dd, type: 3}
     - Key: 2
-      Value: {fileID: 21300000, guid: 7140c686292792a4abfe218b90b2ae90, type: 3}
+      Value: {fileID: 21300000, guid: d80a86e644656d24f970ffe9b0cf0de2, type: 3}
   EffectDescriptions:
-    _serializedList: []
+    _serializedList:
+    - Key: 0
+      Value: "\u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435"
+    - Key: 4
+      Value: "\u0423\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u0438\u0435 \u0437\u0430\u0449\u0438\u0442\u044B"
+    - Key: 2
+      Value: "\u0413\u043E\u0440\u0435\u043D\u0438\u0435"
   CardTypesDescriptions:
     _serializedList: []
+  CardMaterials:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 2100000, guid: b2267a0c1b35e5a4f97237578f455398, type: 2}
+    - Key: 1
+      Value: {fileID: 2100000, guid: 0f4cc50df11c65643a23697bb68a270d, type: 2}
+    - Key: 2
+      Value: {fileID: 2100000, guid: f6d28209e82f89843a10e2a9ddac2744, type: 2}
+    - Key: 3
+      Value: {fileID: 2100000, guid: 0df1d8fea1d1c7a4a920deadc535bc70, type: 2}
+    - Key: 4
+      Value: {fileID: 2100000, guid: 7c8f6b4d6aa1889419489c1aff3e7045, type: 2}
+    - Key: 5
+      Value: {fileID: 2100000, guid: 0465b5f342f633146b9c5adc01e2fe03, type: 2}
+    - Key: 6
+      Value: {fileID: 2100000, guid: c5e5e0cba825777489c4efe4ea7ab577, type: 2}
   UnknownCard: {fileID: 2972799463160797979, guid: 64582d41b0652a3418a39b65b065505b,
     type: 3}
   _defaultSprite: {fileID: 21300000, guid: 15ec324b46e10db47b736ff151dd581d, type: 3}

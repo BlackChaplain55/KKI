@@ -191,7 +191,13 @@ private void OnValidate()
             Destroy(_playerDeckContainer.GetChild(i).gameObject);
         }
 
-        foreach (string cardName in _deck.PlayerHand)
+        InstantinateCardsToDeck(_deck.PlayerHand);
+        
+    }
+
+    public void InstantinateCardsToDeck(List<string> cards)
+    {
+        foreach (string cardName in cards)
         {
             Card card = _cardCollection.FindCard(cardName);
             if (card != null)
@@ -201,13 +207,6 @@ private void OnValidate()
                 newCard.GetComponent<Card>().Initialize(this);
             }
         }
-        //Это временное добавление всех карт из коллекции
-        //foreach (GameObject card in _collection.Cards)
-        //{
-        //    GameObject newCard = Instantiate(card, _playerDeckContainer);
-        //    newCard.GetComponent<Card>().Initialize(this);
-        //    newCard.GetComponent<Card>().IsInDeck = true;
-        //}
         SetLayoutSpacing();
     }
 

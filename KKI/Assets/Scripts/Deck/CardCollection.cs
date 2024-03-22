@@ -33,4 +33,12 @@ public class CardCollection : ScriptableObject
         Sprite sprite = EffectIcons.GetValueOrDefault(effectType, _defaultSprite);
         return sprite;
     }
+
+    public Material GetMaterial(CardColors color)
+    {
+        Material defaultMat;
+        CardMaterials.TryGetValue(CardColors.delault, out defaultMat);
+        Material material = CardMaterials.GetValueOrDefault(color, defaultMat);
+        return material;
+    }
 }
