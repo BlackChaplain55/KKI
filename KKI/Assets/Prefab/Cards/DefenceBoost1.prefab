@@ -4712,7 +4712,7 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -4724,11 +4724,23 @@ PrefabInstance:
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[1].Key
       value: 
-      objectReference: {fileID: 7327813753202017654, guid: e6e5d4b161ea22345a20fde6c6a8cd15,
+      objectReference: {fileID: 3417216675102108093, guid: 386b33e9cb6910748a195fd3d4f0ee9b,
         type: 3}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[2].Key
+      value: 
+      objectReference: {fileID: 4345979496235505620, guid: 47c3b2e08c1771145b16ef71f6c83e89,
+        type: 3}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[3].Key
+      value: 
+      objectReference: {fileID: 7327813753202017654, guid: e6e5d4b161ea22345a20fde6c6a8cd15,
+        type: 3}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[4].Key
       value: 
       objectReference: {fileID: 1596295167812092877, guid: 1048829f7b6763f4e905787babed10c9,
         type: 3}
@@ -4745,6 +4757,16 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4885318259277563448, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
