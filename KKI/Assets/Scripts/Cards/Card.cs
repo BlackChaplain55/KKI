@@ -179,11 +179,33 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         ApplyEffect(_effect, cardUser, targets);
         foreach(var personalEffectGroup in _personalEffects)
         {
-            foreach (CardEffect personalEffect in personalEffectGroup.Value)
+            if(personalEffectGroup.Key.name == cardUser.name)
             {
-                if (personalEffect.isAOE) ApplyEffect(personalEffect, cardUser);
-                else ApplyEffect(personalEffect, cardUser, targets);
-            }
+                foreach (CardEffect personalEffect in personalEffectGroup.Value)
+                {
+                    if (personalEffect.isAOE)
+                    {
+                        ApplyEffect(personalEffect, cardUser);
+                    }
+                    else
+                    {
+                        ApplyEffect(personalEffect, cardUser, targets);
+                    }
+                    List<CardTypes> effectTypes = new List<CardTypes> { CardTypes.attackMulti, CardTypes.attackSingle, CardTypes.bonusMulti, CardTypes.bonusSingle };
+                    if (effectTypes.Contains(personalEffect.effectType)) 
+                    {     
+                        cardUser.View.ShowEffectName(personalEffect.EffectName, true);
+                    }
+                    else
+                    {
+                        foreach(Unit unit in targets)
+                        {
+                            unit.View.ShowEffectName(personalEffect.EffectName, false);
+                        }
+                    }
+                        
+                }
+            }   
         }
 
         EventBus.Instance.DiscardCard?.Invoke(this);
@@ -234,6 +256,7 @@ public enum EffectTypes
 public struct CardEffect
 {
     public string EffectName;
+    public CardTypes effectType;
     public float Damage;
     public float Heal;
     public float InitiativeBonus;

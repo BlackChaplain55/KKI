@@ -8,7 +8,7 @@ public class UnitAnimationEvents : MonoBehaviour
 
     private void OnValidate()
     {
-        if (!_unit) _unit = GetComponent<Unit>();
+        if (!_unit) _unit = transform.parent.GetComponent<Unit>();
     }
 
     public void OnAnimationFinished()

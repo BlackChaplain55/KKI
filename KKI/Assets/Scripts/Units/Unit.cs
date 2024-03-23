@@ -17,14 +17,15 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     [SerializeField] private float _defence;
     [SerializeField] private float _magicPower;
     [SerializeField] private float _magicResist;
-    [SerializeField] private float _archer;
-    [SerializeField] private float _closeCombat;
+    [SerializeField] private bool _archer;
+    [SerializeField] private bool _closeCombat;
 
     [Space]
     [Header("Unit Data")]
     [SerializeField] private UnitEffects _effects;
     [SerializeField] private GameObject _gameObject;
     [SerializeField] private Transform _transform;
+    [SerializeField] private Transform _figure;
     [SerializeField] private Animator _anim;
     [SerializeField] private UnitView _view;
     [SerializeField] private SimpleAI _AI;
@@ -75,11 +76,12 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     private void OnValidate()
     {
-        if (!_anim) _anim = GetComponent<Animator>();
+        if (!_anim) _anim = transform.Find("Figure").GetComponent<Animator>();
         if(!_transform) _transform = transform;
         if (!_view) _view = GetComponent<UnitView>();
         if (!_AI) _AI = GetComponent<SimpleAI>();
         if (_effects==null) _effects = GetComponent<UnitEffects>();
+        if (!_figure) _figure = transform.Find("Figure");
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -87,6 +89,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         if (_combatManager.ActiveCard != null)
         {
             _combatManager.ActiveUnit.SetUnitAnimation(_combatManager.ActiveCard.AnimationName,true,true);
+            _combatManager.ActiveUnit.LookAtTarget(transform);
             _combatManager.CurrentTarget = this;
         }
     }
@@ -116,6 +119,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         {
             Debug.Log("Enemy unit " + _name + " is activated!");
             _AItarget = _AI.PickTarget();
+            LookAtTarget(_AItarget.transform);
             SetUnitAnimation("Slash", true, isTrigger: true);
         }
         else
@@ -168,8 +172,8 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void Tick()
     {
-        _currentInitiative++;
-        if (_currentInitiative >= _initiative - _bonus.Initiative)
+        _currentInitiative += _initiative + _bonus.Initiative;
+        if (_currentInitiative >= _combatManager.UnitActivationLimit)
         {
             EventBus.Instance.ActivateUnit?.Invoke(this);
             Activate();
@@ -246,6 +250,13 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         _combatManager = combatManager;
         if (_AI) _AI.Init(_combatManager);
         _effects.Init(_combatManager.GetGame.CardCollection);
+        float rnd = UnityEngine.Random.Range(0.8f, 1.2f);
+        _anim.SetFloat("IdleSpeed", rnd);
+    }
+
+    public void LookAtTarget(Transform target)
+    {
+        _figure.LookAt(target);
     }
 }
 

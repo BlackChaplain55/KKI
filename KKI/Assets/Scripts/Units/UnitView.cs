@@ -13,7 +13,7 @@ public class UnitView : MonoBehaviour
     [SerializeField] private TMP_Text _name;
     [SerializeField] private TMP_Text _healthText;
     [SerializeField] private TMP_Text _initiativeText;
-    [SerializeField] private TMP_Text _skillText;
+    [SerializeField] private TMP_Text _effectText;
     [SerializeField] private GameObject _healthDamage;
     [SerializeField] private GameObject _heal;
     [SerializeField] private GameObject _initiativeDamage;
@@ -24,7 +24,7 @@ public class UnitView : MonoBehaviour
     private void OnValidate()
     {
         Transform unitCanvas = transform.Find("UnitCanvas");
-        Transform panel=null;
+        Transform panel = null;
         if (unitCanvas)
         {
             if (!_localCanvas) _localCanvas = unitCanvas.gameObject;
@@ -37,6 +37,7 @@ public class UnitView : MonoBehaviour
                 if (!_initiativeSlider) _initiativeSlider = panel.Find("InitiativeSlider")?.Find("Filler")?.GetComponent<Image>();
                 if (!_healthText) _healthText = panel.Find("HealthText")?.GetComponent<TMP_Text>();
                 if (!_initiativeText) _initiativeText = panel.Find("InitiativeText")?.GetComponent<TMP_Text>();
+                if (!_effectText) _effectText = panel.Find("EffectName")?.GetComponent<TMP_Text>();
                 if (!_healthDamage) _healthDamage = panel.Find("HealthDamage")?.gameObject;
                 if (!_initiativeDamage) _initiativeDamage = panel.Find("InitiativeDamage")?.gameObject;
                 if (!_heal) _heal = panel.Find("Heal")?.gameObject;
@@ -106,5 +107,21 @@ public class UnitView : MonoBehaviour
             _heal.GetComponent<TMP_Text>().text =  sign+initiative.ToString();
             _heal.transform.DOPunchScale(new Vector3(1.5f, 1.5f, 1.5f), 1f, vibrato: 1, elasticity: 0.2f).OnComplete(() => _heal.SetActive(false));
         }
+    }
+
+    public void ShowEffectName(string text, bool isBonus)
+    {
+        if (isBonus)
+        {
+            _effectText.color = _unit.Combat.BonusColor;
+        }
+        else
+        {
+            _effectText.color = _unit.Combat.MalusColor;
+        }
+
+        _effectText.text = text;
+        _effectText.gameObject.SetActive(true);
+        _effectText.transform.DOPunchScale(new Vector3(1.2f, 1.2f, 1.2f), 2f, vibrato: 1, elasticity: 0.2f).OnComplete(() => _effectText.gameObject.SetActive(false));
     }
 }

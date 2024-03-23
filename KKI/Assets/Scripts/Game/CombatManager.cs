@@ -13,8 +13,11 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private int _initialAP = 2;
     [SerializeField] private int _initialAPPerTurn = 3;
     [SerializeField] private float _turnLength;
+    [SerializeField] private float _unitActvationLimit = 100;
     [SerializeField] private int _actionPoints;
     [SerializeField] private float _tickInterval;
+    [SerializeField] private Color _bonusColor = Color.green;
+    [SerializeField] private Color _malusColor = Color.red;
     [Space]
     [Header("Game components")]
     [SerializeField] private Game _game;
@@ -24,7 +27,6 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private List<PlayerUnit> _playerUnits;
     [SerializeField] private List<Unit> _enemyUnits;
     [SerializeField] private Unit _currentTarget;
-
 
     private Unit _activeUnit;
     private Card _activeCard;
@@ -43,6 +45,10 @@ public class CombatManager : MonoBehaviour
     public List<Unit> EnemyUnits => _enemyUnits;
     public float CurrentTurnLength { get => _currentTurnLength; }
     public float TurnLength { get => _turnLength; }
+    public float UnitActivationLimit { get => _unitActvationLimit; }
+
+    public Color BonusColor { get => _bonusColor; }
+    public Color MalusColor { get => _malusColor; }
 
     private void OnValidate()
     {
