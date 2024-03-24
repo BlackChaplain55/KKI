@@ -155,20 +155,32 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         } 
         foreach (var unit in targets)
         {
-            if (effect.Damage > 0 || effect.InitiativeBonus > 0)
+            if (effect.MovesCount > 0)  //Длящиеся эффекты
             {
-                float damageDone = unit.DealInstantEffect(-_effect.Damage * _combatManager.ActiveUnit.Damage, _effect.InitiativeBonus);
-                if (_effect.Vampiric != 0)
+                unit.AddEffect(effect);
+            }
+            else                        //Мгновенные эффекты
+            {
+                if (effect.Damage > 0 || effect.InitiativeBonus > 0)
                 {
-                    cardUser.DealInstantEffect(damageDone, 0);
+                    float pDamage = _effect.Damage * cardUser.Damage;
+                    float mDamage = _effect.MDamage * cardUser.MDamage;
+                    float damageDone = unit.DealInstantEffect(pDamage, mDamage, 0, 0);
+                    if (_effect.Vampiric != 0)
+                    {
+                        cardUser.DealInstantEffect(0, 0, heal: damageDone, 0);
+                    }
+                }
+                if (effect.InitiativeBonus > 0)
+                {
+                    float damageDone = unit.DealInstantEffect(0, 0, 0, effect.InitiativeBonus);
+                }
+                if (effect.Heal > 0)
+                {
+                    float heal = effect.Heal * (cardUser.MDamage + cardUser.Bonus.MDamage * cardUser.MDamage);
+                    unit.DealInstantEffect(0, 0, heal, 0);
                 }
             }
-            if (effect.InitiativeBonus > 0)
-            {
-                float damageDone = unit.DealInstantEffect(0, effect.InitiativeBonus);
-            }
-            if (effect.Heal > 0) unit.DealInstantEffect(effect.Heal, 0);
-            if(effect.MovesCount>0) unit.AddEffect(effect);
         }
         
         //_stateMachine.ChangeState(_defaultState);
@@ -249,7 +261,9 @@ public enum EffectTypes
     damage,
     fire,
     ice,
-    shield
+    shield,
+    healOverTime,
+    bleeding
 }
 
 [Serializable]
@@ -258,12 +272,15 @@ public struct CardEffect
     public string EffectName;
     public CardTypes effectType;
     public float Damage;
+    public float MDamage;
     public float Heal;
     public float InitiativeBonus;
     public float MaxHealthBonus;
     public float MaxInitiativeBonus;
     public float DamageBonus;
     public float DefenceBonus;
+    public float MDamageBonus;
+    public float MResistBonus;
     public float Vampiric;
     public int MovesCount;
     public int CurrentMovesCount;
