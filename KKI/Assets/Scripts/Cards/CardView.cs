@@ -15,6 +15,11 @@ public class CardView : MonoBehaviour
     [SerializeField] private ParticleSystem _selectedVFX;
     [SerializeField] private Animator _anim;
     [SerializeField] private GameObject _fullViewPanel;
+    [SerializeField] private Material _darkMaterial;
+    [SerializeField] private TMP_Text _stats;
+    [SerializeField] private TMP_Text _personalStats;
+    [SerializeField] private TMP_Text _APCost;
+    [SerializeField] private TMP_Text _fullViewInfo;
 
     public Animator Anim => _anim;
     public ParticleSystem SelectedVFX => _selectedVFX;
@@ -34,7 +39,13 @@ public class CardView : MonoBehaviour
 
     private void OnValidate()
     {
-        if (!_fullViewPanel) _fullViewPanel = transform.Find("CardModel")?.Find("Card")?.Find("CardInfoCanvas")?.Find("FullView")?.gameObject;
+        Transform canvas = transform.Find("CardModel")?.Find("Card")?.Find("CardInfoCanvas");
+        if (!_fullViewPanel) _fullViewPanel = canvas?.Find("FullView")?.gameObject;
+        if (!_APCost) _APCost = canvas?.Find("APCost")?.GetComponent<TMP_Text>();
+        if (!_stats) _stats = canvas?.Find("Stats")?.GetComponent<TMP_Text>();
+        if (!_personalStats) _personalStats = canvas?.Find("PersonalStats")?.GetComponent<TMP_Text>();
+        if (!_fullViewPanel) _fullViewPanel = canvas?.Find("FullView")?.gameObject;
+        if (!_fullViewInfo) _fullViewInfo = canvas?.Find("FullView")?.Find("CardInfoPanel")?.Find("Info")?.GetComponent<TMP_Text>();
         if (!_meshRenderer) _meshRenderer = GetComponent<MeshRenderer>();
         if (!_card) _card = GetComponent<Card>();
         if (!_game) _game = FindObjectOfType<Game>();
@@ -45,16 +56,148 @@ public class CardView : MonoBehaviour
     public void Init(Card card)
     {
         _card = card;
+
+        EventBus.Instance.UpdateCards.AddListener(OnUpdateCards);
+        EventBus.Instance.UnitActivationFinished.AddListener(OnDeactivateUnit);
         List<Material> materials = new();
-        materials.Add(_meshRenderer.sharedMaterials[0]);
+        if (_card.IsDark)
+        {
+            materials.Add(_darkMaterial);
+        }
+        else
+        {
+            materials.Add(_meshRenderer.sharedMaterials[0]); 
+        }
         materials.Add(_card.CurrentGame.CardCollection.GetMaterial(_card.Color));
 
         _meshRenderer.SetMaterials(materials);
+
+        _APCost.text = "ОД:" + _card.APCost.ToString();
+
+        FillStats(_stats,true);
+        FillStats(_fullViewInfo, true);
+    }    
+
+    public void UpdateView()
+    {
+        FillStats(_personalStats);
+    }
+
+    private void OnUpdateCards()
+    {
+        UpdateView();
+    }
+
+    private void OnDeactivateUnit()
+    {
+        _personalStats.text = "";
     }
 
     private void StateChanged(IState cardState, bool pointerEnter)
     {
         
+    }
+
+    private void FillStats(TMP_Text textPanel, bool mainStats = false, bool allUnits = false, bool clear = true)
+    {
+        if (clear) textPanel.text = "";
+
+        if (mainStats)
+        {
+            textPanel.text = GetEffectDescriptionString(_card.Effect);
+        }
+        else if (allUnits)
+        {
+            List<List<CardEffect>> allEffects = _card.GetPersonatEffectsList();
+            foreach (List<CardEffect> effectsGroup in allEffects)
+            {
+                foreach (CardEffect personalEffect in effectsGroup)
+                {
+                    textPanel.text += GetEffectDescriptionString(personalEffect);
+                }
+            }
+        }
+        else
+        {
+            Unit activeUnit = _card.CurrentGame.Combat.ActiveUnit;
+            textPanel.text = activeUnit.Name + ":\r\n";
+            var personalEffects = _card.GetPersonalEffect(activeUnit.Name);
+            foreach (CardEffect personalEffect in personalEffects)
+            {
+                textPanel.text += GetEffectDescriptionString(personalEffect);
+            }
+        }
+    }
+
+    private string GetEffectDescriptionString(CardEffect effect)
+    {
+        string description = "";
+        description += effect.EffectName;
+        description += " - " + _card.CurrentGame.CardCollection.GetEffectDescription(effect.type);
+
+        if (effect.isAOE)
+        {
+            description += "(AOE)";
+        }
+
+        if (effect.Damage > 0)
+        {
+            description += " " + effect.Damage.ToString()+ " физ. урона";
+        }
+
+        if (effect.MDamage > 0)
+        {
+            description += " " + effect.MDamage.ToString() + " маг. урона";
+        }
+
+        if (effect.DamageBonus > 0)
+        {
+            description += " +" + effect.DamageBonus.ToString() + " бонус силы";
+        }
+
+        if (effect.DamageBonus < 0)
+        {
+            description += " +" + effect.DamageBonus.ToString() + " штраф силы";
+        }
+
+        if (effect.DefenceBonus > 0)
+        {
+            description += " +" + effect.DefenceBonus.ToString() + " бонус защиты";
+        }
+
+        if (effect.DefenceBonus < 0)
+        {
+            description += " +" + effect.DefenceBonus.ToString() + " штраф защиты";
+        }
+
+        if (effect.Heal > 0)
+        {
+            description += " +" + effect.Damage.ToString() + " здоровье";
+        }
+
+        if (effect.InitiativeBonus > 0)
+        {
+            description += " +" + effect.InitiativeBonus.ToString() + "";
+        }
+
+        if (effect.InitiativeBonus < 0)
+        {
+            description += " -" + effect.InitiativeBonus.ToString() + "";
+        }
+
+        if (effect.InitiativeBoost != 0)
+        {
+            description += " на " + effect.Damage.ToString() + " ";
+        }
+
+        if (effect.Vampiric > 0)
+        {
+            description += " " + effect.Damage.ToString() + " от нанесенного урона ";
+        }
+
+        description += "\r\n";
+
+        return description;
     }
 
     public void SetFullView()

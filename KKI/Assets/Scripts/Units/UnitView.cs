@@ -14,7 +14,9 @@ public class UnitView : MonoBehaviour
     [SerializeField] private TMP_Text _healthText;
     [SerializeField] private TMP_Text _initiativeText;
     [SerializeField] private TMP_Text _effectText;
+    [SerializeField] private TMP_Text _statsText;
     [SerializeField] private GameObject _healthDamage;
+    [SerializeField] private GameObject _statsPanel;
     [SerializeField] private GameObject _heal;
     [SerializeField] private GameObject _initiativeDamage;
     [SerializeField] private GameObject _localCanvas;
@@ -41,6 +43,8 @@ public class UnitView : MonoBehaviour
                 if (!_healthDamage) _healthDamage = panel.Find("HealthDamage")?.gameObject;
                 if (!_initiativeDamage) _initiativeDamage = panel.Find("InitiativeDamage")?.gameObject;
                 if (!_heal) _heal = panel.Find("Heal")?.gameObject;
+                if (!_statsPanel) _statsPanel = panel.Find("StatsPanel").gameObject;
+                if (!_statsText&& _statsPanel) _statsText = _statsPanel.transform.Find("Stats")?.GetComponent<TMP_Text>();
             }
         }
         if (!_selectIndicator) _selectIndicator = transform.Find("Selection").gameObject;
@@ -55,6 +59,12 @@ public class UnitView : MonoBehaviour
     private void Awake()
     {
         if (_localCanvas && Camera.main) _localCanvas.transform.rotation = Camera.main.transform.rotation;
+        _statsPanel.SetActive(false);
+    }
+
+    public void ShowStats(bool state)
+    {
+        _statsPanel.SetActive(state);
     }
 
     public void Init(Unit unit, string name)
@@ -71,6 +81,17 @@ public class UnitView : MonoBehaviour
         _initiativeSlider.fillAmount = _unit.CurrentInitiative/(_unit.MaxInitiative);
         _healthText.text = _unit.CurrentHealth.ToString() + "/" + _unit.MaxHealth.ToString();
         _initiativeText.text = _unit.CurrentInitiative.ToString() + "/" + _unit.MaxInitiative.ToString();
+        string damBonusColor = _unit.Bonus.Damage >= 0 ? "<color=\"green\">" : "<color=\"red\">";
+        string defBonusColor = _unit.Bonus.Defence >= 0 ? "<color=\"green\">" : "<color=\"red\">";
+        string mDamageBonusColor = _unit.Bonus.MDamage >= 0 ? "<color=\"green\">" : "<color=\"red\">";
+        string mResistColor = _unit.Bonus.MResistance >= 0 ? "<color=\"green\">" : "<color=\"red\">";
+        _statsText.text =   "Физ. сила: " + _unit.Damage.ToString() + "+" + damBonusColor + _unit.Bonus.Damage + "</color>\r\n" +
+                            "Защита: " + _unit.Defence.ToString() + "\r\n" + "+" + defBonusColor + _unit.Bonus.Defence + "</color>\r\n" +
+                            "Маг. сила: " + _unit.MDamage.ToString() + "\r\n" + "+" + mDamageBonusColor + _unit.Bonus.MDamage + "</color>\r\n" +
+                            "Сопротивл.: " + _unit.MResistance.ToString() + "\r\n" + "+" + mResistColor + _unit.Bonus.MResistance + "</color>\r\n";
+                            //"Здоровье: " + _unit.Defence.ToString() + "\r\n" + "+" + _unit.Bonus.Defence + "\r\n" +
+                            //"Инициатива: " + _unit.Defence.ToString() + "\r\n" + "+" + _unit.Bonus.Defence + "\r\n" +
+            ;
     }
 
     public void SetSelect(bool state)

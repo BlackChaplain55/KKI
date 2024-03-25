@@ -81,6 +81,7 @@ public class CombatManager : MonoBehaviour
     private void ActivateUnit(Unit unit)
     {
         _activeUnit = unit;
+        EventBus.Instance.UpdateCards?.Invoke();
     }
 
     private void Tick()

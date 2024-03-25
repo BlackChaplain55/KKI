@@ -44,7 +44,7 @@ public class UnitEffects: MonoBehaviour
             CardEffect effect = _temporaryEffects[i];
 
             bonus.Damage += effect.DamageBonus;
-            bonus.Initiative += effect.MaxInitiativeBonus;
+            bonus.Initiative += effect.InitiativeBonus;
             bonus.Health += effect.MaxHealthBonus;
             bonus.Defence += effect.DefenceBonus;
             bonus.MDamage += effect.MDamage;
@@ -70,6 +70,15 @@ public class UnitEffects: MonoBehaviour
         }
 
         UpdateEffectsIcons();
+    }
+
+    public bool CheckEffectExist(EffectTypes effectType)
+    {
+        foreach (var effect in _temporaryEffects)
+        {
+            if (effect.type == effectType) return true;
+        }
+        return false;
     }
 
     private void UpdateEffectsIcons()

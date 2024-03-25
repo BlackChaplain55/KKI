@@ -19,9 +19,10 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     [SerializeField] private CardTypes _type;
     [SerializeField] private CardColors _color;
     [SerializeField] private int _actionPointCost = 0;
+    [SerializeField] private int _giveCardsCount;
     [SerializeField] private CardEffect _effect;
     [SerializeField] private AnimationConstants _animationName;
-    [SerializeField] private bool isDark = false;
+    [SerializeField] private bool _isDark = false;
     [SerializeField] private SerializedDictionary<Unit,List<CardEffect>> _personalEffects;
 
     [Space]
@@ -57,6 +58,9 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     private Quaternion _modelDefaultRotation;
 
     public string AnimationName { get => _animationName.ToString(); }
+    public int GiveCardsCount { get => _giveCardsCount;  }
+    public bool IsDark { get => _isDark; }
+    public CardEffect Effect { get => _effect; }
     public CardDefaultState DefaultState => _defaultState;
     public CardSelectState SelectState => _selectState;
     public CardHighlightState HightLightState => _highlightState;
@@ -115,6 +119,16 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         PointerClick?.Invoke(eventData);
     }
 
+    public List<List<CardEffect>> GetPersonatEffectsList()
+    {
+        List<List<CardEffect>> personalEffectsGroup = new();
+        foreach(List<CardEffect> effects in _personalEffects.Values)
+        {
+            personalEffectsGroup.Add(effects);
+        }
+        return personalEffectsGroup;
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         _pointerEnter = true;
@@ -136,6 +150,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         {
             Debug.Log("CARD INITIALIZATION ERROR");
         }
+        
         _game = game;
         float rnd = UnityEngine.Random.Range(0.5f, 1.2f);
         _cardView.Init(this);
@@ -152,7 +167,8 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         if (targets == null) {
             targets = new();
             targets.AddRange(_combatManager.EnemyUnits);
-        } 
+        }
+        float damageDone = 0;
         foreach (var unit in targets)
         {
             if (effect.MovesCount > 0)  //Длящиеся эффекты
@@ -163,17 +179,14 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             {
                 if (effect.Damage > 0 || effect.InitiativeBonus > 0)
                 {
-                    float pDamage = _effect.Damage * cardUser.Damage;
-                    float mDamage = _effect.MDamage * cardUser.MDamage;
-                    float damageDone = unit.DealInstantEffect(pDamage, mDamage, 0, 0);
-                    if (_effect.Vampiric != 0)
-                    {
-                        cardUser.DealInstantEffect(0, 0, heal: damageDone, 0);
-                    }
+                    float pDamage = _effect.Damage * cardUser.Damage + cardUser.Bonus.Damage*cardUser.Damage;
+                    float mDamage = _effect.MDamage * cardUser.MDamage + cardUser.Bonus.MDamage * cardUser.MDamage;
+                    damageDone += unit.DealInstantEffect(pDamage, mDamage, 0, 0);
+                    
                 }
                 if (effect.InitiativeBonus > 0)
                 {
-                    float damageDone = unit.DealInstantEffect(0, 0, 0, effect.InitiativeBonus);
+                    unit.DealInstantEffect(0, 0, 0, effect.InitiativeBonus);
                 }
                 if (effect.Heal > 0)
                 {
@@ -182,7 +195,10 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
                 }
             }
         }
-        
+        if (_effect.Vampiric != 0)
+        {
+            cardUser.DealInstantEffect(0, 0, heal: damageDone * _effect.Vampiric / 100, 0);
+        }
         //_stateMachine.ChangeState(_defaultState);
     }
 
@@ -228,6 +244,19 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         DestroyCard();
     }
 
+    public List<CardEffect> GetPersonalEffect(string unitName)
+    {
+        List<CardEffect> effects = new();
+        foreach (var personalEffectGroup in _personalEffects)
+        {
+            if (personalEffectGroup.Key.name == unitName)
+            {
+                return personalEffectGroup.Value;
+            }
+        }
+        return effects;
+    }
+
     public void ToDeck()
     {
         _game.DeckBuider.AddCardToDeck(this.name);
@@ -252,18 +281,22 @@ public enum CardTypes
     bonusSingle,
     malusSingle,
     bonusMulti,
-    malusMulti
+    malusMulti,
+    giveCard
 }
 
 public enum EffectTypes
 {
-    speed,
+    speedUP,
+    slowDown,
     damage,
     fire,
     ice,
     shield,
     healOverTime,
-    bleeding
+    bleeding,
+    stun,
+    provoke
 }
 
 [Serializable]
@@ -276,7 +309,7 @@ public struct CardEffect
     public float Heal;
     public float InitiativeBonus;
     public float MaxHealthBonus;
-    public float MaxInitiativeBonus;
+    public float InitiativeBoost;
     public float DamageBonus;
     public float DefenceBonus;
     public float MDamageBonus;
