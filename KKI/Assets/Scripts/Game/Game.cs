@@ -24,12 +24,15 @@ public class Game : MonoBehaviour
     [SerializeField] private GridLayoutGroup3D _layoutGroup3D;
     [SerializeField] private Scene _currentScene;
     [SerializeField] private CardCollection _collection;
+    [SerializeField] private Settings _settings;
+    [SerializeField] private PuzzleController _puzzleController;
+
+    private Transform _playerGMPosition;
 
     //private float _cellStep;
     private bool _isCombat;
-    private Settings _settings;
-    private PuzzleController _puzzleController;
-    
+    [SerializeField] private EncounterData _currentEncounter;
+
     private GameStartState _startState;
     private GameDeckBuildState _deckbuildState;
     private GameMainMenuState _mainMenuState;
@@ -38,6 +41,8 @@ public class Game : MonoBehaviour
 
     private static Game GameInstance;
 
+    public EncounterData Encounter { get => _currentEncounter; set => _currentEncounter = value; }
+    public Transform PlayerGMPosition { get => _playerGMPosition; set => _playerGMPosition.SetPositionAndRotation(value.position,value.rotation); }
     public StateMachine StateMachine => _stateMachine;
     public IState CurrentState => _stateMachine.CurrentState;
     public MainMenu MainMenu => _mainMenu;
@@ -148,6 +153,12 @@ private void OnValidate()
         // Действия при начале боя
         _isCombat = true;
         _combatManager = FindObjectOfType<CombatManager>();
+        List<GameObject> enemiesList = new();
+        if (_currentEncounter.Name != "")
+        {
+            enemiesList = _currentEncounter.Enemies;
+        }
+        _combatManager.Initialize(enemiesList);
         _deck.LoadDeck();
         InitializePlayerDeck();
         

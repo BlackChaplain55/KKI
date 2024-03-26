@@ -80,6 +80,7 @@ public class CardView : MonoBehaviour
 
     public void UpdateView()
     {
+        FillStats(_stats, true);
         FillStats(_personalStats);
     }
 
@@ -101,10 +102,11 @@ public class CardView : MonoBehaviour
     private void FillStats(TMP_Text textPanel, bool mainStats = false, bool allUnits = false, bool clear = true)
     {
         if (clear) textPanel.text = "";
+        Unit activeUnit = _card.CurrentGame.Combat.ActiveUnit;
 
         if (mainStats)
         {
-            textPanel.text = GetEffectDescriptionString(_card.Effect);
+            textPanel.text = GetEffectDescriptionString(_card.Effect, activeUnit);
         }
         else if (allUnits)
         {
@@ -118,10 +120,10 @@ public class CardView : MonoBehaviour
             }
         }
         else
-        {
-            Unit activeUnit = _card.CurrentGame.Combat.ActiveUnit;
-            textPanel.text = activeUnit.Name + ":\r\n";
+        {    
             var personalEffects = _card.GetPersonalEffect(activeUnit.Name);
+            if (personalEffects.Count == 0) return;
+            textPanel.text = activeUnit.Name + ":\r\n";
             foreach (CardEffect personalEffect in personalEffects)
             {
                 textPanel.text += GetEffectDescriptionString(personalEffect);
@@ -129,7 +131,7 @@ public class CardView : MonoBehaviour
         }
     }
 
-    private string GetEffectDescriptionString(CardEffect effect)
+    private string GetEffectDescriptionString(CardEffect effect, Unit cardUser = null)
     {
         string description = "";
         description += effect.EffectName;
@@ -142,12 +144,26 @@ public class CardView : MonoBehaviour
 
         if (effect.Damage > 0)
         {
-            description += " " + effect.Damage.ToString()+ " физ. урона";
+            description += " " + effect.Damage.ToString();
+            if (cardUser)
+            {
+                float pDamageBonus = effect.Damage * (cardUser.Damage + cardUser.Bonus.Damage) - effect.Damage;
+                string damageBonusColor = pDamageBonus >= 0 ? "<color=#196F3D>" : "<color=\"red\">";
+                description += " + " + damageBonusColor + pDamageBonus.ToString() + "</color>" + "(бонус "+cardUser.Name+")";
+            }
+            description += " физ. урона";
         }
 
         if (effect.MDamage > 0)
         {
-            description += " " + effect.MDamage.ToString() + " маг. урона";
+            description += " " + effect.MDamage.ToString();
+            if (cardUser)
+            {
+                float mDamageBonus = effect.MDamage * (cardUser.MDamage + cardUser.Bonus.MDamage) - effect.MDamage;
+                string damageBonusColor = mDamageBonus >= 0 ? "<color=#196F3D>" : "<color=\"red\">";
+                description += " " + effect.MDamage.ToString() + damageBonusColor + mDamageBonus.ToString() + "</color>";
+            }
+            description += " маг. урона";
         }
 
         if (effect.DamageBonus > 0)

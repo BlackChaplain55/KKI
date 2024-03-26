@@ -3697,8 +3697,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4780215742169294259, guid: 0ec5669bc45ff9f49a99a13e6bd66f7f,
         type: 3}
+      propertyPath: _archer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4780215742169294259, guid: 0ec5669bc45ff9f49a99a13e6bd66f7f,
+        type: 3}
       propertyPath: _damage
-      value: 7
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4780215742169294259, guid: 0ec5669bc45ff9f49a99a13e6bd66f7f,
         type: 3}
@@ -3718,7 +3723,7 @@ PrefabInstance:
     - target: {fileID: 4780215742169294259, guid: 0ec5669bc45ff9f49a99a13e6bd66f7f,
         type: 3}
       propertyPath: _magicPower
-      value: 15
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4780215742169294259, guid: 0ec5669bc45ff9f49a99a13e6bd66f7f,
         type: 3}

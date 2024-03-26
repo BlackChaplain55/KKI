@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 
+[RequireComponent(typeof(SoundManager))]
+
 //Этот класс управляет основным меню
 public class MainMenu : MonoBehaviour
 {
@@ -23,6 +25,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private StateMachine _stateMachine;
 
     [SerializeField] private MusicPlayer _musicPlayer;
+    [SerializeField] private SoundManager _SFXManager;
+    
     [SerializeField] private Game _game;
 
     private MenuCombatState _combatState;
@@ -47,6 +51,7 @@ public class MainMenu : MonoBehaviour
         if (!_game) _game = FindObjectOfType<Game>();
         if (!_musicPlayer) _musicPlayer = GetComponent<MusicPlayer>();
         if (!_menuComponents) _menuComponents = GetComponent<MenuComponents>();
+        if (!_SFXManager) _SFXManager = GetComponent<SoundManager>();
     }
 
     private void Awake()
@@ -70,6 +75,7 @@ public class MainMenu : MonoBehaviour
         _playState = new(_stateMachine, this);
         if (state == null) _stateMachine.Initialize(_defaultState);
         else _stateMachine.Initialize(state);
+        _SFXManager.Init();
     }
 
     public void ChangeState(IState state)
@@ -77,8 +83,9 @@ public class MainMenu : MonoBehaviour
         _stateMachine.ChangeState(state);
     }
 
-    public void GameStart()
+    public void GameStart(EncounterData encounter)
     {
+        _game.Encounter = encounter;
         FadeScreen(_game.PlayState, _gameStart);
     }
 
@@ -95,6 +102,17 @@ public class MainMenu : MonoBehaviour
     public void DeckBuild()
     {
         FadeScreen(_game.DeckBuildState, _gameStart);
+    }
+
+    public void ShowConfirmationWindow(string dialogText, bool state)
+    {
+        _menuComponents.DialogText.text = dialogText;
+        _menuComponents.ConfirmPanel.SetActive(state);
+    }
+
+    public void Confirm()
+    {
+        EventBus.Instance.Confirm?.Invoke();
     }
 
     public void ShowMenu()

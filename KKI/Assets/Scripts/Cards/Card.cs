@@ -179,8 +179,8 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             {
                 if (effect.Damage > 0 || effect.InitiativeBonus > 0)
                 {
-                    float pDamage = _effect.Damage * cardUser.Damage + cardUser.Bonus.Damage*cardUser.Damage;
-                    float mDamage = _effect.MDamage * cardUser.MDamage + cardUser.Bonus.MDamage * cardUser.MDamage;
+                    float pDamage = _effect.Damage * (cardUser.Damage + cardUser.Bonus.Damage);
+                    float mDamage = _effect.MDamage * (cardUser.MDamage + cardUser.Bonus.MDamage);
                     damageDone += unit.DealInstantEffect(pDamage, mDamage, 0, 0);
                     
                 }
@@ -296,7 +296,8 @@ public enum EffectTypes
     healOverTime,
     bleeding,
     stun,
-    provoke
+    provoke,
+    none
 }
 
 [Serializable]

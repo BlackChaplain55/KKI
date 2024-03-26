@@ -18,6 +18,8 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private float _tickInterval;
     [SerializeField] private Color _bonusColor = Color.green;
     [SerializeField] private Color _malusColor = Color.red;
+    [SerializeField] private List<Transform> _enemyPositions;
+    [SerializeField] private List<GameObject> _defaultEnemies;
     [Space]
     [Header("Game components")]
     [SerializeField] private Game _game;
@@ -60,7 +62,7 @@ public class CombatManager : MonoBehaviour
 
     private void Start()
     {
-        Initialize();
+        //Initialize();
     }
 
     private void FixedUpdate()
@@ -103,7 +105,7 @@ public class CombatManager : MonoBehaviour
         _combatUI.UpdateUI();
     }
 
-    public void Initialize()
+    public void Initialize(List<GameObject> enemiesList)
     {
         _tickTimer = 0;
         _actionPoints = _initialAP;
@@ -112,13 +114,27 @@ public class CombatManager : MonoBehaviour
         EventBus.Instance.DeselectUnits.AddListener(DeselectUnits);
         EventBus.Instance.UnitActivationFinished.AddListener(UnitActivationFinished);
         EventBus.Instance.UnitDeath.AddListener(UnitDeath);
-        for (int i = 0; i < _unitsContainer.childCount; i++)
+
+        string[] heroes = PlayerPrefs.GetString("Heroes").Split(",");
+        if (heroes.Length != 0)
         {
-            _playerUnits.Add(_unitsContainer.GetChild(i).GetComponent<PlayerUnit>());
+            for (int i = 0; i < _unitsContainer.childCount; i++)
+            {
+                _playerUnits.Add(_unitsContainer.GetChild(i).GetComponent<PlayerUnit>());
+            }
         }
-        for (int i = 0; i < _enemiesContainer.childCount; i++)
+        //for (int i = 0; i < _enemiesContainer.childCount; i++)
+        //{
+        //    _enemyUnits.Add(_enemiesContainer.GetChild(i).GetComponent<Unit>());
+        //}
+        if (enemiesList.Count == 0) enemiesList = _defaultEnemies;
+
+        for (int i = 0; i < enemiesList.Count; i++)
         {
-            _enemyUnits.Add(_enemiesContainer.GetChild(i).GetComponent<Unit>());
+            if (i == 5) break;
+            var enemy = enemiesList[i];
+            GameObject newEnemy = Instantiate(enemy, _enemyPositions[i].position, _enemyPositions[i].rotation, _enemiesContainer);
+            _enemyUnits.Add(newEnemy.GetComponent<Unit>());
         }
         _combatUI.Init(this);
     }
@@ -145,6 +161,16 @@ public class CombatManager : MonoBehaviour
     {
         _playerUnits.Remove(playerUnit);
         _enemyUnits.Remove(unit);
+
+        if (_enemyUnits.Count==0)
+        {
+
+        }
+    }
+
+    private void CombatFinished()
+    {
+
     }
 
     private void DeselectUnits()

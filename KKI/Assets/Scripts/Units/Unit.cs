@@ -93,6 +93,15 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         if (_combatManager.ActiveCard != null)
         {
             _combatManager.ActiveUnit.SetUnitAnimation(_combatManager.ActiveCard.AnimationName,true,true);
+            if (_archer)
+            {
+                EventBus.Instance.SFXPlay?.Invoke(SFXClipsTypes.ArrowShoot);
+            }
+            else
+            {
+                EventBus.Instance.SFXPlay?.Invoke(SFXClipsTypes.Slash);
+            }
+            
             _combatManager.ActiveUnit.LookAtTarget(transform);
             _combatManager.CurrentTarget = this;
         }
@@ -131,11 +140,13 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             _AItarget = _AI.PickTarget();
             LookAtTarget(_AItarget.transform);
             SetUnitAnimation("Slash", true, isTrigger: true);
+            EventBus.Instance.SFXPlay?.Invoke(SFXClipsTypes.Slash);
         }
         else
         {
             Debug.Log("Hero unit " + _name + " is activated!");
             EventBus.Instance.ActivateUnit?.Invoke(this);
+            EventBus.Instance.SFXPlay?.Invoke(SFXClipsTypes.Activation);
             _stateMachine.ChangeState(_selectState);
         }
     }
@@ -147,7 +158,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             _AItarget.DealInstantEffect(-_damage,_magicPower,0, 0);
             Debug.Log("Enemy unit " + _name + " hit " + _AItarget + " with " + _damage);
             _AItarget = null;
-            EventBus.Instance.UnitActivationFinished?.Invoke();
+            //EventBus.Instance.UnitActivationFinished?.Invoke();
         }
         else
         {
@@ -170,11 +181,14 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
                 _combatManager.ActiveCard.ApplyCardEffects(this, targets);
             }
             _combatManager.CurrentTarget = null;
-            EventBus.Instance.UnitActivationFinished?.Invoke();
+            //EventBus.Instance.UnitActivationFinished?.Invoke();
         }
+
         _effects.CheckEffects();
         _bonus = _effects.SetBonus();
+        _currentInitiative = 0;
         _view.UpdateUI();
+        EventBus.Instance.UnitActivationFinished?.Invoke();
     }
 
     public void SetUnitAnimation(string animParameter, bool value, bool isTrigger = false)
@@ -196,7 +210,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         {
             EventBus.Instance.ActivateUnit?.Invoke(this);
             Activate();
-            _currentInitiative = 0;
+            
         }
         _view.UpdateUI();
     }
@@ -236,6 +250,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public void Death()
     {
         EventBus.Instance.UnitDeath?.Invoke(this,null);
+        EventBus.Instance.SFXPlay?.Invoke(SFXClipsTypes.Death);
         SetUnitAnimation(AnimationConstants.Death.ToString(), true);
     }
 

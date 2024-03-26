@@ -38,6 +38,8 @@ MonoBehaviour:
   - {fileID: 2972799463160797979, guid: 4c30413ee7f0bd8439f77cc132354256, type: 3}
   - {fileID: 2972799463160797979, guid: 63d1cbd0d47eab2469341393cb2878dd, type: 3}
   - {fileID: 2972799463160797979, guid: 74e9aabd7cf0950439580a19708d797a, type: 3}
+  - {fileID: 2972799463160797979, guid: 8c8488ab6b4314549a9bef30a0e322b2, type: 3}
+  - {fileID: 2972799463160797979, guid: 260e4696c77649e44952d6d454d2667e, type: 3}
   EffectIcons:
     _serializedList:
     - Key: 0

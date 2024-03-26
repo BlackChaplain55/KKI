@@ -16,6 +16,8 @@ public class EventBus : MonoBehaviour
     public UnityEvent<Card> DiscardCard;
     public UnityEvent OnMapTrigger;
     public UnityEvent Tick;
+    public UnityEvent<SFXClipsTypes> SFXPlay;
+    public UnityEvent Confirm;
 
     public static EventBus Instance;
 

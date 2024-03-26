@@ -2323,7 +2323,7 @@ PrefabInstance:
     - target: {fileID: 4169709697365084075, guid: c7207e39c28c8fa4088d15ad7e6091b9,
         type: 3}
       propertyPath: m_Name
-      value: Enemy_Mummy_Swordsman
+      value: Enemy_Mummy_BowMan
       objectReference: {fileID: 0}
     - target: {fileID: 8826832687372877354, guid: c7207e39c28c8fa4088d15ad7e6091b9,
         type: 3}
