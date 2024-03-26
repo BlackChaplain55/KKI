@@ -36,15 +36,19 @@ public class UnitEffects: MonoBehaviour
         bonus.Initiative = 0;
         bonus.Health = 0;
         bonus.Defence = 0;
+        bonus.MDamage = 0;
+        bonus.MResistance = 0;
 
         for (int i = 0; i < _temporaryEffects.Count; i++)
         {
             CardEffect effect = _temporaryEffects[i];
 
             bonus.Damage += effect.DamageBonus;
-            bonus.Initiative += effect.MaxInitiativeBonus;
+            bonus.Initiative += effect.InitiativeBonus;
             bonus.Health += effect.MaxHealthBonus;
             bonus.Defence += effect.DefenceBonus;
+            bonus.MDamage += effect.MDamage;
+            bonus.MResistance += effect.MResistBonus;
         }
         return bonus;
     }
@@ -66,6 +70,15 @@ public class UnitEffects: MonoBehaviour
         }
 
         UpdateEffectsIcons();
+    }
+
+    public bool CheckEffectExist(EffectTypes effectType)
+    {
+        foreach (var effect in _temporaryEffects)
+        {
+            if (effect.type == effectType) return true;
+        }
+        return false;
     }
 
     private void UpdateEffectsIcons()

@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
@@ -44,6 +45,12 @@ public class CardHighlightState : IState
             if (_card.APCost > _card.CurrentGame.ActionPoints)
             {
                 return;
+            }
+            if (_card.Type == CardTypes.giveCard)
+            {
+                List<string> newCards = _card.CurrentGame.CurrentDeck.GetRandomCards(_card.GiveCardsCount);
+                _card.CurrentGame.CurrentDeck.AddToHand(newCards);
+                _card.CurrentGame.InstantinateCardsToDeck(newCards);
             }
             if (_card.Type == CardTypes.attackMulti || _card.Type == CardTypes.bonusMulti || _card.Type == CardTypes.malusMulti)
             {

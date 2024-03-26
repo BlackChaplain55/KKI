@@ -53,20 +53,24 @@ MonoBehaviour:
   _actionPointCost: 0
   _effect:
     EffectName: 
+    effectType: 0
     Damage: 0
+    MDamage: 0
     Heal: 0
     InitiativeBonus: 0
     MaxHealthBonus: 0
-    MaxInitiativeBonus: 0
+    InitiativeBoost: 0
     DamageBonus: 0
     DefenceBonus: 0
+    MDamageBonus: 0
+    MResistBonus: 0
     Vampiric: 0
     MovesCount: 0
     CurrentMovesCount: 0
     isAOE: 0
     type: 0
   _animationName: 0
-  isDark: 0
+  _isDark: 0
   _personalEffects:
     _serializedList: []
   _gameObject: {fileID: 8042370180080501523}
@@ -88,12 +92,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 5793464973898975967}
-  _cardFront: {fileID: 7807368675564291543}
   _card: {fileID: 4627947290752318534}
   _game: {fileID: 0}
   _selectedVFX: {fileID: 7856371652827225527}
   _anim: {fileID: 5829809792163252368}
   _fullViewPanel: {fileID: 6999536694755305192}
+  _darkMaterial: {fileID: 2100000, guid: c6d46d8b196153a4ca8c5347712eb0f2, type: 2}
 --- !u!95 &5829809792163252368
 Animator:
   serializedVersion: 5
@@ -151,17 +155,17 @@ PrefabInstance:
     - target: {fileID: 490392537152277863, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
       propertyPath: m_fontColor.b
-      value: 0.0813012
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 490392537152277863, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
       propertyPath: m_fontColor.g
-      value: 0.0813012
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 490392537152277863, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
       propertyPath: m_fontColor.r
-      value: 0.084905684
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 490392537152277863, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
@@ -182,7 +186,7 @@ PrefabInstance:
     - target: {fileID: 490392537152277863, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4279571734
+      value: 4278190080
       objectReference: {fileID: 0}
     - target: {fileID: 490392537152277863, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
@@ -197,12 +201,12 @@ PrefabInstance:
     - target: {fileID: 1259620224189277071, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -2.49
+      value: -2.311
       objectReference: {fileID: 0}
     - target: {fileID: 1259620224189277071, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.815
+      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 1330728175937569274, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
@@ -484,12 +488,6 @@ GameObject:
 --- !u!1 &7708923606931195220 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1508189732082302363, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
-    type: 3}
-  m_PrefabInstance: {fileID: 9085365457642977487}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &7807368675564291543 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1318688063809682712, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
     type: 3}
   m_PrefabInstance: {fileID: 9085365457642977487}
   m_PrefabAsset: {fileID: 0}
