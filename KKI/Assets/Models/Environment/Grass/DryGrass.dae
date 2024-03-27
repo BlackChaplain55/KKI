@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 3.1.0 commit date:2022-03-08, commit time:18:16, hash:c77597cd0e15</authoring_tool>
+    </contributor>
+    <created>2023-04-12T13:44:52</created>
+    <modified>2023-04-12T13:44:52</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="DryGrass-effect">
+      <profile_COMMON>
+        <newparam sid="DryGrass_1_png-surface">
+          <surface type="2D">
+            <init_from>DryGrass_1_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="DryGrass_1_png-sampler">
+          <sampler2D>
+            <source>DryGrass_1_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="DryGrass_1_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="DryGrass2-effect">
+      <profile_COMMON>
+        <newparam sid="DryGrass_0_png-surface">
+          <surface type="2D">
+            <init_from>DryGrass_0_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="DryGrass_0_png-sampler">
+          <sampler2D>
+            <source>DryGrass_0_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="DryGrass_0_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="DryGrass3-effect">
+      <profile_COMMON>
+        <newparam sid="DryGrass_2_png-surface">
+          <surface type="2D">
+            <init_from>DryGrass_2_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="DryGrass_2_png-sampler">
+          <sampler2D>
+            <source>DryGrass_2_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="DryGrass_2_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images>
+    <image id="DryGrass_0_png" name="DryGrass_0_png">
+      <init_from>DryGrass_0.png</init_from>
+    </image>
+    <image id="DryGrass_1_png" name="DryGrass_1_png">
+      <init_from>DryGrass_1.png</init_from>
+    </image>
+    <image id="DryGrass_2_png" name="DryGrass_2_png">
+      <init_from>DryGrass_2.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="DryGrass-material" name="DryGrass">
+      <instance_effect url="#DryGrass-effect"/>
+    </material>
+    <material id="DryGrass2-material" name="DryGrass2">
+      <instance_effect url="#DryGrass2-effect"/>
+    </material>
+    <material id="DryGrass3-material" name="DryGrass3">
+      <instance_effect url="#DryGrass3-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Cube-mesh" name="Cube">
+      <mesh>
+        <source id="Cube-mesh-positions">
+          <float_array id="Cube-mesh-positions-array" count="180">0.5970242 0.1977767 0.893531 0.600454 0.9478103 -0.144825 0.2900496 -1.027955 1.026498 0.2900496 -1.027955 -0.144825 -0.5970242 1.802223 0.893531 -0.5970242 1.802223 -0.144825 -0.1730386 -0.9820592 1.060154 -0.5501834 0.9820594 -0.144825 -0.1730386 -0.9820592 -0.144825 -0.7060117 -0.2917999 -0.144825 0.600454 0.9478103 1.026498 0.5970242 0.1977767 -0.144825 -0.7060117 -0.2917999 0.893531 0.7060117 -1.7082 0.893531 0.7060117 -1.7082 -0.144825 -0.5501834 0.9820594 1.060154 0.08280742 -0.9264877 -0.144825 -0.2275969 -2.902253 0.5952098 -0.2275969 -2.902253 -0.144825 0.08280742 -0.9264877 0.5952098 -0.1781653 -1.027133 -0.1448249 0.5227712 -2.473313 0.3177481 0.5227712 -2.473313 -0.1448249 -0.1781653 -1.027133 0.3177481 0.1222839 2.175658 -0.144825 -0.6223941 0.319464 0.5952098 -0.6223941 0.319464 -0.144825 0.1222839 2.175658 0.5952098 -0.1545931 2.135966 -0.144825 0.3475345 0.200025 0.317748 0.3475345 0.200025 -0.144825 -0.1545931 2.135966 0.317748 -0.9382662 0.1365398 -0.1448249 1.030295 -0.2166848 1.215732 1.030295 -0.2166848 -0.1448249 -0.9382662 0.1365398 1.215732 0.1007071 -1.225574 -0.1448249 0.008036494 -2.994319 0.1644819 0.008036494 -2.994319 -0.1448249 0.1007071 -1.225574 0.1644819 0.1066901 2.622477 -0.1448251 0.01401942 1.176571 0.1644819 0.01401942 1.176571 -0.1448251 0.1066901 2.622477 0.1644819 -0.1785281 -0.004544973 -0.144825 0.2992377 -1.372379 0.8251239 0.2992377 -1.372379 -0.144825 -0.1785281 -0.004544973 0.8251239 -0.1195608 0.8360207 -0.144825 -0.7748243 -0.8372255 0.7357464 -0.7748243 -0.8372255 -0.144825 -0.1195608 0.8360207 0.7357464 0.08260917 1.013313 -0.144825 -0.2277952 -0.9624524 1.74013 -0.2277952 -0.9624524 -0.144825 0.08260917 1.013313 1.74013 0.6225214 0.4861224 -0.1448249 -0.4574225 -0.9501382 1.350924 -0.4574225 -0.9501382 -0.1448249 0.6225214 0.4861224 1.350924</float_array>
+          <technique_common>
+            <accessor source="#Cube-mesh-positions-array" count="60" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Cube-mesh-normals">
+          <float_array id="Cube-mesh-normals-array" count="69">-0.7082002 -0.7060117 0 -0.9820594 -0.1885724 0 0.9878828 -0.1552022 0 0.8022233 0.5970242 0 0.8998732 0.4361519 0 0.9280969 -0.372339 0 0.9679706 0.2510638 0 0.1766123 0.9842806 0 0.9986304 -0.05232161 0 0.9979525 -0.06396049 0 0.9440683 0.3297502 0 0.9311456 -0.3646478 0 0.7992653 -0.6009785 0 -0.9820594 -0.1885724 0 0.9878828 -0.1552022 0 0.9878828 -0.1552022 0 0.8998731 0.4361519 0 0.9679706 0.2510638 0 0.9986304 -0.05232161 0 0.9979525 -0.06396049 0 0.9440683 0.3297502 0 0.9311456 -0.3646478 0 0.7992652 -0.6009784 0</float_array>
+          <technique_common>
+            <accessor source="#Cube-mesh-normals-array" count="23" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Cube-mesh-map-0">
+          <float_array id="Cube-mesh-map-0-array" count="180">0.9919534 0.9732883 0.005300283 0.02136689 0.9946997 0.02136671 0.9919534 0.9732883 0.005300283 0.02136689 0.9946997 0.02136671 0.9919534 0.9732883 0.005300283 0.02136689 0.9946997 0.02136671 0.9919534 0.9732883 0.005300283 0.02136689 0.9946997 0.02136671 0.9919534 0.9732883 0.005300283 0.02136689 0.9946997 0.02136671 0.9919534 0.9732883 0.005300283 0.02136689 0.9946997 0.02136671 0.9919534 0.9732883 0.005300283 0.02136689 0.9946997 0.02136671 0.9919534 0.9732883 0.005300283 0.02136689 0.9946997 0.02136671 0.9919534 0.9732883 0.005300283 0.02136689 0.9946997 0.02136671 0.9919534 0.9732883 0.005300283 0.02136689 0.9946997 0.02136671 0.9919534 0.9732883 0.005300283 0.02136689 0.9946997 0.02136671 0.9919534 0.9732883 0.005300283 0.02136689 0.9946997 0.02136671 0.9919534 0.9732883 0.005300283 0.02136689 0.9946997 0.02136671 0.9919534 0.9732883 0.005300283 0.02136689 0.9946997 0.02136671 0.9919534 0.9732883 0.005300283 0.02136689 0.9946997 0.02136671 0.9919534 0.9732883 0.002553939 0.9732885 0.005300283 0.02136689 0.9919534 0.9732883 0.002553939 0.9732885 0.005300283 0.02136689 0.9919534 0.9732883 0.002553939 0.9732885 0.005300283 0.02136689 0.9919534 0.9732883 0.002553939 0.9732885 0.005300283 0.02136689 0.9919534 0.9732883 0.002553939 0.9732885 0.005300283 0.02136689 0.9919534 0.9732883 0.002553939 0.9732885 0.005300283 0.02136689 0.9919534 0.9732883 0.002553939 0.9732885 0.005300283 0.02136689 0.9919534 0.9732883 0.002553939 0.9732885 0.005300283 0.02136689 0.9919534 0.9732883 0.002553939 0.9732885 0.005300283 0.02136689 0.9919534 0.9732883 0.002553939 0.9732885 0.005300283 0.02136689 0.9919534 0.9732883 0.002553939 0.9732885 0.005300283 0.02136689 0.9919534 0.9732883 0.002553939 0.9732885 0.005300283 0.02136689 0.9919534 0.9732883 0.002553939 0.9732885 0.005300283 0.02136689 0.9919534 0.9732883 0.002553939 0.9732885 0.005300283 0.02136689 0.9919534 0.9732883 0.002553939 0.9732885 0.005300283 0.02136689</float_array>
+          <technique_common>
+            <accessor source="#Cube-mesh-map-0-array" count="90" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Cube-mesh-vertices">
+          <input semantic="POSITION" source="#Cube-mesh-positions"/>
+        </vertices>
+        <triangles material="DryGrass-material" count="18">
+          <input semantic="VERTEX" source="#Cube-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Cube-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Cube-mesh-map-0" offset="2" set="0"/>
+          <p>13 0 0 9 0 1 14 0 2 6 1 3 7 1 4 8 1 5 10 2 6 3 2 7 1 2 8 4 3 9 11 3 10 5 3 11 19 2 12 18 2 13 16 2 14 23 4 15 22 4 16 20 4 17 27 5 18 26 5 19 24 5 20 31 6 21 30 6 22 28 6 23 35 7 24 34 7 25 32 7 26 13 0 45 12 0 46 9 0 47 6 13 48 15 13 49 7 13 50 10 14 51 2 14 52 3 14 53 4 3 54 0 3 55 11 3 56 19 15 57 17 15 58 18 15 59 23 16 60 21 16 61 22 16 62 27 5 63 25 5 64 26 5 65 31 17 66 29 17 67 30 17 68 35 7 69 33 7 70 34 7 71</p>
+        </triangles>
+        <triangles material="DryGrass2-material" count="8">
+          <input semantic="VERTEX" source="#Cube-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Cube-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Cube-mesh-map-0" offset="2" set="0"/>
+          <p>39 8 27 38 8 28 36 8 29 43 9 30 42 9 31 40 9 32 47 10 33 46 10 34 44 10 35 51 11 36 50 11 37 48 11 38 39 18 72 37 18 73 38 18 74 43 19 75 41 19 76 42 19 77 47 20 78 45 20 79 46 20 80 51 21 81 49 21 82 50 21 83</p>
+        </triangles>
+        <triangles material="DryGrass3-material" count="4">
+          <input semantic="VERTEX" source="#Cube-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Cube-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Cube-mesh-map-0" offset="2" set="0"/>
+          <p>55 2 39 54 2 40 52 2 41 59 12 42 58 12 43 56 12 44 55 2 84 53 2 85 54 2 86 59 22 87 57 22 88 58 22 89</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="DryGrass" name="DryGrass" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#Cube-mesh" name="DryGrass">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="DryGrass-material" target="#DryGrass-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="DryGrass2-material" target="#DryGrass2-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="DryGrass3-material" target="#DryGrass3-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>
