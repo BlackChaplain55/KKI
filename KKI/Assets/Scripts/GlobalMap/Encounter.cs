@@ -45,11 +45,18 @@ public class Encounter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _isStarted = false;
-            _game.MainMenu.ShowConfirmationWindow("", false);
-            _globalMapManager.Player.SetInputBlocked(false);
-            EventBus.Instance.Confirm.RemoveListener(OnConfirm);
+            StartCoroutine(DelayedTriggerExit());
         }
+    }
+
+    private IEnumerator DelayedTriggerExit()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        _isStarted = false;
+        _game.MainMenu.ShowConfirmationWindow("", false);
+        _globalMapManager.Player.SetInputBlocked(false);
+        EventBus.Instance.Confirm.RemoveListener(OnConfirm);
     }
 
     public void Init(GlobalMapManager gmManager, bool complete)
@@ -89,6 +96,10 @@ public struct EncounterData
     public string Name;
     public List<GameObject> Enemies;
     public string EncounterBeginText;
+    public Sprite InitialScreen;
+    public Sprite VictoryScreen;
+    public AudioClip InitialClip;
+    public AudioClip VictoryClip;
     public string EncounterVictoryText;
     public GameObject VictoryCard;
     public bool IsComplete;

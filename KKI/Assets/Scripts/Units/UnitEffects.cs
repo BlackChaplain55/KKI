@@ -17,9 +17,10 @@ public class UnitEffects: MonoBehaviour
         if (!_effectsContainer) _effectsContainer = transform.Find("UnitCanvas")?.Find("Panel")?.Find("EffectsContainer");
     }
 
-    public void Init(CardCollection collection)
+    public void Init(CardCollection collection, Unit unit)
     {
         _collection = collection;
+        _unit = unit;
     }
 
     public void AddEffect(CardEffect effect)
@@ -59,7 +60,9 @@ public class UnitEffects: MonoBehaviour
         for (int i = 0; i < _temporaryEffects.Count; i++)
         {
             CardEffect effect = _temporaryEffects[i];
-            if (!initial)effect.CurrentMovesCount--;
+            if (effect.Damage > 0|| effect.MDamage>0) _unit.DealInstantEffect(pDamage: effect.Damage, mDamage: effect.MDamage, 0,0);
+            if (effect.Heal>0) _unit.DealInstantEffect(0, 0, heal: 0, 0);
+            if (!initial) effect.CurrentMovesCount--;
             if (effect.CurrentMovesCount == 0) expiredEffects.Add(effect);
             _temporaryEffects[i] = effect;
         }

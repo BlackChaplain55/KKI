@@ -283,7 +283,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         _stateMachine.Initialize(_defaultState);
         _combatManager = combatManager;
         if (_AI) _AI.Init(_combatManager, this);
-        _effects.Init(_combatManager.GetGame.CardCollection);
+        _effects.Init(_combatManager.GetGame.CardCollection, this);
         float rnd = UnityEngine.Random.Range(0.8f, 1.2f);
         _anim.SetFloat("IdleSpeed", rnd);
     }

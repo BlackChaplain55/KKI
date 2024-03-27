@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 using DG.Tweening;
 
 //Этот модкль отвечает за визуал карты
@@ -20,6 +21,7 @@ public class CardView : MonoBehaviour
     [SerializeField] private TMP_Text _personalStats;
     [SerializeField] private TMP_Text _APCost;
     [SerializeField] private TMP_Text _fullViewInfo;
+    [SerializeField] private Button _toDeckButton;
 
     public Animator Anim => _anim;
     public ParticleSystem SelectedVFX => _selectedVFX;
@@ -216,10 +218,11 @@ public class CardView : MonoBehaviour
         return description;
     }
 
-    public void SetFullView()
+    public void SetFullView(bool playState)
     {
         _fullViewPanel.SetActive(true);
         _anim.SetTrigger("FullView");
+        if (playState) _toDeckButton.interactable = false;
     }
 
     public void SetAnimation(string animation, bool value, bool isTrigger)

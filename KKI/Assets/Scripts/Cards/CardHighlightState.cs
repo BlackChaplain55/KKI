@@ -40,7 +40,7 @@ public class CardHighlightState : IState
 
     private void Select(PointerEventData eventData)
     {
-        if (_card.CurrentGame.CurrentState is GamePlayState)
+        if (_card.CurrentGame.CurrentState is GamePlayState && eventData.button == PointerEventData.InputButton.Left)
         {
             if (_card.APCost > _card.CurrentGame.ActionPoints)
             {
@@ -61,9 +61,9 @@ public class CardHighlightState : IState
                 _stateMachine.ChangeState(_card.SelectState);
             }
         }
-        else if (_card.CurrentGame.CurrentState is GameDeckBuildState)
+        else if (_card.CurrentGame.CurrentState is GameDeckBuildState|| (_card.CurrentGame.CurrentState is GamePlayState&&eventData.button==PointerEventData.InputButton.Right))
         {
-            if (_card.IsInDeck) EventBus.Instance.ActivateCard?.Invoke(_card);
+            if (_card.CurrentGame.CurrentState is GameDeckBuildState&&_card.IsInDeck) EventBus.Instance.ActivateCard?.Invoke(_card);
             else
             if (_card.name.Contains("Unknown")) return;
             else
@@ -75,10 +75,18 @@ public class CardHighlightState : IState
                 cardFullView.SetState(cardFullView.DescriptionState);
                 cardFullViewGO.transform.SetPositionAndRotation(_card.transform.position, _card.transform.rotation);
                 cardFullViewGO.transform.DOScale(3, 1);
-                cardFullViewGO.transform.DOMove(new Vector3(5, 5, -5), 1).OnComplete(() => {
-                    cardFullView.SetFullView();
+                Vector3 fullViewPosition = new Vector3(5, 5, -5);
+                bool playState = false;
+                if (_card.CurrentGame.CurrentState is GamePlayState)
+                {
+                    fullViewPosition = _card.CurrentGame.Combat.FullViewPosition.position;
+                    playState = true;
+                }
+                cardFullViewGO.transform.DOMove(fullViewPosition, 0.5f).OnComplete(() => {
+                    cardFullView.SetFullView(playState);
                 });
-                _card.CurrentGame.DeckBuider.ActivateCard(true);
+                if (_card.CurrentGame.CurrentState is GameDeckBuildState)
+                    _card.CurrentGame.DeckBuider.ActivateCard(true);
             }  
         }
     }

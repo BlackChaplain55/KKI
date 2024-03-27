@@ -20,6 +20,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private Color _malusColor = Color.red;
     [SerializeField] private List<Transform> _enemyPositions;
     [SerializeField] private List<GameObject> _defaultEnemies;
+    [SerializeField] private Transform _fullViewPosition;
     [Space]
     [Header("Game components")]
     [SerializeField] private Game _game;
@@ -41,6 +42,7 @@ public class CombatManager : MonoBehaviour
     public Unit CurrentTarget { get => _currentTarget; set => _currentTarget = value; }
     public int ActionPoints { get => _actionPoints; set => _actionPoints = value; }
     public int InitialHandSize { get => _initialHandSize; }
+    public Transform FullViewPosition { get => _fullViewPosition; }
 
     public Game GetGame => _game;
     public Unit ActiveUnit => _activeUnit;

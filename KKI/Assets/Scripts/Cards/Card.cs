@@ -157,16 +157,24 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         _cardView.Anim.SetFloat("IdleSpeed", rnd);
     }
 
-    public void SetFullView()
+    public void SetFullView(bool playState)
     {
-        _cardView.SetFullView();
+        _cardView.SetFullView(playState);
     }
 
     private void ApplyEffect(CardEffect effect, Unit cardUser, List<Unit> targets=null)
     {
-        if (targets == null) {
+        if (targets == null)
+        {
             targets = new();
-            targets.AddRange(_combatManager.EnemyUnits);
+            if (effect.effectType == CardTypes.bonusMulti)
+            {
+                targets.AddRange(_combatManager.PlayerUnits);
+            }
+            else
+            {
+                targets.AddRange(_combatManager.EnemyUnits);
+            }
         }
         float damageDone = 0;
         foreach (var unit in targets)
@@ -179,16 +187,16 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             }
             else                        //ћгновенные эффекты
             {
-                if (effect.Damage > 0 || effect.InitiativeBonus > 0)
+                if (effect.Damage > 0 || effect.MDamage > 0)
                 {
-                    float pDamage = _effect.Damage * (cardUser.Damage + cardUser.Bonus.Damage);
-                    float mDamage = _effect.MDamage * (cardUser.MDamage + cardUser.Bonus.MDamage);
+                    float pDamage = effect.Damage * (cardUser.Damage + cardUser.Bonus.Damage);
+                    float mDamage = effect.MDamage * (cardUser.MDamage + cardUser.Bonus.MDamage);
                     damageDone += unit.DealInstantEffect(pDamage, mDamage, 0, 0);
                     
                 }
-                if (effect.InitiativeBonus > 0)
+                if (effect.InitiativeBoost != 0)
                 {
-                    unit.DealInstantEffect(0, 0, 0, effect.InitiativeBonus);
+                    unit.DealInstantEffect(0, 0, 0, effect.InitiativeBoost);
                 }
                 if (effect.Heal > 0)
                 {

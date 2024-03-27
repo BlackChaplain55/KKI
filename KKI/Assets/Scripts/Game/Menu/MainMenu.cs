@@ -89,6 +89,11 @@ public class MainMenu : MonoBehaviour
         FadeScreen(_game.PlayState, _gameStart);
     }
 
+    public void GMStart()
+    {
+        FadeScreen(_game.GlobalMapState, _gameStart);
+    }
+
     public void GoToMainMenu()
     {
         FadeScreen(_game.StartState);
