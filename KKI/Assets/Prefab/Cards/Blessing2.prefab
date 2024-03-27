@@ -15,6 +15,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
+      propertyPath: _type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
       propertyPath: _isDark
       value: 1
       objectReference: {fileID: 0}
@@ -31,37 +36,42 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.EffectName
-      value: "\"\u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u0441\u0442\u043E\u0439\u043A\u0430\""
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.MovesCount
-      value: 999
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _effect.effectType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.DamageBonus
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.DefenceBonus
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.MDamageBonus
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.MResistBonus
-      value: 15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.MaxHealthBonus
-      value: -20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -122,6 +132,187 @@ PrefabInstance:
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.data[0].isAOE
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].Damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[0].Value.Array.data[0].EffectName
+      value: "\"\u0421\u0442\u043E\u0439\u043A\u0430 \u0423\u0431\u0438\u0439\u0441\u0442\u0432\u0430\""
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[0].Value.Array.data[0].MovesCount
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[0].Value.Array.data[0].effectType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].EffectName
+      value: "\"\u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u0441\u0442\u043E\u0439\u043A\u0430\""
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].MovesCount
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].effectType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].EffectName
+      value: "\"\u042F\u0440\u043E\u0441\u0442\u044C II\""
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].MovesCount
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].effectType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].EffectName
+      value: "\"\u0421\u0431\u0440\u043E\u0441 \u0431\u0440\u043E\u043D\u0438 II\""
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].MovesCount
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].effectType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.data[0].EffectName
+      value: "\"\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u0438\u0433\u0440\u043E\u0432\u043E\u0433\u043E
+        \u0431\u0430\u043B\u0430\u043D\u0441\u0430 II\" \u0432\u0441\u0435\u043C"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.data[0].MovesCount
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.data[0].effectType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[0].Value.Array.data[0].DamageBonus
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].DamageBonus
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].DamageBonus
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].DamageBonus
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].DefenceBonus
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].MDamageBonus
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].MResistBonus
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].DefenceBonus
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].MDamageBonus
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].MResistBonus
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].DefenceBonus
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].MResistBonus
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.data[0].DefenceBonus
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.data[0].MResistBonus
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].MaxHealthBonus
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.data[0].MaxHealthBonus
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[0].Value.Array.data[0].InitiativeBonus
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].InitiativeBonus
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].InitiativeBonus
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4885318259277563448, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -191,9 +382,7 @@ PrefabInstance:
     - target: {fileID: 6649056135796426233, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: "\"\u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u0441\u0442\u043E\u0439\u043A\u0430\"
-        - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 +-5 \u0448\u0442\u0440\u0430\u0444
-        \u0441\u0438\u043B\u044B +-10 \u0448\u0442\u0440\u0430\u0444 \u0437\u0430\u0449\u0438\u0442\u044B\r\n"
+      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 8042370180080501523, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -203,9 +392,7 @@ PrefabInstance:
     - target: {fileID: 8708706953026549160, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: "\"\u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u0441\u0442\u043E\u0439\u043A\u0430\"
-        - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 +-5 \u0448\u0442\u0440\u0430\u0444
-        \u0441\u0438\u043B\u044B +-10 \u0448\u0442\u0440\u0430\u0444 \u0437\u0430\u0449\u0438\u0442\u044B\r\n"
+      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435\r\n"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

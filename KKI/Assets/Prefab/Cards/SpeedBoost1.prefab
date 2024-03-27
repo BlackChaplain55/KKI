@@ -36,13 +36,18 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _type
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _cardPrefab
       value: 
       objectReference: {fileID: 3181271284085333340}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _effect.isAOE
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _animationName
@@ -201,7 +206,7 @@ PrefabInstance:
     - target: {fileID: 6649056135796426233, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 --25\r\n"
+      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435(AOE) --25\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 7076191167850465283, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -236,7 +241,7 @@ PrefabInstance:
     - target: {fileID: 8708706953026549160, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 --25\r\n"
+      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435(AOE) --25\r\n"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

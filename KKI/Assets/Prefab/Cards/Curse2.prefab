@@ -31,7 +31,7 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.DefenceBonus
-      value: -1000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -116,7 +116,7 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[0].Value.Array.data[0].EffectName
-      value: "\"\u0418\u0441\u0441\u044B\u0445\u0430\u043D\u0438\u0435\" (\u0432\u0441\u0435\u043C)"
+      value: "\"\u0418\u0441\u0441\u044B\u0445\u0430\u043D\u0438\u0435\" \u0432\u0441\u0435\u043C"
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -126,7 +126,7 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].EffectName
-      value: "\"\u041F\u0440\u043E\u043A\u043B\u044F\u0442\u0438\u0435\""
+      value: "\"\u041F\u0440\u043E\u043A\u043B\u044F\u0442\u0438\u0435 I\""
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -271,8 +271,7 @@ PrefabInstance:
     - target: {fileID: 6649056135796426233, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 +-1000 \u0448\u0442\u0440\u0430\u0444
-        \u0437\u0430\u0449\u0438\u0442\u044B\r\n"
+      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 8042370180080501523, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -282,8 +281,7 @@ PrefabInstance:
     - target: {fileID: 8708706953026549160, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 +-1000 \u0448\u0442\u0440\u0430\u0444
-        \u0437\u0430\u0449\u0438\u0442\u044B\r\n"
+      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435\r\n"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
