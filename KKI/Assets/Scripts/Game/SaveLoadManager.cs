@@ -23,4 +23,20 @@ public static class SaveLoadManager
 
         return settings;
     }
+
+    public static void SaveProgresData(ProgressData progress)
+    {
+        PlayerPrefs.SetFloat("PositionX",progress.PlayerPosition.x);
+        PlayerPrefs.SetFloat("PositionY", progress.PlayerPosition.y);
+        PlayerPrefs.SetFloat("PositionZ", progress.PlayerPosition.z);
+        PlayerPrefs.SetString("CompleteEncounters", progress.CompleteEncounters);
+    }
+
+    public static ProgressData LoadProgres()
+    {
+        ProgressData progress = new();
+        progress.PlayerPosition = new Vector3(PlayerPrefs.GetFloat("PositionX", 15.16f), PlayerPrefs.GetFloat("PositionY", 4.201f), PlayerPrefs.GetFloat("PositionZ", 175.8f));
+        progress.CompleteEncounters = PlayerPrefs.GetString("CompleteEncounters", "");
+        return progress;
+    }
 }

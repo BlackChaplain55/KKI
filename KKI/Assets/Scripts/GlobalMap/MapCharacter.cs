@@ -7,9 +7,12 @@ using UnityEngine.EventSystems;
 public class MapCharacter : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private GameObject _target;
+    [SerializeField] private Game _game;
+    [SerializeField] private GlobalMapManager _GM;
     [SerializeField] private NavMeshAgent _navAgent;
     [SerializeField] private Animator _anim;
     [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private bool _inputBlocked;
     public void OnPointerClick(PointerEventData eventData)
     {
         _target.transform.position = eventData.position;
@@ -21,9 +24,15 @@ public class MapCharacter : MonoBehaviour, IPointerClickHandler
         _target.gameObject.SetActive(false);
     }
 
+    public void SetInputBlocked(bool state)
+    {
+        _inputBlocked = state;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (_inputBlocked) return;
         RaycastHit hitInfo;
 
         if (Input.GetMouseButton(0))

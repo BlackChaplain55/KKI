@@ -7,15 +7,22 @@ public class Encounter : MonoBehaviour
 {
     [SerializeField] private EncounterData _encData;
     [SerializeField] private Game _game;
+    [SerializeField] private GlobalMapManager _globalMapManager;
+    [SerializeField] private GameObject _blocker;
     private bool _isStarted = false;
     private bool _isConfirmed = false;
-    private bool _isComplete;
 
-    public bool IsComplete { get => _isComplete; }
+    public bool IsComplete { get => _encData.IsComplete; }
+    public string Name { get => _encData.Name; }
 
+
+    private void OnValidate()
+    {
+        if (!_game) _game = FindObjectOfType<Game>();
+    }
     private void Awake()
     {
-        _game = FindObjectOfType<Game>();
+        if(!_game) _game = FindObjectOfType<Game>();
         
     }
 
@@ -23,11 +30,12 @@ public class Encounter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (!_isStarted && !_isComplete)
+            if (!_isStarted && !_encData.IsComplete)
             {
                 _isStarted = true;
                 //BeginEncounter();
                 _game.MainMenu.ShowConfirmationWindow(_encData.EncounterBeginText, true);
+                _globalMapManager.Player.SetInputBlocked(true);
                 EventBus.Instance.Confirm.AddListener(OnConfirm);
             }
         }
@@ -39,27 +47,33 @@ public class Encounter : MonoBehaviour
         {
             _isStarted = false;
             _game.MainMenu.ShowConfirmationWindow("", false);
+            _globalMapManager.Player.SetInputBlocked(false);
             EventBus.Instance.Confirm.RemoveListener(OnConfirm);
         }
     }
 
-    public void Init(bool complete)
+    public void Init(GlobalMapManager gmManager, bool complete)
     {
-        _isComplete = false;
+        //_isComplete = false;
+        _globalMapManager = gmManager;
+        _encData.IsComplete = complete;
+
+        if (complete)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    public void CompleteEncounter()
+    {
+        //_isComplete = true;
+        _encData.IsComplete = true;
+        _blocker.SetActive(false);
     }
 
     private void OnConfirm()
     {
-        BeginEncounter();
-    }
-
-    private IEnumerator WaitForConfirmation()
-    {
-        while (!_isComplete)
-        {
-            yield return null;
-        }
-
+        _globalMapManager.SaveProgress();
         BeginEncounter();
     }
 
@@ -77,5 +91,6 @@ public struct EncounterData
     public string EncounterBeginText;
     public string EncounterVictoryText;
     public GameObject VictoryCard;
+    public bool IsComplete;
 }
 

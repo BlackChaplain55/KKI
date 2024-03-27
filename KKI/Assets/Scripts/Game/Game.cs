@@ -26,6 +26,7 @@ public class Game : MonoBehaviour
     [SerializeField] private CardCollection _collection;
     [SerializeField] private Settings _settings;
     [SerializeField] private PuzzleController _puzzleController;
+    [SerializeField] private GlobalMapManager _globalMapManager;
 
     private Transform _playerGMPosition;
 
@@ -158,16 +159,17 @@ private void OnValidate()
         {
             enemiesList = _currentEncounter.Enemies;
         }
-        _combatManager.Initialize(enemiesList);
-        _deck.LoadDeck();
+        ClearPlayerDeckContainer();
         InitializePlayerDeck();
-        
+        _combatManager.Initialize(this, enemiesList);  
     }
 
     public void InitializeGlobalMapScene()
     {
         _puzzleController = FindObjectOfType<PuzzleController>();
+        _globalMapManager = FindObjectOfType<GlobalMapManager>();
         _puzzleController.Init(this);
+        _globalMapManager.Init(this);
     }
 
     public void ExitCombatScene()
@@ -194,14 +196,9 @@ private void OnValidate()
 
     private void InitializePlayerDeck() // «агружаем карты в руку игрока
     {
-        _deck.Init();
+        _deck.Init(this);
+        _deck.LoadDeck();
         _deck.AddToHand(_deck.GetRandomCards(_combatManager.InitialHandSize));
-
-        for (int i = _playerDeckContainer.childCount-1; i >=0 ; i--)
-        {
-            Destroy(_playerDeckContainer.GetChild(i).gameObject);
-        }
-
         InstantinateCardsToDeck(_deck.PlayerHand);
         
     }
@@ -219,6 +216,14 @@ private void OnValidate()
             }
         }
         SetLayoutSpacing();
+    }
+
+    private void ClearPlayerDeckContainer()
+    {
+        for (int i = _playerDeckContainer.childCount - 1; i >= 0; i--)
+        {
+            Destroy(_playerDeckContainer.GetChild(i).gameObject);
+        }
     }
 
     private void SetLayoutSpacing() //Ќастраиваем плотность расположени€ карт в руке игрока
@@ -270,4 +275,10 @@ public struct Settings
     public float EffectsVol;
     public float MusicVol;
     public float AmbientVol;
+}
+
+public struct ProgressData
+{
+    public Vector3 PlayerPosition;
+    public string CompleteEncounters;
 }

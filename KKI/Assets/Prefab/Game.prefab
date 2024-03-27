@@ -367,13 +367,13 @@ GameObject:
   - component: {fileID: 915342076423986531}
   - component: {fileID: 3710062707117999450}
   - component: {fileID: 830827590213645852}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: ConfirmPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &915342076423986531
 RectTransform:
   m_ObjectHideFlags: 0
@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1360,19 +1360,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4310753596783527034}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8557309372200308454}
-  m_Father: {fileID: 6371326859040653474}
+  m_Father: {fileID: 2638376124034592597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 960, y: 540}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8298685795665360392
 Canvas:
   m_ObjectHideFlags: 0
@@ -1583,7 +1583,7 @@ GameObject:
   - component: {fileID: 494715546320836215}
   - component: {fileID: 6229232451997200021}
   - component: {fileID: 3332206220936677113}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1740,7 +1740,6 @@ Transform:
   - {fileID: 2638376124034592597}
   - {fileID: 6782606869585643342}
   - {fileID: 5480923651152380338}
-  - {fileID: 8567824172806914087}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6525791134401825208
@@ -1769,12 +1768,14 @@ MonoBehaviour:
     m_Handle: 0
   _collection: {fileID: 11400000, guid: 6fabbe2158386f64cb663531c231e6e8, type: 2}
   _puzzleController: {fileID: 0}
+  _globalMapManager: {fileID: 0}
   _currentEncounter:
     Name: 
     Enemies: []
     EncounterBeginText: 
     EncounterVictoryText: 
     VictoryCard: {fileID: 0}
+    IsComplete: 0
 --- !u!114 &6116601076465070097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2046,10 +2047,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3797352185002092586}
+  - {fileID: 8567824172806914087}
   - {fileID: 525057206886262204}
   - {fileID: 6563402661624889097}
   - {fileID: 4366542139297242224}
-  - {fileID: 3797352185002092586}
   m_Father: {fileID: 6371326859040653474}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2116,7 +2118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
+  m_BlockingObjects: 3
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -3202,7 +3204,7 @@ GameObject:
   - component: {fileID: 478026038029166361}
   - component: {fileID: 2326845790091341553}
   - component: {fileID: 7630918687162122071}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: DialogText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3776,7 +3778,7 @@ GameObject:
   - component: {fileID: 7607640236254717817}
   - component: {fileID: 6740816245142461401}
   - component: {fileID: 7791663852799916975}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Confirm
   m_TagString: Untagged
   m_Icon: {fileID: 0}

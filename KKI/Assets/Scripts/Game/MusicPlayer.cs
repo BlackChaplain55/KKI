@@ -11,6 +11,7 @@ public class MusicPlayer : MonoBehaviour
     [SerializeField] private List<AudioClip> _musicCombat = new();
     [SerializeField] private List<AudioClip> _musicMenu = new();
     [SerializeField] private List<AudioClip> _musicDeckBuild = new();
+    [SerializeField] private List<AudioClip> _musicGlobalMap = new();
     [SerializeField] private List<AudioClip> _ambient = new();
     [SerializeField] private Game _game;
     private bool _soundEnabled = true;
@@ -37,6 +38,11 @@ public class MusicPlayer : MonoBehaviour
         Play(_musicDeckBuild);
     }
 
+    public void SetGlobalMapPlaylist()
+    {
+        Play(_musicGlobalMap);
+    }
+
     private void Play(List<AudioClip> playlist, List<AudioClip> ambient=null)
     {
         if (_musicRoutine!=null) StopCoroutine(_musicRoutine);
@@ -56,7 +62,8 @@ public class MusicPlayer : MonoBehaviour
 
     private IEnumerator PlayMusic(List<AudioClip> playlist)
     {
-        int index = -1;
+        int rnd = Random.Range(0, playlist.Count);
+        int index = rnd-1;
         while (_soundEnabled)
         {
             if (!_musicSource.isPlaying)

@@ -174,6 +174,8 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             if (effect.MovesCount > 0)  //Длящиеся эффекты
             {
                 unit.AddEffect(effect);
+                unit.Effects.CheckEffects(initial: true);
+                if(effect.MaxHealthBonus!=0) unit.DealInstantEffect(0, 0, effect.MaxHealthBonus, 0);
             }
             else                        //Мгновенные эффекты
             {

@@ -155,7 +155,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     {
         if (_AI)
         {
-            _AItarget.DealInstantEffect(-_damage,_magicPower,0, 0);
+            _AItarget.DealInstantEffect(_damage,_magicPower,0, 0);
             Debug.Log("Enemy unit " + _name + " hit " + _AItarget + " with " + _damage);
             _AItarget = null;
             //EventBus.Instance.UnitActivationFinished?.Invoke();

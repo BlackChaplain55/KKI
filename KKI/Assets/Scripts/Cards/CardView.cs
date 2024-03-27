@@ -102,7 +102,7 @@ public class CardView : MonoBehaviour
     private void FillStats(TMP_Text textPanel, bool mainStats = false, bool allUnits = false, bool clear = true)
     {
         if (clear) textPanel.text = "";
-        Unit activeUnit = _card.CurrentGame.Combat.ActiveUnit;
+        Unit activeUnit = _card.CurrentGame.Combat?.ActiveUnit;
 
         if (mainStats)
         {

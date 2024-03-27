@@ -35,6 +35,8 @@ public class CombatManager : MonoBehaviour
     private float _tickTimer;
     private float _currentTurnLength;
     private int _bonusAPPerTurn;
+    private bool _finished = false;
+    private bool _victory = false;
 
     public Unit CurrentTarget { get => _currentTarget; set => _currentTarget = value; }
     public int ActionPoints { get => _actionPoints; set => _actionPoints = value; }
@@ -54,7 +56,7 @@ public class CombatManager : MonoBehaviour
 
     private void OnValidate()
     {
-        if (!_game) _game = FindObjectOfType<Game>();
+       //if (!_game) _game = FindObjectOfType<Game>();
         if (!_unitsContainer) _unitsContainer = transform.Find("PlayerUnits");
         if (!_enemiesContainer) _enemiesContainer = transform.Find("EnemyUnits");
         if (!_combatUI) _combatUI = GetComponent<CombatUI>();
@@ -67,6 +69,7 @@ public class CombatManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_finished) return;
         if (_activeUnit == null)
         {
             _tickTimer += Time.fixedDeltaTime;
@@ -105,8 +108,9 @@ public class CombatManager : MonoBehaviour
         _combatUI.UpdateUI();
     }
 
-    public void Initialize(List<GameObject> enemiesList)
+    public void Initialize(Game game,List<GameObject> enemiesList)
     {
+        _game = game;
         _tickTimer = 0;
         _actionPoints = _initialAP;
         EventBus.Instance.ActivateUnit.AddListener(ActivateUnit);
@@ -136,7 +140,9 @@ public class CombatManager : MonoBehaviour
             GameObject newEnemy = Instantiate(enemy, _enemyPositions[i].position, _enemyPositions[i].rotation, _enemiesContainer);
             _enemyUnits.Add(newEnemy.GetComponent<Unit>());
         }
+        _finished = false;
         _combatUI.Init(this);
+        //_game.CurrentDeck.LoadDeck();
     }
 
     public void Exit()
@@ -162,15 +168,51 @@ public class CombatManager : MonoBehaviour
         _playerUnits.Remove(playerUnit);
         _enemyUnits.Remove(unit);
 
-        if (_enemyUnits.Count==0)
+        if (_enemyUnits.Count==0) //Победа в битве
         {
-
+            _victory = true;
+            CombatFinishedConfirmation();
         }
+
+        if (_playerUnits.Count == 0) //Поражение в битве
+        {
+            _victory = false;
+            CombatFinishedConfirmation();
+        }
+
+
     }
 
-    private void CombatFinished()
+    private void CombatFinishedConfirmation()
     {
+        _finished = true;
+        if (_victory)
+        {
+            _game.MainMenu.ShowConfirmationWindow(_game.Encounter.EncounterVictoryText, true);
+        }
+        else
+        {
+            _game.MainMenu.ShowConfirmationWindow("Поражение", true);
+        }
+        EventBus.Instance.Confirm.AddListener(OnConfirmation);
+    }
 
+    private void OnConfirmation()
+    {
+        if (_victory)
+        {
+            EncounterData enc = _game.Encounter;
+            if (enc.VictoryCard)
+            {
+                if (_game.CardCollection.FindCard(enc.VictoryCard.name) == null)
+                {
+                    _game.CardCollection.Cards.Add(enc.VictoryCard);
+                }
+            }
+            enc.IsComplete = true;
+            _game.Encounter = enc;
+            _game.ChangeState(_game.GlobalMapState);
+        }
     }
 
     private void DeselectUnits()

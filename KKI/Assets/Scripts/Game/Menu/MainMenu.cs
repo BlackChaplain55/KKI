@@ -112,6 +112,7 @@ public class MainMenu : MonoBehaviour
 
     public void Confirm()
     {
+        _menuComponents.ConfirmPanel.SetActive(false);
         EventBus.Instance.Confirm?.Invoke();
     }
 

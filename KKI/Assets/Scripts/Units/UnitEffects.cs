@@ -53,13 +53,13 @@ public class UnitEffects: MonoBehaviour
         return bonus;
     }
 
-    public void CheckEffects()
+    public void CheckEffects(bool initial = false)
     {
         List<CardEffect> expiredEffects = new List<CardEffect>();
         for (int i = 0; i < _temporaryEffects.Count; i++)
         {
             CardEffect effect = _temporaryEffects[i];
-            effect.CurrentMovesCount--;
+            if (!initial)effect.CurrentMovesCount--;
             if (effect.CurrentMovesCount == 0) expiredEffects.Add(effect);
             _temporaryEffects[i] = effect;
         }

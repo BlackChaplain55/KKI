@@ -20,12 +20,13 @@ public class Deck : MonoBehaviour
 
     private void OnValidate()
     {
-        if (!_game) _game = GetComponent<Game>();
+        //if (!_game) _game = GetComponent<Game>();
         if (!_deckUI) _deckUI = GetComponent<DeckUI>();
     }
 
-    public void Init()
+    public void Init(Game game)
     {
+        _game = game;
         EventBus.Instance.DiscardCard.AddListener(DiscardCard);
         _playerDiscard.Clear();
         ResetCurrentDeck();
@@ -70,6 +71,7 @@ public class Deck : MonoBehaviour
         {
             if(card!="") _playerDeck.Add(card);
         }
+        ResetCurrentDeck();
     }
 
     [ContextMenu("Drop saved deck")]
