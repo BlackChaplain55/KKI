@@ -16,8 +16,11 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private float _unitActvationLimit = 100;
     [SerializeField] private int _actionPoints;
     [SerializeField] private float _tickInterval;
+    [SerializeField] private float _effectDelayInterval;
     [SerializeField] private Color _bonusColor = Color.green;
     [SerializeField] private Color _malusColor = Color.red;
+    [SerializeField] public Color InfoBonusColor = Color.green;
+    [SerializeField] public Color InfoMalusColor = Color.red;
     [SerializeField] private List<Transform> _enemyPositions;
     [SerializeField] private List<GameObject> _defaultEnemies;
     [SerializeField] private Transform _fullViewPosition;
@@ -42,6 +45,7 @@ public class CombatManager : MonoBehaviour
     public Unit CurrentTarget { get => _currentTarget; set => _currentTarget = value; }
     public int ActionPoints { get => _actionPoints; set => _actionPoints = value; }
     public int InitialHandSize { get => _initialHandSize; }
+    public float EffectDelayInterval { get => _effectDelayInterval; }
     public Transform FullViewPosition { get => _fullViewPosition; }
 
     public Game GetGame => _game;
@@ -108,6 +112,11 @@ public class CombatManager : MonoBehaviour
             Turn();
         }
         _combatUI.UpdateUI();
+    }
+
+    public void SkipTurn()
+    {
+        _activeUnit.FinishActivation();
     }
 
     public void Initialize(Game game,List<GameObject> enemiesList)

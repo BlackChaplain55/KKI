@@ -21,7 +21,8 @@ public class CardView : MonoBehaviour
     [SerializeField] private TMP_Text _personalStats;
     [SerializeField] private TMP_Text _APCost;
     [SerializeField] private TMP_Text _fullViewInfo;
-    [SerializeField] private Button _toDeckButton;
+    [SerializeField] private GameObject _deckBuildsButtons;
+    [SerializeField] private GameObject _playModeButtons;
 
     public Animator Anim => _anim;
     public ParticleSystem SelectedVFX => _selectedVFX;
@@ -135,6 +136,8 @@ public class CardView : MonoBehaviour
 
     private string GetEffectDescriptionString(CardEffect effect, Unit cardUser = null)
     {
+        string greenColor = ColorUtility.ToHtmlStringRGB(_card.CurrentGame.Combat.InfoBonusColor);
+        string redColor = ColorUtility.ToHtmlStringRGB(_card.CurrentGame.Combat.InfoMalusColor);
         string description = "";
         description += effect.EffectName;
         description += " - " + _card.CurrentGame.CardCollection.GetEffectDescription(effect.type);
@@ -150,7 +153,7 @@ public class CardView : MonoBehaviour
             if (cardUser)
             {
                 float pDamageBonus = effect.Damage * (cardUser.Damage + cardUser.Bonus.Damage) - effect.Damage;
-                string damageBonusColor = pDamageBonus >= 0 ? "<color=#196F3D>" : "<color=\"red\">";
+                string damageBonusColor = pDamageBonus >= 0 ? "<color=#" + greenColor + ">" : "<color=\"red\">";
                 description += " + " + damageBonusColor + pDamageBonus.ToString() + "</color>" + "(бонус "+cardUser.Name+")";
             }
             description += " физ. урона";
@@ -162,7 +165,7 @@ public class CardView : MonoBehaviour
             if (cardUser)
             {
                 float mDamageBonus = effect.MDamage * (cardUser.MDamage + cardUser.Bonus.MDamage) - effect.MDamage;
-                string damageBonusColor = mDamageBonus >= 0 ? "<color=#196F3D>" : "<color=\"red\">";
+                string damageBonusColor = mDamageBonus >= 0 ? "<color=#" + greenColor + ">" : "<color=\"red\">";
                 description += " " + effect.MDamage.ToString() + damageBonusColor + mDamageBonus.ToString() + "</color>";
             }
             description += " маг. урона";
@@ -222,7 +225,16 @@ public class CardView : MonoBehaviour
     {
         _fullViewPanel.SetActive(true);
         _anim.SetTrigger("FullView");
-        if (playState) _toDeckButton.interactable = false;
+        if (playState)
+        {
+            _deckBuildsButtons.SetActive(false);
+            _playModeButtons.SetActive(true);
+        }
+        else
+        {
+            _deckBuildsButtons.SetActive(true);
+            _playModeButtons.SetActive(false);
+        }
     }
 
     public void SetAnimation(string animation, bool value, bool isTrigger)

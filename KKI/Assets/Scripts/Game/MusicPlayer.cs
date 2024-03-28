@@ -55,7 +55,7 @@ public class MusicPlayer : MonoBehaviour
         {
             if (ambient.Count > 0)
             {
-                _ambientRoutine = StartCoroutine(PlayAmbient(playlist));
+                _ambientRoutine = StartCoroutine(PlayAmbient(ambient));
             }
         }
     }

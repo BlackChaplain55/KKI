@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UnitEffects: MonoBehaviour
+public class UnitEffects : MonoBehaviour
 {
     [SerializeField] private Unit _unit;
     [SerializeField] private CardCollection _collection;
     [SerializeField] private List<CardEffect> _temporaryEffects;
     [SerializeField] private Transform _effectsContainer;
     [SerializeField] private GameObject _effectPrefab;
+
+    public List<CardEffect> TempEffects { get => _temporaryEffects; }
 
     private void OnValidate()
     {
@@ -48,7 +50,7 @@ public class UnitEffects: MonoBehaviour
             bonus.Initiative += effect.InitiativeBonus;
             bonus.Health += effect.MaxHealthBonus;
             bonus.Defence += effect.DefenceBonus;
-            bonus.MDamage += effect.MDamage;
+            bonus.MDamage += effect.MDamageBonus;
             bonus.MResistance += effect.MResistBonus;
         }
         return bonus;
@@ -61,7 +63,7 @@ public class UnitEffects: MonoBehaviour
         {
             CardEffect effect = _temporaryEffects[i];
             if (effect.Damage > 0|| effect.MDamage>0) _unit.DealInstantEffect(pDamage: effect.Damage, mDamage: effect.MDamage, 0,0);
-            if (effect.Heal>0) _unit.DealInstantEffect(0, 0, heal: 0, 0);
+            if (effect.Heal>0) _unit.DealInstantEffect(0, 0, heal: effect.Heal, 0);
             if (!initial) effect.CurrentMovesCount--;
             if (effect.CurrentMovesCount == 0) expiredEffects.Add(effect);
             _temporaryEffects[i] = effect;

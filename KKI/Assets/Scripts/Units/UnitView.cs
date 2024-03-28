@@ -77,18 +77,36 @@ public class UnitView : MonoBehaviour
 
     public void UpdateUI()
     {
+        string greenColor = ColorUtility.ToHtmlStringRGB(_unit.Combat.InfoBonusColor);
+        string redColor = ColorUtility.ToHtmlStringRGB(_unit.Combat.InfoMalusColor);
         _healthSlider.fillAmount = _unit.CurrentHealth /(_unit.MaxHealth);
         _initiativeSlider.fillAmount = _unit.CurrentInitiative/(_unit.Combat.UnitActivationLimit);
         _healthText.text = _unit.CurrentHealth.ToString("0") + "/" + _unit.MaxHealth.ToString("0");
         _initiativeText.text = _unit.CurrentInitiative.ToString("0") + "/" + _unit.Combat.UnitActivationLimit.ToString();
-        string damBonusColor = _unit.Bonus.Damage >= 0 ? "<color=#1D8348>" : "<color=\"red\">";
-        string defBonusColor = _unit.Bonus.Defence >= 0 ? "<color=#1D8348>" : "<color=\"red\">";
-        string mDamageBonusColor = _unit.Bonus.MDamage >= 0 ? "<color=#1D8348>" : "<color=\"red\">";
-        string mResistColor = _unit.Bonus.MResistance >= 0 ? "<color=#1D8348>" : "<color=\"red\">";
-        _statsText.text =   "Физ. сила: " + _unit.Damage.ToString() + "+" + damBonusColor + _unit.Bonus.Damage + "</color>\r\n" +
-                            "Защита: " + _unit.Defence.ToString() + "+" + defBonusColor + _unit.Bonus.Defence + "</color>\r\n" +
-                            "Маг. сила: " + _unit.MDamage.ToString() + "+" + mDamageBonusColor + _unit.Bonus.MDamage + "</color>\r\n" +
-                            "Сопротивл.: " + _unit.MResistance.ToString() + "+" + mResistColor + _unit.Bonus.MResistance + "</color>\r\n";
+        string initBonusColor = _unit.Bonus.Initiative >= 0 ? "<color=#"+greenColor+">" : "<color=\"red\">";
+        string healthBonusColor = _unit.Bonus.Health >= 0 ? "<color=#" + greenColor + ">" : "<color=\"red\">";
+        string damBonusColor = _unit.Bonus.Damage >= 0 ? "<color=#" + greenColor + ">" : "<color=\"red\">";
+        string defBonusColor = _unit.Bonus.Defence >= 0 ? "<color=#" + greenColor + ">" : "<color=\"red\">";
+        string mDamageBonusColor = _unit.Bonus.MDamage >= 0 ? "<color=#" + greenColor + ">" : "<color=\"red\">";
+        string mResistColor = _unit.Bonus.MResistance >= 0 ? "<color=#" + greenColor + ">" : "<color=\"red\">";
+
+        string initBonus = _unit.Bonus.Initiative != 0 ? "+" + initBonusColor + _unit.Bonus.Initiative + "</color>\r\n" : "\r\n";
+        string healthBonus = _unit.Bonus.Health != 0 ? "+" + healthBonusColor + _unit.Bonus.Health + "</color>\r\n" : "\r\n";
+        string damBonus = _unit.Bonus.Damage != 0 ? "+" + damBonusColor + _unit.Bonus.Damage + "</color>\r\n" : "\r\n";
+        string defBonus = _unit.Bonus.Defence != 0 ? "+" + defBonusColor + _unit.Bonus.Defence + "</color>\r\n" : "\r\n";
+        string mDamageBonus = _unit.Bonus.MDamage != 0 ? "+" + mDamageBonusColor + _unit.Bonus.MDamage + "</color>\r\n" : "\r\n";
+        string mResist = _unit.Bonus.MResistance != 0 ? "+" + mResistColor + _unit.Bonus.MResistance + "</color>\r\n" : "\r\n";
+
+        _statsText.text =   "Макс. НР: " + _unit.MaxHealth.ToString() + healthBonus +
+                            "Скорость: " + _unit.Initiative.ToString() + initBonus +
+                            "Физ. сила: " + _unit.Damage.ToString() + damBonus +
+                            "Защита: " + _unit.Defence.ToString() + defBonus +
+                            "Маг. сила: " + _unit.MDamage.ToString() + mDamageBonus +
+                            "Сопротивл.: " + _unit.MResistance.ToString() + mResist;
+        foreach(CardEffect effect in _unit.Effects.TempEffects)
+        {
+            _statsText.text += effect.EffectName+" ("+ effect.MovesCount +" ходов)\r\n";
+        }
                             //"Здоровье: " + _unit.Defence.ToString() + "\r\n" + "+" + _unit.Bonus.Defence + "\r\n" +
                             //"Инициатива: " + _unit.Defence.ToString() + "\r\n" + "+" + _unit.Bonus.Defence + "\r\n" +
             ;

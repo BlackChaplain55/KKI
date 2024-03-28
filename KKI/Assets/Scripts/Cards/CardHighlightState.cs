@@ -48,9 +48,15 @@ public class CardHighlightState : IState
             }
             if (_card.Type == CardTypes.giveCard)
             {
+                if(_card.CurrentGame.CurrentDeck.PlayerHand.Count+ _card.GiveCardsCount> _card.CurrentGame.CurrentDeck.PlayerDeck.Count)
+                {
+                    return;
+                }
                 List<string> newCards = _card.CurrentGame.CurrentDeck.GetRandomCards(_card.GiveCardsCount);
                 _card.CurrentGame.CurrentDeck.AddToHand(newCards);
                 _card.CurrentGame.InstantinateCardsToDeck(newCards);
+                _card.FinishCardActivation();
+                _card.CurrentGame.Combat.ActiveUnit.FinishActivation();
             }
             if (_card.Type == CardTypes.attackMulti || _card.Type == CardTypes.bonusMulti || _card.Type == CardTypes.malusMulti)
             {
@@ -74,19 +80,25 @@ public class CardHighlightState : IState
                 cardFullView.Initialize(_card.CurrentGame);
                 cardFullView.SetState(cardFullView.DescriptionState);
                 cardFullViewGO.transform.SetPositionAndRotation(_card.transform.position, _card.transform.rotation);
-                cardFullViewGO.transform.DOScale(3, 1);
+                
                 Vector3 fullViewPosition = new Vector3(5, 5, -5);
                 bool playState = false;
                 if (_card.CurrentGame.CurrentState is GamePlayState)
                 {
+                    cardFullViewGO.transform.DOScale(2.5f, 1);
                     fullViewPosition = _card.CurrentGame.Combat.FullViewPosition.position;
                     playState = true;
+                }
+                else
+                {
+                    cardFullViewGO.transform.DOScale(3, 1);
                 }
                 cardFullViewGO.transform.DOMove(fullViewPosition, 0.5f).OnComplete(() => {
                     cardFullView.SetFullView(playState);
                 });
                 if (_card.CurrentGame.CurrentState is GameDeckBuildState)
                     _card.CurrentGame.DeckBuider.ActivateCard(true);
+                _card.StateMachine.ChangeState(_card.DefaultState);
             }  
         }
     }

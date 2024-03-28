@@ -35,10 +35,11 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     [SerializeField] private float _currentHealth;
     [SerializeField] private float _currentInitiative;
     [SerializeField] private StatsBonus _bonus;
-    [SerializeField] private PlayerUnit _AItarget;
+    [SerializeField] private Unit _AItarget;
     [SerializeField] private Unit _playerTarget;
+    [SerializeField] private CombatManager _combatManager;
 
-    private CombatManager _combatManager;
+    private AIDecision _decision;
 
     public StateMachine _stateMachine;
     private UnitDefaultState _defaultState;
@@ -67,7 +68,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     public float Defence { get => _defence; }
     public float MResistance { get => _magicResist; }
     public float MaxHealth { get => _health+_bonus.Health;}
-    public float MaxInitiative { get => _initiative-_bonus.Initiative; }
+    public float Initiative { get => _initiative; }
     public float CurrentHealth { get => _currentHealth; }
     public float CurrentInitiative { get => _currentInitiative; }
     public StatsBonus Bonus { get => _bonus; }
@@ -88,20 +89,54 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         if (!_figure) _figure = transform.Find("Figure");
     }
 
+    private void Init(CombatManager combatManager)
+    {
+        _currentHealth = _health;
+        _currentInitiative = 0;
+        _bonus = new StatsBonus();
+        _bonus.Initiative = 0;
+        _bonus.Health = 0;
+        _bonus.Damage = 0;
+        _bonus.Defence = 0;
+        _view.Init(this, _name);
+
+        _stateMachine = new StateMachine();
+        _stateMachine.OnStateChanged += (state, oldState) => StateChanged?.Invoke(state, oldState, this);
+
+        _defaultState = new(_stateMachine, this, _view);
+        _selectState = new(_stateMachine, this, _view);
+        _highlightState = new(_stateMachine, this, _view);
+
+        _stateMachine.Initialize(_defaultState);
+        _combatManager = combatManager;
+        if (_AI) _AI.Init(_combatManager, this);
+        _effects.Init(_combatManager.GetGame.CardCollection, this);
+        float rnd = UnityEngine.Random.Range(0.8f, 1.2f);
+        _anim.SetFloat("IdleSpeed", rnd);
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (_combatManager.GetGame.InputBlocked) return;
         if (_combatManager.ActiveCard != null)
         {
             _combatManager.ActiveUnit.SetUnitAnimation(_combatManager.ActiveCard.AnimationName,true,true);
-            if (_archer)
+            if (_combatManager.ActiveCard.AnimationName == AnimationConstants.Slash.ToString())
             {
-                EventBus.Instance.SFXPlay?.Invoke(SFXClipsTypes.ArrowShoot);
+                if (_combatManager.ActiveUnit._archer)
+                {
+                    EventBus.Instance.SFXPlay?.Invoke(SFXClipsTypes.ArrowShoot);
+                }
+                else
+                {
+                    EventBus.Instance.SFXPlay?.Invoke(SFXClipsTypes.Slash);
+                }
             }
-            else
+            if (_combatManager.ActiveCard.AnimationName == AnimationConstants.Cast.ToString())
             {
-                EventBus.Instance.SFXPlay?.Invoke(SFXClipsTypes.Slash);
+                EventBus.Instance.SFXPlay?.Invoke(SFXClipsTypes.Cast);
             }
-            
+
             _combatManager.ActiveUnit.LookAtTarget(transform);
             _combatManager.CurrentTarget = this;
         }
@@ -109,6 +144,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (_combatManager.GetGame.InputBlocked) return;
         _view.ShowStats(true);
         if (_stateMachine.CurrentState == DefaultState)
         {
@@ -118,6 +154,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (_combatManager.GetGame.InputBlocked) return;
         _view.ShowStats(false);
         if (_stateMachine.CurrentState == HighlightState)
         {
@@ -130,14 +167,16 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         //_effects.CheckEffects();
         //_bonus = _effects.SetBonus();
         //_view.UpdateUI();
-        if (_effects.CheckEffectExist(EffectTypes.provoke)) {
+        if (_effects.CheckEffectExist(EffectTypes.stun)) {
             _view.ShowEffectName("Оглушен", false);
+            FinishActivation();
             return;
         };
         if (_AI)
         {
             Debug.Log("Enemy unit " + _name + " is activated!");
-            _AItarget = _AI.PickTarget();
+            _decision = _AI.PickDecision();
+            _AItarget = _decision.targets[0];
             LookAtTarget(_AItarget.transform);
             SetUnitAnimation("Slash", true, isTrigger: true);
             EventBus.Instance.SFXPlay?.Invoke(SFXClipsTypes.Slash);
@@ -153,11 +192,31 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void AnimationFinished()
     {
+        StartCoroutine(ActivationCoroutine());
+    }
+
+    private IEnumerator ActivationCoroutine()
+    {
         if (_AI)
         {
-            _AItarget.DealInstantEffect(_damage,_magicPower,0, 0);
-            Debug.Log("Enemy unit " + _name + " hit " + _AItarget + " with " + _damage);
-            _AItarget = null;
+            if(_decision.action.Type==AIActionTypes.Heal|| _decision.action.Type == AIActionTypes.AOEHeal)
+            {
+                foreach (Unit target in _decision.targets)
+                {
+                    DealInstantEffect(0, 0, _decision.action.Heal, 0);
+                };
+            }
+            else
+            {
+                foreach (Unit target in _decision.targets)
+                {
+                    target.DealInstantEffect(_decision.action.PValue, _decision.action.MValue,0, 0);
+                };
+            }
+            
+            //_AItarget.DealInstantEffect(_damage, _magicPower, 0, 0);
+            //Debug.Log("Enemy unit " + _name + " hit " + _AItarget + " with " + _damage);
+            _decision = new();
             //EventBus.Instance.UnitActivationFinished?.Invoke();
         }
         else
@@ -170,7 +229,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
                 targets.Add(_combatManager.CurrentTarget);
                 _combatManager.ActiveCard.ApplyCardEffects(this, targets);
             }
-            else if(_combatManager.ActiveCard.Type == CardTypes.bonusMulti)
+            else if (_combatManager.ActiveCard.Type == CardTypes.bonusMulti)
             {
                 _combatManager.ActiveCard.ApplyCardEffects(this);
             }
@@ -180,10 +239,17 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
                 targets.AddRange(_combatManager.PlayerUnits);
                 _combatManager.ActiveCard.ApplyCardEffects(this, targets);
             }
-            _combatManager.CurrentTarget = null;
+
             //EventBus.Instance.UnitActivationFinished?.Invoke();
         }
+        yield return new WaitForSeconds(1f);
+        FinishActivation();
+    }
 
+    public void FinishActivation()
+    {
+        EventBus.Instance.DeselectUnits?.Invoke();
+        _combatManager.CurrentTarget = null;
         _effects.CheckEffects();
         _bonus = _effects.SetBonus();
         _currentInitiative = 0;
@@ -231,11 +297,16 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             appliedDamage = -pDamage- mDamage;
             _view.Indicators(appliedDamage, 0, 0);
             SetUnitAnimation("Impact", true, isTrigger: true);
+            EventBus.Instance.SFXPlay?.Invoke(SFXClipsTypes.Impact);
         }
             
         _currentHealth += appliedDamage + heal; ;       
         _currentHealth = Mathf.Clamp(_currentHealth, 0, _health + _bonus.Health);
-        if (_currentHealth <= 0) Death();
+        if (_currentHealth <= 0)
+        {
+            _view.UpdateUI();
+            Death();
+        }    
         
         if (initiativeBoost != 0)
         {
@@ -247,7 +318,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         _view.UpdateUI();
     }
 
-    public void Death()
+    virtual public void Death()
     {
         EventBus.Instance.UnitDeath?.Invoke(this,null);
         EventBus.Instance.SFXPlay?.Invoke(SFXClipsTypes.Death);
@@ -262,31 +333,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         _view.UpdateUI();
     }
 
-    private void Init(CombatManager combatManager)
-    {
-        _currentHealth = _health;
-        _currentInitiative = 0;
-        _bonus = new StatsBonus();
-        _bonus.Initiative = 0;
-        _bonus.Health = 0;
-        _bonus.Damage = 0;
-        _bonus.Defence = 0;
-        _view.Init(this, _name);
-
-        _stateMachine = new StateMachine();
-        _stateMachine.OnStateChanged += (state, oldState) => StateChanged?.Invoke(state, oldState, this);
-
-        _defaultState = new(_stateMachine, this, _view);
-        _selectState = new(_stateMachine, this, _view);
-        _highlightState = new(_stateMachine, this, _view);
-
-        _stateMachine.Initialize(_defaultState);
-        _combatManager = combatManager;
-        if (_AI) _AI.Init(_combatManager, this);
-        _effects.Init(_combatManager.GetGame.CardCollection, this);
-        float rnd = UnityEngine.Random.Range(0.8f, 1.2f);
-        _anim.SetFloat("IdleSpeed", rnd);
-    }
+    
 
     public void LookAtTarget(Transform target)
     {

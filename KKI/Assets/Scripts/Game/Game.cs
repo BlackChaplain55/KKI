@@ -41,6 +41,7 @@ public class Game : MonoBehaviour
     private GameGlobalMapState _globalMapState;
 
     private static Game GameInstance;
+    private bool _inputBlocked;
 
     public EncounterData Encounter { get => _currentEncounter; set => _currentEncounter = value; }
     public Transform PlayerGMPosition { get => _playerGMPosition; set => _playerGMPosition.SetPositionAndRotation(value.position,value.rotation); }
@@ -63,8 +64,9 @@ public class Game : MonoBehaviour
     public CombatManager Combat => _combatManager;
 
     public float ActionPoints { get => _combatManager.ActionPoints; }
+    public bool InputBlocked { get => _inputBlocked; set => _inputBlocked = value; }
 
-private void OnValidate()
+    private void OnValidate()
     {
         if (!_mainMenu) _mainMenu = transform.Find("UI").GetComponent<MainMenu>();
         if (!_deck) _deck = GetComponent<Deck>();
@@ -235,7 +237,7 @@ private void OnValidate()
         else
             _layoutGroup3D.spacing.z = 0.3f;
         _playerDeckContainer.transform.position = new Vector3(_playerDeckContainer.transform.position.x, _playerDeckContainer.transform.position.y,
-            _playerDeckDefaultPosition.transform.position.z + (_layoutGroup3D.cellSize.z / 2 + _layoutGroup3D.spacing.z/2) * _playerDeckContainer.childCount - 1);
+            _playerDeckDefaultPosition.transform.position.z + (_layoutGroup3D.cellSize.z / 2 + _layoutGroup3D.spacing.z/2) * (_playerDeckContainer.childCount - 1)-_layoutGroup3D.cellSize.z / 2);
         _layoutGroup3D.UpdateLayout();
     }
     
@@ -255,7 +257,7 @@ private void OnValidate()
     }
     private float ValueToVolume(float value) //делаем регулировку гроскости более линейной
     {
-        return Mathf.Log10(Mathf.Clamp(value,0.001f,1)) * 40;
+        return Mathf.Log10(Mathf.Clamp(value,0.0001f,1)) * 20;
     }
 
     public void ChangeState(IState state)

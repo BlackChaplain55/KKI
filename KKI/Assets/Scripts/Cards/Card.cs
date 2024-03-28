@@ -110,8 +110,22 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         _stateMachine.OnStateChanged -= (state, oldState) => StateChanged?.Invoke(state, oldState, this);
     }
 
+    public void Initialize(Game game)
+    {
+        if (game == null)
+        {
+            Debug.Log("CARD INITIALIZATION ERROR");
+        }
+
+        _game = game;
+        float rnd = UnityEngine.Random.Range(0.5f, 1.2f);
+        _cardView.Init(this);
+        _cardView.Anim.SetFloat("IdleSpeed", rnd);
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (_game.InputBlocked) return;
         if (_game.CurrentState is GamePlayState) 
         {
             if (_combatManager.ActiveUnit == null) return;
@@ -119,18 +133,9 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         PointerClick?.Invoke(eventData);
     }
 
-    public List<List<CardEffect>> GetPersonatEffectsList()
-    {
-        List<List<CardEffect>> personalEffectsGroup = new();
-        foreach(List<CardEffect> effects in _personalEffects.Values)
-        {
-            personalEffectsGroup.Add(effects);
-        }
-        return personalEffectsGroup;
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (_game.InputBlocked) return;
         _pointerEnter = true;
         if (_game.CurrentState is GameDeckBuildState && _game.DeckBuider.HaveActiveCard) return;
         if (_stateMachine.CurrentState is CardDefaultState) _stateMachine.ChangeState(_highlightState);
@@ -139,26 +144,25 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (_game.InputBlocked) return;
         _pointerEnter = false;
         if(_stateMachine.CurrentState is CardHighlightState) _stateMachine.ChangeState(_defaultState);
         PointerChanged?.Invoke(_pointerEnter, this);
     }
 
-    public void Initialize(Game game)
+    public List<List<CardEffect>> GetPersonatEffectsList()
     {
-        if (game == null)
+        List<List<CardEffect>> personalEffectsGroup = new();
+        foreach (List<CardEffect> effects in _personalEffects.Values)
         {
-            Debug.Log("CARD INITIALIZATION ERROR");
+            personalEffectsGroup.Add(effects);
         }
-        
-        _game = game;
-        float rnd = UnityEngine.Random.Range(0.5f, 1.2f);
-        _cardView.Init(this);
-        _cardView.Anim.SetFloat("IdleSpeed", rnd);
+        return personalEffectsGroup;
     }
 
     public void SetFullView(bool playState)
     {
+        _game.InputBlocked = true;
         _cardView.SetFullView(playState);
     }
 
@@ -181,9 +185,18 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         {
             if (effect.MovesCount > 0)  //Длящиеся эффекты
             {
-                unit.AddEffect(effect);
-                unit.Effects.CheckEffects(initial: true);
-                if(effect.MaxHealthBonus!=0) unit.DealInstantEffect(0, 0, effect.MaxHealthBonus, 0);
+                if(effect.effectType == CardTypes.bonusSingle|| effect.effectType == CardTypes.bonusMulti || effect.effectType == CardTypes.attackMulti)
+                {
+                    cardUser.AddEffect(effect);
+                    cardUser.Effects.CheckEffects(initial: true);
+                    if (effect.MaxHealthBonus != 0) cardUser.DealInstantEffect(0, 0, effect.MaxHealthBonus, 0);
+                }
+                else
+                {
+                    unit.AddEffect(effect);
+                    unit.Effects.CheckEffects(initial: true);
+                    if (effect.MaxHealthBonus != 0) unit.DealInstantEffect(0, 0, effect.MaxHealthBonus, 0);
+                }
             }
             else                        //Мгновенные эффекты
             {
@@ -192,7 +205,6 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
                     float pDamage = effect.Damage * (cardUser.Damage + cardUser.Bonus.Damage);
                     float mDamage = effect.MDamage * (cardUser.MDamage + cardUser.Bonus.MDamage);
                     damageDone += unit.DealInstantEffect(pDamage, mDamage, 0, 0);
-                    
                 }
                 if (effect.InitiativeBoost != 0)
                 {
@@ -214,44 +226,65 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void ApplyCardEffects(Unit cardUser, List<Unit> targets = null)
     {
+        StartCoroutine(ApplyEffectsCoroutine(cardUser, targets));
+    }
+
+    private IEnumerator ApplyEffectsCoroutine(Unit cardUser, List<Unit> targets = null)
+    {
         ApplyEffect(_effect, cardUser, targets);
-        foreach(var personalEffectGroup in _personalEffects)
+        float delay = _game.Combat.EffectDelayInterval;
+        yield return new WaitForSeconds(delay);
+        delay = delay / 2;
+        foreach (var personalEffectGroup in _personalEffects)
         {
-            if(personalEffectGroup.Key.name == cardUser.name)
+            if (personalEffectGroup.Key.name == cardUser.name)
             {
                 foreach (CardEffect personalEffect in personalEffectGroup.Value)
                 {
                     if (personalEffect.isAOE)
                     {
                         ApplyEffect(personalEffect, cardUser);
+                        //delay = delay / 2;
                     }
                     else
                     {
                         ApplyEffect(personalEffect, cardUser, targets);
+                        //StartCoroutine(ApplyDelayedEffect(delay, personalEffect, cardUser, targets));
+                        //delay = delay / 2;
                     }
                     List<CardTypes> effectTypes = new List<CardTypes> { CardTypes.attackMulti, CardTypes.attackSingle, CardTypes.bonusMulti, CardTypes.bonusSingle };
-                    if (effectTypes.Contains(personalEffect.effectType)) 
-                    {     
+                    if (effectTypes.Contains(personalEffect.effectType))
+                    {
                         cardUser.View.ShowEffectName(personalEffect.EffectName, true);
                     }
                     else
                     {
-                        foreach(Unit unit in targets)
+                        foreach (Unit unit in targets)
                         {
                             unit.View.ShowEffectName(personalEffect.EffectName, false);
                         }
                     }
-                        
                 }
-            }   
+            }
         }
 
+        FinishCardActivation();
+    }
+
+    public void FinishCardActivation()
+    {
         EventBus.Instance.DiscardCard?.Invoke(this);
-        EventBus.Instance.DeselectUnits?.Invoke();
-        EventBus.Instance.UnitActivationFinished?.Invoke();
+        //EventBus.Instance.DeselectUnits?.Invoke();
+        //EventBus.Instance.UnitActivationFinished?.Invoke();
         _combatManager.ActionPoints -= _actionPointCost;
         _combatManager.UpdateUI();
         DestroyCard();
+    }
+
+    private IEnumerator ApplyDelayedEffect(float delay, CardEffect effect, Unit cardUser, List<Unit> targets = null)
+    {
+        yield return new WaitForSeconds(delay);
+        ApplyEffect(effect, cardUser, targets);
     }
 
     public List<CardEffect> GetPersonalEffect(string unitName)
@@ -279,6 +312,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void DestroyCard()
     {
+        _game.InputBlocked = false;
         if (_game.DeckBuider) _game.DeckBuider.ActivateCard(false);
         Destroy(this.gameObject);
     }
@@ -307,7 +341,8 @@ public enum EffectTypes
     bleeding,
     stun,
     provoke,
-    none
+    none,
+    mBlessing
 }
 
 [Serializable]

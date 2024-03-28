@@ -31,4 +31,11 @@ public class PlayerUnit : Unit, IPointerClickHandler, IPointerEnterHandler, IPoi
     {
         _stateMachine.ChangeState(DefaultState);
     }
+
+    override public void Death()
+    {
+        EventBus.Instance.UnitDeath?.Invoke(null, this);
+        EventBus.Instance.SFXPlay?.Invoke(SFXClipsTypes.Death);
+        SetUnitAnimation(AnimationConstants.Death.ToString(), true);
+    }
 }
