@@ -13,6 +13,16 @@ PrefabInstance:
       propertyPath: m_text
       value: "\u041E\u0414:1"
       objectReference: {fileID: 0}
+    - target: {fileID: 3668609486782729960, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: m_text
+      value: "\u041A\u0430\u043A \u0432\u043E\u0441\u0445\u043E\u0434\u044F\u0449\u0435\u0435
+        \u0441\u043E\u043B\u043D\u0446\u0435 \u0441\u043E\u0433\u0440\u0435\u0432\u0430\u0435\u0442
+        \u043F\u0435\u0441\u043A\u0438 \u0441\u0432\u043E\u0438\u043C\u0438 \u043B\u0443\u0447\u0430\u043C\u0438,
+        \u0442\u0430\u043A \u0438 \u0420\u0430 \u043D\u0430\u043F\u0440\u0430\u0432\u0438\u0442
+        \u0432\u0430\u0448\u0443 \u043C\u0430\u0433\u0438\u044E \u0441\u0432\u043E\u0438\u043C
+        \u0441\u0432\u0435\u0442\u043E\u043C."
+      objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _type
@@ -41,6 +51,11 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.MDamageBonus
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _effect.MResistBonus
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
@@ -110,6 +125,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[0].Value.Array.data[0].isAOE
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].isAOE
       value: 1
       objectReference: {fileID: 0}
@@ -131,7 +151,7 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[0].Value.Array.data[0].effectType
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -146,7 +166,7 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].effectType
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}

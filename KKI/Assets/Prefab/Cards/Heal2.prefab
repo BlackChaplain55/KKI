@@ -18,10 +18,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1a62575cf48e81f4a81795c49c3a0e28, type: 2}
+    - target: {fileID: 3668609486782729960, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: m_text
+      value: "\u0412\u0441\u0435 \u0436\u0438\u0437\u043D\u0438 \u0432\u0437\u0430\u0438\u043C\u043E\u0441\u0432\u044F\u0437\u0430\u043D\u044B
+        \u0447\u0435\u0440\u0435\u0437 \u0432\u043D\u0443\u0442\u0440\u0435\u043D\u043D\u0438\u044E
+        \u0441\u0438\u043B\u0443  - \u041A\u0430, \u0438 \u0425\u0435\u043A\u0430
+        \u043D\u0430\u0443\u0447\u0438\u0442 \u0432\u0430\u0441 \u0435\u0439 \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C"
+      objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _type
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -181,7 +189,12 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[0].Value.Array.data[0].MovesCount
-      value: 2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[0].Value.Array.data[0].effectType
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -191,6 +204,11 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].MovesCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].effectType
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
