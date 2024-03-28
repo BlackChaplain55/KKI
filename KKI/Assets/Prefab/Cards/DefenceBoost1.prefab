@@ -4669,6 +4669,15 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 82ea366c62d3eb4458342ace9feb1f5c, type: 2}
+    - target: {fileID: 3668609486782729960, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: m_text
+      value: "\u0411\u043E\u0436\u0435\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0439
+        \u043A\u0440\u0435\u0441\u0442 \u0410\u043D\u0445 \u0437\u0438\u0449\u0438\u0442\u0438\u0442
+        \u0441\u0432\u043E\u0438\u0445 \u043D\u043E\u0441\u0438\u0442\u0435\u043B\u0435\u0439 
+        \u043D\u0430 \u043F\u0443\u0442\u0438 \u043A \u0431\u0435\u0441\u0441\u043C\u0435\u0440\u0442\u0438\u044E
+        \u0432 \u0414\u0443\u0430\u0442\u0435."
+      objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _type
@@ -5014,7 +5023,7 @@ PrefabInstance:
     - target: {fileID: 5770260361504788246, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: "\u0423\u0432 \u0444\u0438\u0437 \u0437\u0430\u0449 1"
+      value: "\u0423\u0432 \u0417\u0430\u0449\u0438\u0442\u044B 1"
       objectReference: {fileID: 0}
     - target: {fileID: 5770260361504788246, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}

@@ -18,10 +18,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1a62575cf48e81f4a81795c49c3a0e28, type: 2}
+    - target: {fileID: 3668609486782729960, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: m_text
+      value: "\u0412\u043E\u0438\u0441\u0442\u0438\u043D\u0443, \u0442\u043E, \u0447\u0442\u043E
+        \u043C\u0435\u0440\u0442\u0432\u043E, \u0443\u043C\u0435\u0440\u0435\u0442\u044C
+        \u043D\u0435 \u043C\u043E\u0436\u0435\u0442, \u0430 \u0432\u043E\u0441\u043A\u0440\u0435\u0441\u043D\u0443\u0442\u044C
+        - \u043D\u0435 \u0441\u043C\u0435\u0435\u0442..."
+      objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _type
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -56,7 +64,7 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.MovesCount
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}

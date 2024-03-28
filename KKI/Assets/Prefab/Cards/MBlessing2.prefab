@@ -13,6 +13,18 @@ PrefabInstance:
       propertyPath: m_text
       value: "\u041E\u0414:2"
       objectReference: {fileID: 0}
+    - target: {fileID: 3668609486782729960, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: m_text
+      value: "\u041A\u0430\u043A \u0437\u0430\u0445\u043E\u0434\u044F\u0449\u0435\u0435
+        \u0441\u043E\u043B\u043D\u0446\u0435 \u0437\u0430\u0431\u0438\u0440\u0430\u0435\u0442
+        \u0436\u0438\u0437\u043D\u044C \u0438\u0437 \u044D\u0442\u043E\u0433\u043E
+        \u043C\u0438\u0440\u0430, \u0442\u0430\u043A \u0438 \u0410\u0442\u0443\u043C, 
+        \u0445\u0430\u043E\u0442\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u0441\u0443\u0449\u043D\u043E\u0441\u0442\u044C
+        \u0420\u0430, \u043D\u0430\u043F\u043E\u043B\u043D\u0438\u0442 \u0432\u0430\u0448\u0438
+        \u0437\u0430\u043A\u043B\u0438\u043D\u0430\u043D\u0438\u044F \u0441\u0432\u043E\u0438\u043C
+        \u0432\u0435\u0447\u043D\u044B\u043C \u0434\u044B\u0445\u0430\u043D\u0438\u0435\u043C."
+      objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _type
@@ -110,8 +122,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[0].Value.Array.data[0].EffectName
+      value: "(\u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[0].Value.Array.data[0].effectType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].EffectName
+      value: "(\u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C)"
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -120,8 +142,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].EffectName
+      value: "(\u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].effectType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].EffectName
+      value: "(\u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C)"
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
