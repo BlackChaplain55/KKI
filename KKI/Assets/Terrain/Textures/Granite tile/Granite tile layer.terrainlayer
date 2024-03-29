@@ -6,7 +6,7 @@ TerrainLayer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Granite tile
+  m_Name: Granite tile layer
   m_DiffuseTexture: {fileID: 2800000, guid: 7632467501902bf42a98832b7973f91a, type: 3}
   m_NormalMapTexture: {fileID: 2800000, guid: 03fa1ccd104857c48b0b3719780e83a1, type: 3}
   m_MaskMapTexture: {fileID: 2800000, guid: d1e2fc9dff43ade4f92118eed774de89, type: 3}
