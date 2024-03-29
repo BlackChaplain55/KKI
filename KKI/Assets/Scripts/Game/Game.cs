@@ -282,6 +282,8 @@ public struct Settings
     public float AmbientVol;
 }
 
+[Serializable]
+
 public struct ProgressData
 {
     public Vector3 PlayerPosition;
