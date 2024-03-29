@@ -150,14 +150,20 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         PointerChanged?.Invoke(_pointerEnter, this);
     }
 
-    public List<List<CardEffect>> GetPersonatEffectsList()
+    public List<CardEffect> GetPersonatEffectsList(Unit pUnit)
     {
-        List<List<CardEffect>> personalEffectsGroup = new();
-        foreach (List<CardEffect> effects in _personalEffects.Values)
+        List<CardEffect> personalEffects = _personalEffects.GetValueOrDefault(pUnit, null);
+        return personalEffects;
+    }
+
+    public List<Unit> GetPersonatEffectsUnitList()
+    {
+        List<Unit> pList = new();
+        foreach(var unit in _personalEffects.Keys)
         {
-            personalEffectsGroup.Add(effects);
+            pList.Add(unit);
         }
-        return personalEffectsGroup;
+        return pList;
     }
 
     public void SetFullView(bool playState)
@@ -212,7 +218,8 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
                 }
                 if (effect.Heal > 0)
                 {
-                    float heal = effect.Heal * (cardUser.MDamage + cardUser.Bonus.MDamage * cardUser.MDamage);
+                    //float heal = effect.Heal * (cardUser.MDamage + cardUser.Bonus.MDamage * cardUser.MDamage);
+                    float heal = effect.Heal * (cardUser.MDamage + cardUser.Bonus.MDamage);
                     unit.DealInstantEffect(0, 0, heal, 0);
                 }
             }
@@ -342,7 +349,8 @@ public enum EffectTypes
     stun,
     provoke,
     none,
-    mBlessing
+    mBlessing,
+    pBlessing
 }
 
 [Serializable]

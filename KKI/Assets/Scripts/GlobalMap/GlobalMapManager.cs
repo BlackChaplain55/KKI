@@ -25,15 +25,19 @@ public class GlobalMapManager : MonoBehaviour
         if (!_player) _player = GameObject.FindObjectOfType<MapCharacter>();
         _encounters = new List<Encounter>();
         _encounters.AddRange(FindObjectsByType<Encounter>(FindObjectsSortMode.None));
-        LoadProgress();
-        List<string> CompleteEncounterNames = new();
-        CompleteEncounterNames.AddRange(_progress.CompleteEncounters.Split(','));
         if (_game.Encounter.Name != "") {
-            CompleteEncounterNames.Add(_game.Encounter.Name);
+            //CompleteEncounterNames.Add(_game.Encounter.Name);
+            if (game.Encounter.GiveBastet) _progress.Bastet = true;
+            if (game.Encounter.GiveThoth) _progress.Thoth = true;
+            if (game.Encounter.GiveGeb) _progress.Geb = true;
+            if (game.Encounter.GiveMeritseger) _progress.Meritseger = true;
             SaveProgress(_game.Encounter.Name);
             EncounterData enc = new();
             _game.Encounter = enc;
         }
+        LoadProgress();
+        List<string> CompleteEncounterNames = new();
+        CompleteEncounterNames.AddRange(_progress.CompleteEncounters.Split(','));
         foreach (Encounter enc in _encounters)
         {
             if (CompleteEncounterNames.Contains(enc.Name))

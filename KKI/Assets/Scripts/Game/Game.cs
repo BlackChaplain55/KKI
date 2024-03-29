@@ -288,6 +288,10 @@ public struct ProgressData
 {
     public Vector3 PlayerPosition;
     public string CompleteEncounters;
+    public int InitialDeckBonus;
+    public int TurnCardBonus;
+    public int InitialAP;
+    public int TurnAPBonus;
     public bool Bastet;
     public bool Geb;
     public bool Meritseger;

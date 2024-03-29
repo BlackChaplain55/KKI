@@ -2600,6 +2600,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _combatManager: {fileID: 0}
   _unit: {fileID: 0}
+  _actions: []
+  _attacks: []
 --- !u!136 &6505003678880924222
 CapsuleCollider:
   m_ObjectHideFlags: 0

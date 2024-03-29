@@ -40,7 +40,7 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.Damage
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -296,8 +296,18 @@ PrefabInstance:
     - target: {fileID: 6649056135796426233, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 0,0001 \u0444\u0438\u0437.
-        \u0443\u0440\u043E\u043D\u0430\r\n"
+      value: "-\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u0438\u0432\u0430 II -
+        \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 1,5 \u0444\u0438\u0437.
+        \u0443\u0440\u043E\u043D\u0430 \u043D\u0430 1,5 \r\n\u0424\u0438\u0437\u0438\u0447\u0435\u0441\u043A\u0430\u044F
+        \u0430\u0442\u0430\u043A\u0430 II - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435
+        1,5 \u0444\u0438\u0437. \u0443\u0440\u043E\u043D\u0430 +-15 \u0448\u0442\u0440\u0430\u0444
+        \u0441\u0438\u043B\u044B\r\n\u0410\u043E\u0415 \u0430\u0442\u0430\u043A\u0430
+        - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435(AOE) 1 \u0444\u0438\u0437.
+        \u0443\u0440\u043E\u043D\u0430\r\n\"\u0421\u043E\u0442\u0440\u0435\u0441\u0435\u043D\u0438\u0435
+        \u043C\u043E\u0437\u0433\u0430\" - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435
+        1,5 \u0444\u0438\u0437. \u0443\u0440\u043E\u043D\u0430\r\n\"\u0420\u0430\u0437\u044A\u0435\u0434\u0430\u043D\u0438\u0435
+        \u0431\u0440\u043E\u043D\u0438\" - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435
+        +-5 \u0448\u0442\u0440\u0430\u0444 \u0437\u0430\u0449\u0438\u0442\u044B\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 8042370180080501523, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -307,8 +317,7 @@ PrefabInstance:
     - target: {fileID: 8708706953026549160, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 0,0001 \u0444\u0438\u0437.
-        \u0443\u0440\u043E\u043D\u0430\r\n"
+      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435\r\n"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

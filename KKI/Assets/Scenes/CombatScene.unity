@@ -3718,10 +3718,10 @@ MonoBehaviour:
   _Bastet: {fileID: 1581259033}
   _Meritseger: {fileID: 2040244358}
   _Thoth: {fileID: 1256991393}
-  _initialHandSize: 6
-  _cardsPerTurn: 5
-  _initialAP: 10
-  _initialAPPerTurn: 3
+  _initialHandSize: 3
+  _cardsPerTurn: 2
+  _initialAP: 5
+  _initialAPPerTurn: 2
   _turnLength: 100
   _unitActvationLimit: 100
   _actionPoints: 0

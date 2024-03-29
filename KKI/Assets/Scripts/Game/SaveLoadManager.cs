@@ -30,6 +30,10 @@ public static class SaveLoadManager
         PlayerPrefs.SetFloat("PositionY", progress.PlayerPosition.y);
         PlayerPrefs.SetFloat("PositionZ", progress.PlayerPosition.z);
         PlayerPrefs.SetString("CompleteEncounters", progress.CompleteEncounters);
+        PlayerPrefs.SetString("Bastet", progress.Bastet.ToString());
+        PlayerPrefs.SetString("Geb", progress.Geb.ToString());
+        PlayerPrefs.SetString("Thoth", progress.Thoth.ToString());
+        PlayerPrefs.SetString("Meritseger", progress.Meritseger.ToString());
     }
 
     public static ProgressData LoadProgres()
@@ -37,6 +41,10 @@ public static class SaveLoadManager
         ProgressData progress = new();
         progress.PlayerPosition = new Vector3(PlayerPrefs.GetFloat("PositionX", 15.16f), PlayerPrefs.GetFloat("PositionY", 4.201f), PlayerPrefs.GetFloat("PositionZ", 175.8f));
         progress.CompleteEncounters = PlayerPrefs.GetString("CompleteEncounters", "");
+        progress.Geb = bool.Parse(PlayerPrefs.GetString("Geb", "false"));
+        progress.Thoth = bool.Parse(PlayerPrefs.GetString("Thoth", "false"));
+        progress.Meritseger = bool.Parse(PlayerPrefs.GetString("Meritseger", "false"));
+        progress.Bastet = bool.Parse(PlayerPrefs.GetString("Bastet", "false"));
         return progress;
     }
 }

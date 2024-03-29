@@ -78,7 +78,7 @@ public class CardView : MonoBehaviour
         _APCost.text = "ОД:" + _card.APCost.ToString();
 
         FillStats(_stats,true);
-        FillStats(_fullViewInfo, true);
+        FillStats(_fullViewInfo,false,true);
     }    
 
     public void UpdateView()
@@ -113,11 +113,14 @@ public class CardView : MonoBehaviour
         }
         else if (allUnits)
         {
-            List<List<CardEffect>> allEffects = _card.GetPersonatEffectsList();
-            foreach (List<CardEffect> effectsGroup in allEffects)
+            List<Unit> units = _card.GetPersonatEffectsUnitList();
+
+            foreach (Unit unit in units)
             {
-                foreach (CardEffect personalEffect in effectsGroup)
+                List<CardEffect> allEffects = _card.GetPersonatEffectsList(unit);
+                foreach (var personalEffect in allEffects)
                 {
+                    textPanel.text += unit.Name +"\r\n";
                     textPanel.text += GetEffectDescriptionString(personalEffect);
                 }
             }
@@ -129,22 +132,32 @@ public class CardView : MonoBehaviour
             textPanel.text = activeUnit.Name + ":\r\n";
             foreach (CardEffect personalEffect in personalEffects)
             {
-                textPanel.text += GetEffectDescriptionString(personalEffect);
+                textPanel.text += GetEffectDescriptionString(personalEffect, activeUnit);
             }
         }
     }
 
     private string GetEffectDescriptionString(CardEffect effect, Unit cardUser = null)
     {
-        string greenColor = ColorUtility.ToHtmlStringRGB(_card.CurrentGame.Combat.InfoBonusColor);
-        string redColor = ColorUtility.ToHtmlStringRGB(_card.CurrentGame.Combat.InfoMalusColor);
+        string greenColor = ColorUtility.ToHtmlStringRGB(Color.green);
+        string redColor = ColorUtility.ToHtmlStringRGB(Color.red);
+        if (_card.CurrentGame.Combat)
+        {
+            greenColor = ColorUtility.ToHtmlStringRGB(_card.CurrentGame.Combat.InfoBonusColor);
+            redColor = ColorUtility.ToHtmlStringRGB(_card.CurrentGame.Combat.InfoMalusColor);
+        }
+        
         string description = "";
         description += effect.EffectName;
         description += " - " + _card.CurrentGame.CardCollection.GetEffectDescription(effect.type);
 
         if (effect.isAOE)
         {
-            description += "(AOE)";
+            description += "(AOE)" + "\r\n";
+        }
+        else
+        {
+            description += "\r\n";
         }
 
         if (effect.Damage > 0)
@@ -152,11 +165,12 @@ public class CardView : MonoBehaviour
             description += " " + effect.Damage.ToString();
             if (cardUser)
             {
+
                 float pDamageBonus = effect.Damage * (cardUser.Damage + cardUser.Bonus.Damage) - effect.Damage;
                 string damageBonusColor = pDamageBonus >= 0 ? "<color=#" + greenColor + ">" : "<color=\"red\">";
                 description += " + " + damageBonusColor + pDamageBonus.ToString() + "</color>" + "(бонус "+cardUser.Name+")";
             }
-            description += " физ. урона";
+            description += " физ. урона" + "\r\n";
         }
 
         if (effect.MDamage > 0)
@@ -168,55 +182,55 @@ public class CardView : MonoBehaviour
                 string damageBonusColor = mDamageBonus >= 0 ? "<color=#" + greenColor + ">" : "<color=\"red\">";
                 description += " " + effect.MDamage.ToString() + damageBonusColor + mDamageBonus.ToString() + "</color>";
             }
-            description += " маг. урона";
+            description += " маг. урона" + "\r\n";
         }
 
         if (effect.DamageBonus > 0)
         {
-            description += " +" + effect.DamageBonus.ToString() + " бонус силы";
+            description += " +" + effect.DamageBonus.ToString() + " бонус силы" + "\r\n";
         }
 
         if (effect.DamageBonus < 0)
         {
-            description += " +" + effect.DamageBonus.ToString() + " штраф силы";
+            description += " +" + effect.DamageBonus.ToString() + " штраф силы" + "\r\n";
         }
 
         if (effect.DefenceBonus > 0)
         {
-            description += " +" + effect.DefenceBonus.ToString() + " бонус защиты";
+            description += " +" + effect.DefenceBonus.ToString() + " бонус защиты" + "\r\n";
         }
 
         if (effect.DefenceBonus < 0)
         {
-            description += " +" + effect.DefenceBonus.ToString() + " штраф защиты";
+            description += " +" + effect.DefenceBonus.ToString() + " штраф защиты" + "\r\n";
         }
 
         if (effect.Heal > 0)
         {
-            description += " +" + effect.Damage.ToString() + " здоровье";
+            description += " +" + effect.Damage.ToString() + " здоровье" + "\r\n";
         }
 
         if (effect.InitiativeBonus > 0)
         {
-            description += " +" + effect.InitiativeBonus.ToString() + "";
+            description += " +" + effect.InitiativeBonus.ToString() + "" + "\r\n";
         }
 
         if (effect.InitiativeBonus < 0)
         {
-            description += " -" + effect.InitiativeBonus.ToString() + "";
+            description += " -" + effect.InitiativeBonus.ToString() + "" + "\r\n";
         }
 
         if (effect.InitiativeBoost != 0)
         {
-            description += " на " + effect.Damage.ToString() + " ";
+            description += " на " + effect.Damage.ToString() + " " + "\r\n";
         }
 
         if (effect.Vampiric > 0)
         {
-            description += " " + effect.Damage.ToString() + " от нанесенного урона ";
+            description += " " + effect.Damage.ToString() + " от нанесенного урона " + "\r\n";
         }
 
-        description += "\r\n";
+        //description += "\r\n";
 
         return description;
     }

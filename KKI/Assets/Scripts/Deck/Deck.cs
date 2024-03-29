@@ -65,6 +65,7 @@ public class Deck : MonoBehaviour
     public void LoadDeck()
     {
         string deck = PlayerPrefs.GetString("PlayerDeck", "");
+        deck = "PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack2,PhisicalAttack2,MagicalAttack1,MagicalAttack1,MagicalAttack1,DefenceBoost1,DefenceBoost1,PBlessing1,MBlessing1,Blessing2,Heal1,Heal1,Heal2,Heal2,APBoost,CardDraw,CardDraw"; 
         string[] cards = deck.Split(',');
         _playerDeck.Clear();
         foreach (string card in cards)
