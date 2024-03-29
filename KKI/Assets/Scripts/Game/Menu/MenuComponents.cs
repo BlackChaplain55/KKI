@@ -14,6 +14,8 @@ public class MenuComponents : MonoBehaviour
     public Button ReturnButton;
     public Button DeckButton;
     public Button MainMenuButton;
+    public Button TutorialButton;
+    public Button PanteonButton;
 
     private void OnValidate()
     {
