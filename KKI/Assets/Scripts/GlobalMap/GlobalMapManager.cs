@@ -24,17 +24,17 @@ public class GlobalMapManager : MonoBehaviour
         _encounters = new List<Encounter>();
         _encounters.AddRange(FindObjectsByType<Encounter>(FindObjectsSortMode.None));
         LoadProgress();
-        List<string> encounterNames = new();
-        encounterNames.AddRange(_progress.CompleteEncounters.Split(','));
+        List<string> CompleteEncounterNames = new();
+        CompleteEncounterNames.AddRange(_progress.CompleteEncounters.Split(','));
         if (_game.Encounter.Name != "") {
-            encounterNames.Add(_game.Encounter.Name);
-            SaveProgress();
+            CompleteEncounterNames.Add(_game.Encounter.Name);
+            SaveProgress(_game.Encounter.Name);
             EncounterData enc = new();
             _game.Encounter = enc;
         }
         foreach (Encounter enc in _encounters)
         {
-            if (encounterNames.Contains(enc.Name))
+            if (CompleteEncounterNames.Contains(enc.Name))
             {
                 enc.Init(this, true);
             }
@@ -46,13 +46,17 @@ public class GlobalMapManager : MonoBehaviour
         }
     }
 
-    public void SaveProgress()
+    public void SaveProgress(string addCompleteEncounter="")
     {
         _progress.PlayerPosition = _player.transform.position;
         List<string> completeEncounters =new();
         foreach (Encounter enc in _encounters)
         {
             if (enc.IsComplete) completeEncounters.Add(enc.Name);
+        }
+        if (addCompleteEncounter != "")
+        {
+            completeEncounters.Add(addCompleteEncounter);
         }
         _progress.CompleteEncounters = string.Join(',', completeEncounters);
         SaveLoadManager.SaveProgresData(_progress);

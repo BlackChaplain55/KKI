@@ -133,7 +133,7 @@ public class Game : MonoBehaviour
         else if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName(Constants.GlobalMapSceneName))
         {
             _stateMachine.Initialize(_globalMapState);
-            InitializeGlobalMapScene();
+            //InitializeGlobalMapScene();
         }
         else
         {
