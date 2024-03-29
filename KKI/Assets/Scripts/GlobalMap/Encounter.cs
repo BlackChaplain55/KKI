@@ -87,6 +87,7 @@ public class Encounter : MonoBehaviour
     private void BeginEncounter()
     {
         _game.MainMenu.GameStart(_encData);
+        _game.Progress = _globalMapManager.Progress;
     }
 }
 

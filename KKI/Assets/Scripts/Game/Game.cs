@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,6 +34,7 @@ public class Game : MonoBehaviour
     //private float _cellStep;
     private bool _isCombat;
     [SerializeField] private EncounterData _currentEncounter;
+    [SerializeField] private ProgressData  _progress;
 
     private GameStartState _startState;
     private GameDeckBuildState _deckbuildState;
@@ -44,6 +46,7 @@ public class Game : MonoBehaviour
     private bool _inputBlocked;
 
     public EncounterData Encounter { get => _currentEncounter; set => _currentEncounter = value; }
+    public ProgressData Progress { get => _progress; set => _progress = value; }
     public Transform PlayerGMPosition { get => _playerGMPosition; set => _playerGMPosition.SetPositionAndRotation(value.position,value.rotation); }
     public StateMachine StateMachine => _stateMachine;
     public IState CurrentState => _stateMachine.CurrentState;
@@ -163,7 +166,7 @@ public class Game : MonoBehaviour
         }
         ClearPlayerDeckContainer();
         InitializePlayerDeck();
-        _combatManager.Initialize(this, enemiesList);  
+        _combatManager.Initialize(this, enemiesList,_progress);  
     }
 
     public void InitializeGlobalMapScene()
@@ -283,4 +286,8 @@ public struct ProgressData
 {
     public Vector3 PlayerPosition;
     public string CompleteEncounters;
+    public bool Bastet;
+    public bool Geb;
+    public bool Meritseger;
+    public bool Thoth;
 }

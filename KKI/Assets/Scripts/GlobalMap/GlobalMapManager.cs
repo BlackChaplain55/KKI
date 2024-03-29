@@ -9,6 +9,8 @@ public class GlobalMapManager : MonoBehaviour
     [SerializeField] private List<Encounter> _encounters;
     [SerializeField] private ProgressData _progress;
 
+
+    public ProgressData Progress { get => _progress; }
     public MapCharacter Player { get => _player; }
 
     private void OnValidate()

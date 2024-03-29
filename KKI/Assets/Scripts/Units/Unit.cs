@@ -250,7 +250,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     {
         EventBus.Instance.DeselectUnits?.Invoke();
         _combatManager.CurrentTarget = null;
-        _effects.CheckEffects();
+        _effects.CheckEffects(initial:true);
         _bonus = _effects.SetBonus();
         _currentInitiative = 0;
         _view.UpdateUI();
@@ -351,8 +351,6 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         _bonus = _effects.SetBonus();
         _view.UpdateUI();
     }
-
-    
 
     public void LookAtTarget(Transform target)
     {
