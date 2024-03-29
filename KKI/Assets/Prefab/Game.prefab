@@ -2708,8 +2708,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _SFXClips:
-    _serializedList: []
-  _source: {fileID: 0}
+    _serializedList:
+    - Key: 0
+      Value:
+      - {fileID: 8300000, guid: f8ac809222fa69d49b206d38b1fabf44, type: 3}
+      - {fileID: 8300000, guid: b6d84979d01c10a41a0b36f00e495cf3, type: 3}
+      - {fileID: 8300000, guid: be2bb297a4f8f5a4bac2dc0e763b3197, type: 3}
+      - {fileID: 8300000, guid: 23efbe755ccaac2448162503384a47f8, type: 3}
+    - Key: 1
+      Value:
+      - {fileID: 8300000, guid: dd5c605abf7b56144a1bdb211ad44373, type: 3}
+    - Key: 2
+      Value:
+      - {fileID: 8300000, guid: d1c16ddb620a7c4439f32c0cd66cfafe, type: 3}
+    - Key: 3
+      Value:
+      - {fileID: 8300000, guid: 822c8fe0350b0904f9d441f0f8a68356, type: 3}
+    - Key: 4
+      Value: []
+    - Key: 5
+      Value:
+      - {fileID: 8300000, guid: ce0e4b944d748904590add0305b038b1, type: 3}
+    - Key: 6
+      Value: []
+    - Key: 7
+      Value: []
+  _source: {fileID: 8652948931245451400}
 --- !u!1 &5872344790617540083
 GameObject:
   m_ObjectHideFlags: 0

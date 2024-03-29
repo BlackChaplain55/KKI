@@ -271,7 +271,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void Tick()
     {
-        _currentInitiative += _initiative + _bonus.Initiative;
+        _currentInitiative += (_initiative + _bonus.Initiative)/10;
         if (_currentInitiative >= _combatManager.UnitActivationLimit)
         {
             EventBus.Instance.ActivateUnit?.Invoke(this);
@@ -327,8 +327,27 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void AddEffect(CardEffect effect)
     {
-        effect.CurrentMovesCount = effect.MovesCount;
-        _effects.AddEffect(effect);
+        CardEffect existingEffect = _effects.TempEffects.Find(searchEffect => searchEffect.EffectName == effect.EffectName);
+
+        if (existingEffect.EffectName!=null)
+        {
+            _effects.TempEffects.Remove(existingEffect);
+            existingEffect.CurrentMovesCount+= effect.MovesCount;
+            existingEffect.Stacked++;
+            existingEffect.Damage += effect.DamageBonus;
+            existingEffect.InitiativeBonus += effect.InitiativeBonus;
+            existingEffect.MaxHealthBonus += effect.MaxHealthBonus;
+            existingEffect.DefenceBonus += effect.DefenceBonus;
+            existingEffect.MDamageBonus += effect.MDamageBonus;
+            existingEffect.MResistBonus += effect.MResistBonus;
+            _effects.AddEffect(existingEffect);
+        }
+        else
+        {
+            effect.CurrentMovesCount = effect.MovesCount;
+            effect.Stacked = 1;
+            _effects.AddEffect(effect);
+        }
         _bonus = _effects.SetBonus();
         _view.UpdateUI();
     }

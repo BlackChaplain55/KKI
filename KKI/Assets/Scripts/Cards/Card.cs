@@ -185,7 +185,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         {
             if (effect.MovesCount > 0)  //Длящиеся эффекты
             {
-                if(effect.effectType == CardTypes.bonusSingle|| effect.effectType == CardTypes.bonusMulti || effect.effectType == CardTypes.attackMulti)
+                if(effect.effectType == CardTypes.bonusSingle)
                 {
                     cardUser.AddEffect(effect);
                     cardUser.Effects.CheckEffects(initial: true);
@@ -363,6 +363,7 @@ public struct CardEffect
     public float Vampiric;
     public int MovesCount;
     public int CurrentMovesCount;
+    public int Stacked;
     public bool isAOE;
     public EffectTypes type;
 }

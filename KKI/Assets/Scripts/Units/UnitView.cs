@@ -105,7 +105,9 @@ public class UnitView : MonoBehaviour
                             "Сопротивл.: " + _unit.MResistance.ToString() + mResist;
         foreach(CardEffect effect in _unit.Effects.TempEffects)
         {
-            _statsText.text += effect.EffectName+" ("+ effect.MovesCount +" ходов)\r\n";
+            string movesCountString = effect.MovesCount > 10 ? "\u221E" :effect.MovesCount.ToString();
+            string stackCountString = effect.Stacked > 1 ? " x" + effect.Stacked.ToString() : "";
+            _statsText.text += effect.EffectName+ stackCountString +  " ("+movesCountString +" х.)"+"\r\n";
         }
                             //"Здоровье: " + _unit.Defence.ToString() + "\r\n" + "+" + _unit.Bonus.Defence + "\r\n" +
                             //"Инициатива: " + _unit.Defence.ToString() + "\r\n" + "+" + _unit.Bonus.Defence + "\r\n" +

@@ -27,7 +27,7 @@ public class UnitEffects : MonoBehaviour
 
     public void AddEffect(CardEffect effect)
     {
-        effect.CurrentMovesCount = effect.MovesCount;
+        //effect.CurrentMovesCount = effect.MovesCount;
         _temporaryEffects.Add(effect);
         UpdateEffectsIcons();
     }
@@ -113,11 +113,11 @@ public class UnitEffects : MonoBehaviour
             Image effectSprite = effectIndicator.transform.Find("Icon")?.GetComponent<Image>();
             effectSprite.sprite = _collection.GetEffectSprite(effect.type);
 
-            GameObject counterGO = effectIndicator.transform.Find("Counter").gameObject;
+            GameObject counterGO = effectIndicator.transform.Find("CounterBG").gameObject;
             if (effect.CurrentMovesCount > 0)
             {
                 counterGO.SetActive(true);
-                TMP_Text counter = counterGO?.GetComponent<TMP_Text>();
+                TMP_Text counter = counterGO?.transform.Find("Counter")?.GetComponent<TMP_Text>();
                 if (effect.CurrentMovesCount > 10) counter.text = "\u221E";
                 else counter.text = effect.CurrentMovesCount.ToString();
             }
@@ -125,7 +125,18 @@ public class UnitEffects : MonoBehaviour
             {
                 counterGO.SetActive(false);
             }
-                
+
+            GameObject stackGO = effectIndicator.transform.Find("StackBG").gameObject;
+            if (effect.Stacked > 1)
+            {
+                stackGO.SetActive(true);
+                TMP_Text stack = stackGO?.transform.Find("Stack")?.GetComponent<TMP_Text>();
+                stack.text = "x"+ effect.Stacked.ToString();
+            }
+            else
+            {
+                stackGO.SetActive(false);
+            }
 
             index++;
         }
