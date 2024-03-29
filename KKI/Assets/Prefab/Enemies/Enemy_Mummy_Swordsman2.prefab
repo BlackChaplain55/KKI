@@ -2717,14 +2717,69 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
         type: 3}
+      propertyPath: _name
+      value: "\u041C\u0443\u043C\u0438\u044F \u0412\u043E\u0438\u043D (2)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
+      propertyPath: _health
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
+      propertyPath: _defence
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
       propertyPath: _initiative
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1073352240043798423, guid: c7207e39c28c8fa4088d15ad7e6091b9,
         type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 3c4ce28fc6d1f0a48a11ecf47f808ed1, type: 2}
+    - target: {fileID: 2164154271165931422, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
+      propertyPath: _actions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164154271165931422, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
+      propertyPath: _attacks.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164154271165931422, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
+      propertyPath: _actions.Array.data[0].Heal
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164154271165931422, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
+      propertyPath: _actions.Array.data[0].Name
+      value: "\u041B\u0435\u0447\u0435\u043D\u0438\u0435"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164154271165931422, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
+      propertyPath: _actions.Array.data[0].Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164154271165931422, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
+      propertyPath: _actions.Array.data[1].Heal
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164154271165931422, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
+      propertyPath: _actions.Array.data[1].Name
+      value: "\u041E\u0431\u0449\u0435\u0435 \u043B\u0435\u0447\u0435\u043D\u0438\u0435"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164154271165931422, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
+      propertyPath: _actions.Array.data[1].Type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4169709697365084075, guid: c7207e39c28c8fa4088d15ad7e6091b9,
         type: 3}
       propertyPath: m_Name

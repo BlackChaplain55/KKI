@@ -3294,8 +3294,38 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: e66f10ee67e220e45802e00808b42490, type: 2}
     - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
         type: 3}
+      propertyPath: _name
+      value: "\u041C\u0435\u0440\u0438\u0442\u0441\u0435\u0433\u0435\u0440"
+      objectReference: {fileID: 0}
+    - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
+      propertyPath: _archer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
+      propertyPath: _damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
+      propertyPath: _defence
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
       propertyPath: _initiative
-      value: 10
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
+      propertyPath: _magicPower
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
+        type: 3}
+      propertyPath: _magicResist
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1073352240043798423, guid: c7207e39c28c8fa4088d15ad7e6091b9,
         type: 3}
