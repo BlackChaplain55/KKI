@@ -31025,8 +31025,8 @@ MonoBehaviour:
   _encounters:
   - {fileID: 819413389}
   - {fileID: 2066438744}
-  - {fileID: 2104156146}
   - {fileID: 284734478}
+  - {fileID: 2104156146}
   _progress:
     PlayerPosition: {x: 15.16, y: 4.201, z: 175.8}
     CompleteEncounters: 
