@@ -2600,6 +2600,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _combatManager: {fileID: 0}
   _unit: {fileID: 0}
+  _actions: []
+  _attacks: []
 --- !u!136 &6505003678880924222
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3753,7 +3755,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6573548869723830117}
-  m_LocalRotation: {x: 0.18301274, y: -0.6830127, z: 0.18301274, w: 0.6830127}
+  m_LocalRotation: {x: 0.27984816, y: -0.3647052, z: 0.1159169, w: 0.8804763}
   m_LocalPosition: {x: 0, y: 0, z: 0.038}
   m_LocalScale: {x: 0.008, y: 0.008, z: 0.008}
   m_ConstrainProportionsScale: 1

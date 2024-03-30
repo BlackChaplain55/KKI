@@ -86,6 +86,7 @@ public class Encounter : MonoBehaviour
 
     private void BeginEncounter()
     {
+        _game.Progress = _globalMapManager.Progress;
         _game.MainMenu.GameStart(_encData);
     }
 }
@@ -103,5 +104,9 @@ public struct EncounterData
     public string EncounterVictoryText;
     public GameObject VictoryCard;
     public bool IsComplete;
+    public bool GiveBastet;
+    public bool GiveGeb;
+    public bool GiveThoth;
+    public bool GiveMeritseger;
 }
 

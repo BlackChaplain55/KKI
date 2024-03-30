@@ -148,6 +148,8 @@ public struct AIDecision
     public List<Unit> targets;
 }
 
+[System.Serializable]
+
 public struct AIAction
 {
     public string Name;
@@ -156,6 +158,8 @@ public struct AIAction
     public float Heal;
     public AIActionTypes Type;
 }
+
+[System.Serializable]
 
 public enum AIActionTypes
 {

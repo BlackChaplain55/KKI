@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,13 @@ using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
+    [Space]
+    [Header("Heroes")]
+    [SerializeField] private PlayerUnit _Jabari;
+    [SerializeField] private PlayerUnit _Geb;
+    [SerializeField] private PlayerUnit _Bastet;
+    [SerializeField] private PlayerUnit _Meritseger;
+    [SerializeField] private PlayerUnit _Thoth;
     [Header("Game settings")]
     [SerializeField] private int _initialHandSize = 6;
     [SerializeField] private int _cardsPerTurn = 3;
@@ -119,7 +127,7 @@ public class CombatManager : MonoBehaviour
         _activeUnit.FinishActivation();
     }
 
-    public void Initialize(Game game,List<GameObject> enemiesList)
+    public void Initialize(Game game,List<GameObject> enemiesList, ProgressData progress)
     {
         _game = game;
         _tickTimer = 0;
@@ -130,18 +138,22 @@ public class CombatManager : MonoBehaviour
         EventBus.Instance.UnitActivationFinished.AddListener(UnitActivationFinished);
         EventBus.Instance.UnitDeath.AddListener(UnitDeath);
 
-        string[] heroes = PlayerPrefs.GetString("Heroes").Split(",");
-        if (heroes.Length != 0)
+        if (progress.PlayerPosition == Vector3.zero)
         {
             for (int i = 0; i < _unitsContainer.childCount; i++)
             {
                 _playerUnits.Add(_unitsContainer.GetChild(i).GetComponent<PlayerUnit>());
             }
         }
-        //for (int i = 0; i < _enemiesContainer.childCount; i++)
-        //{
-        //    _enemyUnits.Add(_enemiesContainer.GetChild(i).GetComponent<Unit>());
-        //}
+        else
+        {
+            _playerUnits.Add(_Jabari);
+            EnableHero(progress.Bastet, _Bastet);
+            EnableHero(progress.Geb, _Geb);
+            EnableHero(progress.Thoth, _Thoth);
+            EnableHero(progress.Meritseger, _Meritseger);
+        }
+
         if (enemiesList.Count == 0) enemiesList = _defaultEnemies;
 
         for (int i = 0; i < enemiesList.Count; i++)
@@ -156,6 +168,10 @@ public class CombatManager : MonoBehaviour
         //_game.CurrentDeck.LoadDeck();
     }
 
+    private void EnableHero(bool enabled, PlayerUnit hero)
+    {
+        if (enabled) _playerUnits.Add(hero); else hero.gameObject.SetActive(false);
+    }
     public void Exit()
     {
 
@@ -190,8 +206,6 @@ public class CombatManager : MonoBehaviour
             _victory = false;
             CombatFinishedConfirmation();
         }
-
-
     }
 
     private void CombatFinishedConfirmation()

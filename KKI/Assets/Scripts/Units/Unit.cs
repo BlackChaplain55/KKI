@@ -250,7 +250,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
     {
         EventBus.Instance.DeselectUnits?.Invoke();
         _combatManager.CurrentTarget = null;
-        _effects.CheckEffects();
+        _effects.CheckEffects(initial:true);
         _bonus = _effects.SetBonus();
         _currentInitiative = 0;
         _view.UpdateUI();
@@ -292,8 +292,8 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
         if (pDamage > 0|| mDamage > 0) //Damage
         {
-            pDamage -= pDamage * (_defence + _defence*_bonus.Defence) / 100;
-            mDamage -= mDamage * (_magicResist + _magicResist*_bonus.MResistance) / 100;
+            pDamage -= pDamage * (_defence + _defence*_bonus.Defence/100) / 100;
+            mDamage -= mDamage * (_magicResist + _magicResist*_bonus.MResistance / 100) / 100;
             appliedDamage = -pDamage- mDamage;
             _view.Indicators(appliedDamage, 0, 0);
             SetUnitAnimation("Impact", true, isTrigger: true);
@@ -334,7 +334,8 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             _effects.TempEffects.Remove(existingEffect);
             existingEffect.CurrentMovesCount+= effect.MovesCount;
             existingEffect.Stacked++;
-            existingEffect.Damage += effect.DamageBonus;
+            existingEffect.Damage += effect.Damage;
+            existingEffect.MDamage += effect.MDamage;
             existingEffect.InitiativeBonus += effect.InitiativeBonus;
             existingEffect.MaxHealthBonus += effect.MaxHealthBonus;
             existingEffect.DefenceBonus += effect.DefenceBonus;
@@ -351,8 +352,6 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         _bonus = _effects.SetBonus();
         _view.UpdateUI();
     }
-
-    
 
     public void LookAtTarget(Transform target)
     {
