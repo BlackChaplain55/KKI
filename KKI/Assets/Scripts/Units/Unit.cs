@@ -252,7 +252,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         _combatManager.CurrentTarget = null;
         _effects.CheckEffects(initial:true);
         _bonus = _effects.SetBonus();
-        _currentInitiative = 0;
+        _currentInitiative -= _combatManager.UnitActivationLimit;
         _view.UpdateUI();
         EventBus.Instance.UnitActivationFinished?.Invoke();
     }
@@ -292,7 +292,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
         if (pDamage > 0|| mDamage > 0) //Damage
         {
-            pDamage -= pDamage * (_defence + _defence*_bonus.Defence/100) / 100;
+            pDamage -= pDamage * (_defence + _defence*_bonus.Defence / 100) / 100;
             mDamage -= mDamage * (_magicResist + _magicResist*_bonus.MResistance / 100) / 100;
             appliedDamage = -pDamage- mDamage;
             _view.Indicators(appliedDamage, 0, 0);

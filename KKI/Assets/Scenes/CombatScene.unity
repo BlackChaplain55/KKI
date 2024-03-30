@@ -3722,7 +3722,7 @@ MonoBehaviour:
   _initialHandSize: 3
   _cardsPerTurn: 1
   _initialAP: 5
-  _initialAPPerTurn: 2
+  _initialAPPerTurn: 1
   _turnLength: 100
   _unitActvationLimit: 100
   _actionPoints: 0

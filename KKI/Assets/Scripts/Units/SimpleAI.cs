@@ -56,8 +56,8 @@ public class SimpleAI : MonoBehaviour
         {
             AIAction action = new();
             action.Type = AIActionTypes.RandomSingleDamage;
-            action.PValue = _unit.Damage;
-            action.MValue = _unit.MDamage;
+            action.PValue = _unit.Damage+ _unit.Bonus.Damage;
+            action.MValue = _unit.MDamage+ _unit.Bonus.Damage;
             decision.action = action;
             decision.targets.Add(PickTarget());
             return decision;
@@ -95,8 +95,8 @@ public class SimpleAI : MonoBehaviour
         attack = _attacks[rnd];
         if (attack.PValue == 0 && attack.MValue == 0)
         {
-            attack.PValue = _unit.Damage;
-            attack.MValue = _unit.MDamage;
+            attack.PValue = _unit.Damage + _unit.Bonus.Damage;
+            attack.MValue = _unit.MDamage + _unit.Bonus.MDamage;
         }
         if (attack.Type == AIActionTypes.RandomSingleDamage)
         {

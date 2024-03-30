@@ -179,7 +179,8 @@ public class Game : MonoBehaviour
 
     public void ExitCombatScene()
     {
-        // ƒействи€ при возврате в меню из бо€
+        ClearPlayerDeckContainer();
+        _deck.Clear();
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
@@ -203,7 +204,7 @@ public class Game : MonoBehaviour
     {
         _deck.Init(this);
         _deck.LoadDeck();
-        _deck.AddToHand(_deck.GetRandomCards(_combatManager.InitialHandSize));
+        _deck.AddToHand(_deck.GetRandomCards(_combatManager.InitialHandSize+_progress.InitialDeckBonus));
         InstantinateCardsToDeck(_deck.PlayerHand);
         
     }
@@ -229,6 +230,7 @@ public class Game : MonoBehaviour
         {
             Destroy(_playerDeckContainer.GetChild(i).gameObject);
         }
+        Debug.Log("Deck container clear - " + _playerDeckContainer.childCount.ToString());
     }
 
     private void SetLayoutSpacing() //Ќастраиваем плотность расположени€ карт в руке игрока
@@ -296,4 +298,5 @@ public struct ProgressData
     public bool Geb;
     public bool Meritseger;
     public bool Thoth;
+    public int DarkCardsUsed;
 }

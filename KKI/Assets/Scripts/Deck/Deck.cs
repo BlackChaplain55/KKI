@@ -65,8 +65,8 @@ public class Deck : MonoBehaviour
     public void LoadDeck()
     {
         string deck = PlayerPrefs.GetString("PlayerDeck", "");
-        deck = "PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack2,PhisicalAttack2,MagicalAttack1,MagicalAttack1,MagicalAttack1,MagicalAttack1,DefenceBoost1," +
-                "DefenceBoost1,PBlessing1,MBlessing1,Blessing2,Heal1,Heal1,Heal2,SpeedBoost2,CardDraw,CardDraw";
+        //deck = "PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack2,PhisicalAttack2,MagicalAttack1,MagicalAttack1,MagicalAttack1,MagicalAttack1,DefenceBoost1," +
+        //        "DefenceBoost1,PBlessing1,MBlessing1,Blessing2,Heal1,Heal1,Heal2,SpeedBoost2,CardDraw,CardDraw";
         //deck = "PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack1";
         string[] cards = deck.Split(',');
         _playerDeck.Clear();
@@ -100,6 +100,13 @@ public class Deck : MonoBehaviour
         }
         _deckUI.UpdateUI();
         return cards;
+    }
+
+    public void Clear()
+    {
+        _playerCurrentDeck.Clear();
+        _playerHand.Clear();
+        _playerDiscard.Clear();
     }
 
     private void ResetCurrentDeck()

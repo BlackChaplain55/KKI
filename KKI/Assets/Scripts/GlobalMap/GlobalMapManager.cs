@@ -21,6 +21,7 @@ public class GlobalMapManager : MonoBehaviour
     }
     public void Init(Game game)
     {
+        _player.SetNavAget(false);
         if (!_game) _game = game;
         if (!_player) _player = GameObject.FindObjectOfType<MapCharacter>();
         _encounters = new List<Encounter>();
@@ -29,6 +30,7 @@ public class GlobalMapManager : MonoBehaviour
         if (_game.Encounter.Name != "") {
             if (_game.Encounter.IsComplete)
             {
+                _progress = _game.Progress;
                 if (_game.Encounter.GiveBastet) _progress.Bastet = true;
                 if (_game.Encounter.GiveThoth) _progress.Thoth = true;
                 if (_game.Encounter.GiveGeb) _progress.Geb = true;
@@ -59,6 +61,7 @@ public class GlobalMapManager : MonoBehaviour
             }
             
         }
+        _player.SetNavAget(true);
     }
 
     public void SaveProgress(string addCompleteEncounter, Vector3 savePosition)
@@ -71,23 +74,26 @@ public class GlobalMapManager : MonoBehaviour
         {
             _progress.PlayerPosition = _player.transform.position;
         }
-        List<string> completeEncounters =new();
-        foreach (Encounter enc in _encounters)
-        {
-            if (enc.IsComplete) completeEncounters.Add(enc.Name);
-        }
         if (addCompleteEncounter != "")
         {
-            completeEncounters.Add(addCompleteEncounter);
+            if (_progress.CompleteEncounters == "")
+            {
+                _progress.CompleteEncounters = addCompleteEncounter;
+            }
+            else
+            {
+                _progress.CompleteEncounters = _progress.CompleteEncounters+","+addCompleteEncounter;
+            }
         }
-        _progress.CompleteEncounters = string.Join(',', completeEncounters);
+        
+        //_progress.CompleteEncounters = string.Join(',', completeEncounters);
         SaveLoadManager.SaveProgresData(_progress);
     }
 
     public void LoadProgress()
     {
         ProgressData progress = SaveLoadManager.LoadProgres();
-        _player.transform.position = progress.PlayerPosition;
+        _player.transform.SetPositionAndRotation(progress.PlayerPosition,Quaternion.identity);
         _progress = progress;
     }
 

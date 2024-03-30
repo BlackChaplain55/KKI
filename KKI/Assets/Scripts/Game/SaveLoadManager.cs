@@ -43,7 +43,7 @@ public static class SaveLoadManager
     public static ProgressData LoadProgres()
     {
         ProgressData progress = new();
-        progress.PlayerPosition = new Vector3(PlayerPrefs.GetFloat("PositionX", 15.16f), PlayerPrefs.GetFloat("PositionY", 4.201f), PlayerPrefs.GetFloat("PositionZ", 175.8f));
+        progress.PlayerPosition = new Vector3(PlayerPrefs.GetFloat("PositionX", 18.16f), PlayerPrefs.GetFloat("PositionY", 4.164f), PlayerPrefs.GetFloat("PositionZ", 186.06f));
         progress.CompleteEncounters = PlayerPrefs.GetString("CompleteEncounters", "");
         progress.Geb = bool.Parse(PlayerPrefs.GetString("Geb", "false"));
         progress.Thoth = bool.Parse(PlayerPrefs.GetString("Thoth", "false"));
