@@ -9,8 +9,8 @@ TerrainLayer:
   m_Name: Wet stones with sand
   m_DiffuseTexture: {fileID: 2800000, guid: 43a606f821f34d6409ddf16b7cdbe60b, type: 3}
   m_NormalMapTexture: {fileID: 2800000, guid: e70f242460ccc0a4b94b3c94ec475db6, type: 3}
-  m_MaskMapTexture: {fileID: 2800000, guid: c57c79dcf0012fa4ba45b05c5bb066fe, type: 3}
-  m_TileSize: {x: 4, y: 4}
+  m_MaskMapTexture: {fileID: 2800000, guid: d36825513e9b87d4887129b98a32717e, type: 3}
+  m_TileSize: {x: 10, y: 10}
   m_TileOffset: {x: 0, y: 0}
   m_Specular: {r: 0, g: 0, b: 0, a: 0}
   m_Metallic: 0.46
