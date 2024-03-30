@@ -13,6 +13,7 @@ public class MapCharacter : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Animator _anim;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private bool _inputBlocked;
+
     public void OnPointerClick(PointerEventData eventData)
     {
         _target.transform.position = eventData.position;
@@ -27,12 +28,13 @@ public class MapCharacter : MonoBehaviour, IPointerClickHandler
     public void SetInputBlocked(bool state)
     {
         _inputBlocked = state;
+        _anim.SetBool("Run", false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_inputBlocked) return;
+        if (_inputBlocked||!_navAgent.enabled) return;
         RaycastHit hitInfo;
 
         if (Input.GetMouseButton(0))
@@ -55,5 +57,10 @@ public class MapCharacter : MonoBehaviour, IPointerClickHandler
             _target.gameObject.SetActive(false);
             _anim.SetBool("Run", false);
         }
+    }
+
+    public void SetNavAget(bool state)
+    {
+        _navAgent.enabled = state;
     }
 }

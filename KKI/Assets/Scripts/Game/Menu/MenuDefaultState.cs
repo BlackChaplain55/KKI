@@ -16,7 +16,7 @@ public class MenuDefaultState : IState
     }
     public void Enter()
     {
-        _mainMenu.Components.ContinueButton.interactable = false;
+        //_mainMenu.Components.ContinueButton.interactable = false;
         _mainMenu.Components.StartButton.interactable = true;
         _mainMenu.Components.MainMenuButton.gameObject.SetActive(false);
         _mainMenu.Components.ReturnButton.gameObject.SetActive(false);

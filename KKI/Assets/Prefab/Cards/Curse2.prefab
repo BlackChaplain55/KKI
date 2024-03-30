@@ -13,6 +13,11 @@ PrefabInstance:
       propertyPath: m_text
       value: "\u041E\u0414:2"
       objectReference: {fileID: 0}
+    - target: {fileID: 480692921643707325, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3668609486782729960, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
@@ -285,15 +290,19 @@ PrefabInstance:
     - target: {fileID: 6649056135796426233, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: "\"\u0418\u0441\u0441\u044B\u0445\u0430\u043D\u0438\u0435\" \u0432\u0441\u0435\u043C
-        - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435(AOE)\r\n\"\u041F\u0440\u043E\u043A\u043B\u044F\u0442\u0438\u0435
-        I\" - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 +-10 \u0448\u0442\u0440\u0430\u0444
-        \u0441\u0438\u043B\u044B +-10 \u0448\u0442\u0440\u0430\u0444 \u0437\u0430\u0449\u0438\u0442\u044B\r\n\"\u042F\u0434\u043E\u0432\u0438\u0442\u044B\u0439
-        \u0443\u043A\u0443\u0441\" - \u041A\u0440\u043E\u0432\u043E\u0442\u0435\u0447\u0435\u043D\u0438\u0435
-        1 \u0444\u0438\u0437. \u0443\u0440\u043E\u043D\u0430 --5\r\n\"\u041A\u0440\u0443\u0448\u0435\u043D\u0438\u0435
-        \u0431\u0440\u043E\u043D\u0438\" - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435
-        +-5 \u0448\u0442\u0440\u0430\u0444 \u0437\u0430\u0449\u0438\u0442\u044B\r\n\"\u0417\u0430\u043C\u043E\u0440\u043E\u0437\u043A\u0430\"
-        - \r\n"
+      value: "<b><u>\u0411\u0430\u0441\u0442\u0435\u0442:</u><b>\r\n\"\u0418\u0441\u0441\u044B\u0445\u0430\u043D\u0438\u0435\"
+        \u0432\u0441\u0435\u043C - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435(AOE)\r\n
+        \u043D\u0430 999 \u0445.\r\n<b><u>\u0414\u0436\u0430\u0431\u0430\u0440\u0438:</u><b>\r\n\"\u041F\u0440\u043E\u043A\u043B\u044F\u0442\u0438\u0435
+        I\" - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435\r\n \u0448\u0442\u0440\u0430\u0444
+        \u0441\u0438\u043B\u044B -10 -10 \u0448\u0442\u0440\u0430\u0444 \u0437\u0430\u0449\u0438\u0442\u044B
+        \u043D\u0430 2 \u0445.\r\n<b><u>\u041C\u0435\u0440\u0438\u0442\u0441\u0435\u0433\u0435\u0440:</u><b>\r\n\"\u042F\u0434\u043E\u0432\u0438\u0442\u044B\u0439
+        \u0443\u043A\u0443\u0441\" - \u041A\u0440\u043E\u0432\u043E\u0442\u0435\u0447\u0435\u043D\u0438\u0435\r\n14
+        \u0444\u0438\u0437. \u0443\u0440\u043E\u043D\u0430\r\n -5 \u043D\u0430 2
+        \u0445.\r\n<b><u>\u0413\u0435\u0431:</u><b>\r\n\"\u041A\u0440\u0443\u0448\u0435\u043D\u0438\u0435
+        \u0431\u0440\u043E\u043D\u0438\" - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435\r\n
+        -5 \u0448\u0442\u0440\u0430\u0444 \u0437\u0430\u0449\u0438\u0442\u044B \u043D\u0430
+        999 \u0445.\r\n<b><u>\u0422\u043E\u0442:</u><b>\r\n\"\u0417\u0430\u043C\u043E\u0440\u043E\u0437\u043A\u0430\"
+        \u043D\u0430 1 \u0445.\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 8042370180080501523, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -303,7 +312,8 @@ PrefabInstance:
     - target: {fileID: 8708706953026549160, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435\r\n"
+      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 \u043D\u0430
+        2 \u0445.\r\n"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

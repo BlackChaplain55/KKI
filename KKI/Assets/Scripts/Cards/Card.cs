@@ -350,7 +350,14 @@ public enum EffectTypes
     provoke,
     none,
     mBlessing,
-    pBlessing
+    pBlessing,
+    pCurse,
+    mCurse,
+    pAttack,
+    mAttack,
+    armourBreak,
+    heal,
+    healthUp
 }
 
 [Serializable]

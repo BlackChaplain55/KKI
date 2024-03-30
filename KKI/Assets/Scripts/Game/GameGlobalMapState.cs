@@ -16,8 +16,8 @@ public class GameGlobalMapState : IState
     public void Enter()
     {
         if(_game.CurrentScene.name!= Constants.GlobalMapSceneName)  _game.LoadScene(Constants.GlobalMapSceneName);
-        _game.MainMenu.GameMusicPlayer.SetCombatPlaylist();
-        _game.MainMenu.ChangeState(_game.MainMenu.CombatState);
+        _game.MainMenu.GameMusicPlayer.SetGlobalMapPlaylist();
+        _game.MainMenu.ChangeState(_game.MainMenu.GlobalMapState);
         _game.MainMenu.Components.MenuPanel.SetActive(false);
     }
 
