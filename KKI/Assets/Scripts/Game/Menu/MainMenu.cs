@@ -7,18 +7,19 @@ using DG.Tweening;
 using TMPro;
 
 [RequireComponent(typeof(SoundManager))]
+[RequireComponent(typeof(MenuComponents))]
 
 //Этот класс управляет основным меню
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject _settingsPanel;
-    
+
     [SerializeField] private AudioSource _audio;
     [SerializeField] private AudioClip _click;
     [SerializeField] private AudioClip _gameStart;
     [SerializeField] private MenuComponents _menuComponents;
     [SerializeField] private Image _blankScreen;
-    [SerializeField] private Slider _musicVol;    
+    [SerializeField] private Slider _musicVol;
     [SerializeField] private Slider _ambientVol;
     [SerializeField] private Slider _effectsVol;
     [SerializeField] private Toggle _toggleSound;
@@ -26,26 +27,30 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private MusicPlayer _musicPlayer;
     [SerializeField] private SoundManager _SFXManager;
-    
+
     [SerializeField] private Game _game;
 
     private MenuCombatState _combatState;
     private MenuDeckBuildState _deckbuildState;
     private MenuDefaultState _defaultState;
     private MenuMainState _playState;
+    private MenuGlobalMapState _globalMapState;
 
     public MenuCombatState CombatState => _combatState;
     public MenuDeckBuildState DeckBuildState => _deckbuildState;
     public MenuDefaultState DefaultState => _defaultState;
     public MenuMainState PlayState => _playState;
+    public MenuGlobalMapState GlobalMapState => _globalMapState;
 
     public StateMachine StateMachine => _stateMachine;
     public IState CurrentState => _stateMachine.CurrentState;
 
-    public MenuComponents Components => _menuComponents;
     public MusicPlayer GameMusicPlayer => _musicPlayer;
 
-    private void OnValidate()
+    public MenuComponents Components { get => _menuComponents; }
+
+
+private void OnValidate()
     {
         if (!_settingsPanel) _settingsPanel = transform.Find("SettingsPanel").gameObject;        
         if (!_game) _game = FindObjectOfType<Game>();
@@ -72,6 +77,7 @@ public class MainMenu : MonoBehaviour
         _combatState = new(_stateMachine, this);
         _defaultState = new(_stateMachine, this);
         _deckbuildState = new(_stateMachine, this);
+        _globalMapState = new(_stateMachine, this);
         _playState = new(_stateMachine, this);
         if (state == null) _stateMachine.Initialize(_defaultState);
         else _stateMachine.Initialize(state);
@@ -94,6 +100,23 @@ public class MainMenu : MonoBehaviour
         FadeScreen(_game.GlobalMapState, _gameStart);
     }
 
+    public void NewGame()
+    {
+        ProgressData progress = new();
+        progress.Bastet = false;
+        progress.Geb = false;
+        progress.Thoth = false;
+        progress.Meritseger = false;
+        progress.InitialAP = 0;
+        progress.InitialDeckBonus = 0;
+        progress.TurnAPBonus = 0;
+        progress.TurnCardBonus = 0;
+        progress.PlayerPosition = new Vector3(15.16f, 4.201f, 175.8f);
+        progress.CompleteEncounters = "";
+        SaveLoadManager.SaveProgresData(progress);        
+        FadeScreen(_game.GlobalMapState, _gameStart);        
+    }
+
     public void GoToMainMenu()
     {
         FadeScreen(_game.StartState);
@@ -112,6 +135,7 @@ public class MainMenu : MonoBehaviour
     public void ShowConfirmationWindow(string dialogText, bool state)
     {
         _menuComponents.DialogText.text = dialogText;
+        if (!_menuComponents.ConfirmPanel) _menuComponents.Validate();
         _menuComponents.ConfirmPanel.SetActive(state);
     }
 

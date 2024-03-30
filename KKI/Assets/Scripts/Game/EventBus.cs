@@ -23,6 +23,9 @@ public class EventBus : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
     }
 }

@@ -81,17 +81,17 @@ public class CardHighlightState : IState
                 cardFullView.SetState(cardFullView.DescriptionState);
                 cardFullViewGO.transform.SetPositionAndRotation(_card.transform.position, _card.transform.rotation);
                 
-                Vector3 fullViewPosition = new Vector3(5, 5, -5);
+                Vector3 fullViewPosition = new Vector3(7, 8, -5);
                 bool playState = false;
                 if (_card.CurrentGame.CurrentState is GamePlayState)
                 {
-                    cardFullViewGO.transform.DOScale(2.5f, 1);
+                    cardFullViewGO.transform.DOScale(3.5f, 1);
                     fullViewPosition = _card.CurrentGame.Combat.FullViewPosition.position;
                     playState = true;
                 }
                 else
                 {
-                    cardFullViewGO.transform.DOScale(3, 1);
+                    cardFullViewGO.transform.DOScale(3.8f, 1);
                 }
                 cardFullViewGO.transform.DOMove(fullViewPosition, 0.5f).OnComplete(() => {
                     cardFullView.SetFullView(playState);

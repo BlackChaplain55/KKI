@@ -6,21 +6,26 @@ using TMPro;
 
 public class MenuComponents : MonoBehaviour
 {
-    public GameObject MenuPanel;
-    public GameObject ConfirmPanel;
-    public TMP_Text DialogText;
-    public Button StartButton;
-    public Button ContinueButton;
-    public Button ReturnButton;
-    public Button DeckButton;
-    public Button MainMenuButton;
-    public Button TutorialButton;
-    public Button PanteonButton;
+    [SerializeField] public GameObject MenuPanel;
+    [SerializeField] public GameObject ConfirmPanel;
+    [SerializeField] public TMP_Text DialogText;
+    [SerializeField] public Button StartButton;
+    [SerializeField] public Button ContinueButton;
+    [SerializeField] public Button ReturnButton;
+    [SerializeField] public Button DeckButton;
+    [SerializeField] public Button MainMenuButton;
+    [SerializeField] public Button TutorialButton;
+    [SerializeField] public Button PanteonButton;
 
     private void OnValidate()
     {
-        if (!MenuPanel) MenuPanel = transform.Find("MainMenu").gameObject;
-        if (!ConfirmPanel) ConfirmPanel = transform.Find("Dialogs")?.transform.Find("ConfirmPanel")?.gameObject;
-        if (!DialogText) DialogText = transform.Find("Dialogs")?.transform.Find("ConfirmPanel")?.transform.Find("DialogText")?.GetComponent<TMP_Text>();
+        Validate();
+    }
+
+    public void Validate()
+    {
+        if (!MenuPanel) MenuPanel = transform?.Find("MainMenu")?.gameObject;
+        if (!ConfirmPanel) ConfirmPanel = transform?.Find("Dialogs")?.transform.Find("ConfirmPanel")?.gameObject;
+        if (!DialogText) DialogText = transform?.Find("Dialogs")?.transform.Find("ConfirmPanel")?.transform.Find("DialogText")?.GetComponent<TMP_Text>();
     }
 }

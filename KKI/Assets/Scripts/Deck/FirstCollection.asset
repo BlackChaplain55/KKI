@@ -62,6 +62,16 @@ MonoBehaviour:
       Value: {fileID: 21300000, guid: ca4a230461fccfa4b9bee6a181750bdf, type: 3}
     - Key: 2
       Value: {fileID: 21300000, guid: d80a86e644656d24f970ffe9b0cf0de2, type: 3}
+    - Key: 13
+      Value: {fileID: 21300000, guid: d74a0ec27d713114780e7a93eb72a913, type: 3}
+    - Key: 19
+      Value: {fileID: 21300000, guid: ca4a230461fccfa4b9bee6a181750bdf, type: 3}
+    - Key: 18
+      Value: {fileID: 21300000, guid: ca4a230461fccfa4b9bee6a181750bdf, type: 3}
+    - Key: 17
+      Value: {fileID: 21300000, guid: 9c9a9a29ea35c6d48833dd3abc0268a6, type: 3}
+    - Key: 14
+      Value: {fileID: 21300000, guid: cdd171a9bbc290d448598c78b08e5aa4, type: 3}
   EffectDescriptions:
     _serializedList:
     - Key: 0

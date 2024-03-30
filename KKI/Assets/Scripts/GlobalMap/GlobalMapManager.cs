@@ -25,36 +25,52 @@ public class GlobalMapManager : MonoBehaviour
         if (!_player) _player = GameObject.FindObjectOfType<MapCharacter>();
         _encounters = new List<Encounter>();
         _encounters.AddRange(FindObjectsByType<Encounter>(FindObjectsSortMode.None));
+        
         if (_game.Encounter.Name != "") {
+            if (_game.Encounter.IsComplete)
+            {
+                if (_game.Encounter.GiveBastet) _progress.Bastet = true;
+                if (_game.Encounter.GiveThoth) _progress.Thoth = true;
+                if (_game.Encounter.GiveGeb) _progress.Geb = true;
+                if (_game.Encounter.GiveMeritseger) _progress.Meritseger = true;
+                _progress.InitialDeckBonus += _game.Encounter.InitialDeckBonus;
+                _progress.TurnCardBonus += _game.Encounter.TurnCardBonus;
+                _progress.InitialAP += _game.Encounter.InitialAP;
+                _progress.TurnAPBonus += _game.Encounter.TurnAPBonus;
+                //_progress.PlayerPosition = _game.Encounter.SavePoint;
+                SaveProgress(_game.Encounter.Name, _game.Encounter.SavePoint);
+                EncounterData enc = new();
+                _game.Encounter = enc;
+            }
             //CompleteEncounterNames.Add(_game.Encounter.Name);
-            if (game.Encounter.GiveBastet) _progress.Bastet = true;
-            if (game.Encounter.GiveThoth) _progress.Thoth = true;
-            if (game.Encounter.GiveGeb) _progress.Geb = true;
-            if (game.Encounter.GiveMeritseger) _progress.Meritseger = true;
-            SaveProgress(_game.Encounter.Name);
-            EncounterData enc = new();
-            _game.Encounter = enc;
         }
         LoadProgress();
         List<string> CompleteEncounterNames = new();
         CompleteEncounterNames.AddRange(_progress.CompleteEncounters.Split(','));
         foreach (Encounter enc in _encounters)
-        {
+        {            
             if (CompleteEncounterNames.Contains(enc.Name))
             {
-                enc.Init(this, true);
+                enc.Init(this, true,_game);
             }
             else
             {
-                enc.Init(this, false);
+                enc.Init(this, false, _game);
             }
             
         }
     }
 
-    public void SaveProgress(string addCompleteEncounter="")
+    public void SaveProgress(string addCompleteEncounter, Vector3 savePosition)
     {
-        _progress.PlayerPosition = _player.transform.position;
+        if (savePosition != Vector3.zero)
+        {
+            _progress.PlayerPosition = savePosition;
+        }
+        else
+        {
+            _progress.PlayerPosition = _player.transform.position;
+        }
         List<string> completeEncounters =new();
         foreach (Encounter enc in _encounters)
         {

@@ -16,6 +16,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private PlayerUnit _Meritseger;
     [SerializeField] private PlayerUnit _Thoth;
     [Header("Game settings")]
+    [SerializeField] private int _maxHandSize = 12;
     [SerializeField] private int _initialHandSize = 6;
     [SerializeField] private int _cardsPerTurn = 3;
     [SerializeField] private int _initialAP = 2;
@@ -179,8 +180,9 @@ public class CombatManager : MonoBehaviour
 
     private void Turn()
     {
-        _actionPoints += _initialAPPerTurn+ _bonusAPPerTurn;
-        List<string> newCards = _game.CurrentDeck.GetRandomCards(_cardsPerTurn);
+        _actionPoints += _initialAPPerTurn + _game.Progress.TurnAPBonus;
+        if (_game.CurrentDeck.PlayerHand.Count > _maxHandSize) return;
+        List<string> newCards = _game.CurrentDeck.GetRandomCards(_cardsPerTurn +_game.Progress.TurnCardBonus);
         _game.CurrentDeck.AddToHand(newCards);
         _game.InstantinateCardsToDeck(newCards);
     }
@@ -235,6 +237,13 @@ public class CombatManager : MonoBehaviour
                 }
             }
             enc.IsComplete = true;
+            _game.Encounter = enc;
+            _game.ChangeState(_game.GlobalMapState);
+        }
+        else
+        {
+            EncounterData enc = _game.Encounter;
+            enc.IsComplete = false;
             _game.Encounter = enc;
             _game.ChangeState(_game.GlobalMapState);
         }

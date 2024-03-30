@@ -9,6 +9,7 @@ public class Encounter : MonoBehaviour
     [SerializeField] private Game _game;
     [SerializeField] private GlobalMapManager _globalMapManager;
     [SerializeField] private GameObject _blocker;
+    [SerializeField] private Transform _savePoint;
     private bool _isStarted = false;
     private bool _isConfirmed = false;
 
@@ -23,13 +24,13 @@ public class Encounter : MonoBehaviour
     private void Awake()
     {
         if(!_game) _game = FindObjectOfType<Game>();
-        
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            _globalMapManager.Player.SetNavAget(false);
             if (!_isStarted && !_encData.IsComplete)
             {
                 _isStarted = true;
@@ -59,12 +60,13 @@ public class Encounter : MonoBehaviour
         EventBus.Instance.Confirm.RemoveListener(OnConfirm);
     }
 
-    public void Init(GlobalMapManager gmManager, bool complete)
+    public void Init(GlobalMapManager gmManager, bool complete, Game game)
     {
         //_isComplete = false;
         _globalMapManager = gmManager;
+        _game = game;
         _encData.IsComplete = complete;
-
+        _encData.SavePoint = _savePoint.position;
         if (complete)
         {
             gameObject.SetActive(false);
@@ -80,7 +82,8 @@ public class Encounter : MonoBehaviour
 
     private void OnConfirm()
     {
-        _globalMapManager.SaveProgress();
+        _globalMapManager.SaveProgress("",_encData.SavePoint);
+        //_globalMapManager.Player.SetNavAget(true);
         BeginEncounter();
     }
 
@@ -108,5 +111,10 @@ public struct EncounterData
     public bool GiveGeb;
     public bool GiveThoth;
     public bool GiveMeritseger;
+    public int InitialDeckBonus;
+    public int TurnCardBonus;
+    public int InitialAP;
+    public int TurnAPBonus;
+    public Vector3 SavePoint;
 }
 

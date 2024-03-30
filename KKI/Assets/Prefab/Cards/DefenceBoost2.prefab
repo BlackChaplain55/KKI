@@ -4659,6 +4659,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 480692921643707325, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 993477197713171774, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -5061,17 +5066,19 @@ PrefabInstance:
     - target: {fileID: 6649056135796426233, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: "\u0412\u0441\u0435\u043C +Health +Heal - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435(AOE)
-        +0 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435\r\n\u0417\u0430\u0449\u0438\u0442\u0430
+      value: "<b><u>\u0411\u0430\u0441\u0442\u0435\u0442:</u><b>\r\n\u0412\u0441\u0435\u043C
+        +Health +Heal - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435(AOE)\r\n
+        +0 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F \u043D\u0430 2 \u0445.\r\n<b><u>\u0414\u0436\u0430\u0431\u0430\u0440\u0438:</u><b>\r\n\u0417\u0430\u0449\u0438\u0442\u0430
         \u0447\u0435\u0440\u0435\u0437 \u0441\u0438\u043B\u044C\u043D\u043E\u0435
-        HP - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 +0 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435\r\n\u0417\u0430\u0449\u0438\u0442\u0430
-        \u0447\u0435\u0440\u0435\u0437 Heal over Time - \u0420\u0435\u0433\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F
-        +0 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435 +5\r\n\"\u0411\u0430\u0442\u0438\u043E\u043D\"
-        - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 +40 \u0431\u043E\u043D\u0443\u0441
-        \u0437\u0430\u0449\u0438\u0442\u044B\r\n\"\u0422\u0435\u043C\u043F\u043E\u0440\u0430\u043B\u044C\u043D\u044B\u0439
-        \u0449\u0438\u0442\" - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435(AOE)
+        HP - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435\r\n +0 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F
+        \u043D\u0430 1 \u0445.\r\n<b><u>\u041C\u0435\u0440\u0438\u0442\u0441\u0435\u0433\u0435\u0440:</u><b>\r\n\u0417\u0430\u0449\u0438\u0442\u0430
+        \u0447\u0435\u0440\u0435\u0437 Heal over Time - \u0420\u0435\u0433\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F\r\n
+        +0 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F +5 \u043D\u0430 2 \u0445.\r\n<b><u>\u0413\u0435\u0431:</u><b>\r\n\"\u0411\u0430\u0442\u0438\u043E\u043D\"
+        - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435\r\n +40 \u0431\u043E\u043D\u0443\u0441
+        \u0437\u0430\u0449\u0438\u0442\u044B \u043D\u0430 2 \u0445.\r\n<b><u>\u0422\u043E\u0442:</u><b>\r\n\"\u0422\u0435\u043C\u043F\u043E\u0440\u0430\u043B\u044C\u043D\u044B\u0439
+        \u0449\u0438\u0442\" - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435(AOE)\r\n
         +100 \u0431\u043E\u043D\u0443\u0441 \u0437\u0430\u0449\u0438\u0442\u044B
-        \u043D\u0430 0 \r\n"
+        \u043D\u0430 -100 \u043D\u0430 1 \u0445.\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 7076191167850465283, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -5107,8 +5114,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: "\u041F\u043E\u0432\u044B\u0448\u0435\u043D\u0438\u0435 \u0417\u0430\u0449\u0438\u0442\u044B
-        II - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 +30 \u0431\u043E\u043D\u0443\u0441
-        \u0437\u0430\u0449\u0438\u0442\u044B\r\n"
+        II - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435\r\n +30 \u0431\u043E\u043D\u0443\u0441
+        \u0437\u0430\u0449\u0438\u0442\u044B \u043D\u0430 3 \u0445.\r\n"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -34,7 +34,11 @@ public static class SaveLoadManager
         PlayerPrefs.SetString("Geb", progress.Geb.ToString());
         PlayerPrefs.SetString("Thoth", progress.Thoth.ToString());
         PlayerPrefs.SetString("Meritseger", progress.Meritseger.ToString());
-    }
+        PlayerPrefs.SetInt("InitialDeckBonus", progress.InitialDeckBonus);
+        PlayerPrefs.SetInt("TurnCardBonus", progress.TurnCardBonus);
+        PlayerPrefs.SetInt("InitialAP", progress.InitialAP);
+        PlayerPrefs.SetInt("TurnAPBonus", progress.TurnAPBonus);
+}
 
     public static ProgressData LoadProgres()
     {
@@ -45,6 +49,10 @@ public static class SaveLoadManager
         progress.Thoth = bool.Parse(PlayerPrefs.GetString("Thoth", "false"));
         progress.Meritseger = bool.Parse(PlayerPrefs.GetString("Meritseger", "false"));
         progress.Bastet = bool.Parse(PlayerPrefs.GetString("Bastet", "false"));
+        progress.InitialDeckBonus = PlayerPrefs.GetInt("InitialDeckBonus", 0);
+        progress.TurnCardBonus = PlayerPrefs.GetInt("TurnCardBonus", 0);
+        progress.InitialAP = PlayerPrefs.GetInt("InitialAP",0);
+        progress.TurnAPBonus = PlayerPrefs.GetInt("TurnAPBonus", 0);
         return progress;
     }
 }

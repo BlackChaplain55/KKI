@@ -68,6 +68,7 @@ MonoBehaviour:
     Vampiric: 0
     MovesCount: 0
     CurrentMovesCount: 0
+    Stacked: 0
     isAOE: 0
     type: 0
   _animationName: 0
@@ -151,7 +152,7 @@ PrefabInstance:
     - target: {fileID: 490392537152277863, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
       propertyPath: m_fontSize
-      value: 6
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 490392537152277863, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
@@ -177,7 +178,7 @@ PrefabInstance:
     - target: {fileID: 490392537152277863, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
       propertyPath: m_fontSizeBase
-      value: 6
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 490392537152277863, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
@@ -208,12 +209,12 @@ PrefabInstance:
     - target: {fileID: 1259620224189277071, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -2.311
+      value: -1.98
       objectReference: {fileID: 0}
     - target: {fileID: 1259620224189277071, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.75
+      value: -0.63
       objectReference: {fileID: 0}
     - target: {fileID: 1330728175937569274, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
@@ -239,6 +240,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3057423631968396062, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 3.4656
+      objectReference: {fileID: 0}
+    - target: {fileID: 3057423631968396062, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -3.238
+      objectReference: {fileID: 0}
+    - target: {fileID: 3057423631968396062, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.0881
       objectReference: {fileID: 0}
     - target: {fileID: 3314539036869793796, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}
@@ -406,6 +422,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Card
+      objectReference: {fileID: 0}
+    - target: {fileID: 8700514765857346418, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8700514765857346418, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 8756878903019363789, guid: f51d3a7e68ef8dd439f8204a6941c9bc,
         type: 3}

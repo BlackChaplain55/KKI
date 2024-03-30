@@ -486,7 +486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2827824147088664309
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2183,6 +2183,26 @@ MonoBehaviour:
     EncounterVictoryText: 
     VictoryCard: {fileID: 0}
     IsComplete: 0
+    GiveBastet: 0
+    GiveGeb: 0
+    GiveThoth: 0
+    GiveMeritseger: 0
+    InitialDeckBonus: 0
+    TurnCardBonus: 0
+    InitialAP: 0
+    TurnAPBonus: 0
+    SavePoint: {x: 0, y: 0, z: 0}
+  _progress:
+    PlayerPosition: {x: 0, y: 0, z: 0}
+    CompleteEncounters: 
+    InitialDeckBonus: 0
+    TurnCardBonus: 0
+    InitialAP: 0
+    TurnAPBonus: 0
+    Bastet: 0
+    Geb: 0
+    Meritseger: 0
+    Thoth: 0
 --- !u!114 &6116601076465070097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2697,6 +2717,8 @@ MonoBehaviour:
   ReturnButton: {fileID: 782118490731269093}
   DeckButton: {fileID: 2471677257247900453}
   MainMenuButton: {fileID: 6755755282837791584}
+  TutorialButton: {fileID: 0}
+  PanteonButton: {fileID: 0}
 --- !u!114 &837300757953117052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6014,7 +6036,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
-      objectReference: {fileID: 21300000, guid: d2d8db34421a3284f998ddc449afc07b,
+      objectReference: {fileID: 21300000, guid: 1abaf48ab9af2e24a89b7f3a522a966e,
         type: 3}
     - target: {fileID: 5347871081229304681, guid: 44f6939a04a8d31479ae7f15f90909a0,
         type: 3}
@@ -6080,7 +6102,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1a4f09bbf6eccc444a5569160491a503,
+      objectReference: {fileID: 21300000, guid: ab89537a9d2ea0d4faf3bcadb8c021da,
         type: 3}
     - target: {fileID: 6994963656709510363, guid: 44f6939a04a8d31479ae7f15f90909a0,
         type: 3}
@@ -6192,8 +6214,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7031313653228773257, guid: 44f6939a04a8d31479ae7f15f90909a0, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

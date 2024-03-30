@@ -61,12 +61,7 @@ PrefabInstance:
     - target: {fileID: 1914907910238257518, guid: 9d089fed63410c54988c83a7dd1bf796,
         type: 3}
       propertyPath: m_Name
-      value: DefaultEncounter Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 4646465361661097918, guid: 9d089fed63410c54988c83a7dd1bf796,
-        type: 3}
-      propertyPath: _game
-      value: 
+      value: TestEncounter
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -16710,6 +16710,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6959729613661292731, guid: a48685dfb9a9a7342aadf8860a86edd6,
         type: 3}
+      propertyPath: _encData.InitialDeckBonus
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959729613661292731, guid: a48685dfb9a9a7342aadf8860a86edd6,
+        type: 3}
       propertyPath: _encData.Enemies.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -17637,6 +17642,16 @@ PrefabInstance:
         type: 3}
       propertyPath: _encData.Name
       value: Start4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959729613661292731, guid: a48685dfb9a9a7342aadf8860a86edd6,
+        type: 3}
+      propertyPath: _encData.InitialAP
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959729613661292731, guid: a48685dfb9a9a7342aadf8860a86edd6,
+        type: 3}
+      propertyPath: _encData.TurnAPBonus
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6959729613661292731, guid: a48685dfb9a9a7342aadf8860a86edd6,
         type: 3}
@@ -28100,6 +28115,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6959729613661292731, guid: a48685dfb9a9a7342aadf8860a86edd6,
         type: 3}
+      propertyPath: _encData.InitialAP
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959729613661292731, guid: a48685dfb9a9a7342aadf8860a86edd6,
+        type: 3}
+      propertyPath: _encData.TurnCardBonus
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959729613661292731, guid: a48685dfb9a9a7342aadf8860a86edd6,
+        type: 3}
       propertyPath: _encData.Enemies.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -29186,7 +29211,7 @@ PrefabInstance:
     - target: {fileID: 5584009211037306401, guid: 6ecfb8e30a2b85d49a530b967d0f8cea,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.25
+      value: -0.24
       objectReference: {fileID: 0}
     - target: {fileID: 5704460666725762982, guid: 6ecfb8e30a2b85d49a530b967d0f8cea,
         type: 3}
@@ -30943,12 +30968,12 @@ MonoBehaviour:
   _game: {fileID: 0}
   _player: {fileID: 1451193003}
   _encounters:
+  - {fileID: 284734478}
+  - {fileID: 2104156146}
   - {fileID: 819413389}
   - {fileID: 2066438744}
-  - {fileID: 2104156146}
-  - {fileID: 284734478}
   _progress:
-    PlayerPosition: {x: 0, y: 0, z: 0}
+    PlayerPosition: {x: 15.16, y: 4.201, z: 175.8}
     CompleteEncounters: 
     InitialDeckBonus: 0
     TurnCardBonus: 0
@@ -30957,7 +30982,7 @@ MonoBehaviour:
     Bastet: 0
     Geb: 0
     Meritseger: 0
-    Thoth: 1
+    Thoth: 0
 --- !u!1 &1109173337
 GameObject:
   m_ObjectHideFlags: 0
@@ -42687,8 +42712,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -58715,6 +58740,11 @@ PrefabInstance:
     - target: {fileID: 6959729613661292731, guid: a48685dfb9a9a7342aadf8860a86edd6,
         type: 3}
       propertyPath: _encData.GiveBastet
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959729613661292731, guid: a48685dfb9a9a7342aadf8860a86edd6,
+        type: 3}
+      propertyPath: _encData.InitialDeckBonus
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6959729613661292731, guid: a48685dfb9a9a7342aadf8860a86edd6,

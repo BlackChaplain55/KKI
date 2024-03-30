@@ -3718,8 +3718,9 @@ MonoBehaviour:
   _Bastet: {fileID: 1581259033}
   _Meritseger: {fileID: 2040244358}
   _Thoth: {fileID: 1256991393}
+  _maxHandSize: 12
   _initialHandSize: 3
-  _cardsPerTurn: 2
+  _cardsPerTurn: 1
   _initialAP: 5
   _initialAPPerTurn: 2
   _turnLength: 100
