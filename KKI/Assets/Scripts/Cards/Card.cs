@@ -120,7 +120,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         EventBus.Instance.DeselectCards.AddListener(DeselectCard);
 
         _game = game;
-        float rnd = UnityEngine.Random.Range(0.5f, 1.2f);
+        float rnd = UnityEngine.Random.Range(0.2f, 1.2f);
         _cardView.Init(this);
         _cardView.Anim.SetFloat("IdleSpeed", rnd);
     }
