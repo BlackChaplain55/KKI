@@ -16,6 +16,7 @@ public class MenuDeckBuildState : IState
     }
     public void Enter()
     {
+        _mainMenu.Components.MenuBG.SetActive(true);
         _mainMenu.Components.ContinueButton.interactable = true;
         _mainMenu.Components.StartButton.interactable = true;
         _mainMenu.Components.MainMenuButton.gameObject.SetActive(true);

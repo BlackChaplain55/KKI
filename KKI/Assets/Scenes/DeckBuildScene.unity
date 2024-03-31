@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 1.5
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 9ca22510633fbfd4399f1704cd9d5c72, type: 2}
@@ -601,13 +601,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 792064539}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.41639176, y: 0.2255559, z: -0.099660866, w: 0.8751058}
-  m_LocalPosition: {x: -40.38, y: -23.88, z: -15.47}
+  m_LocalRotation: {x: 0.10456761, y: 0.18008254, z: -0.16845788, w: 0.9634614}
+  m_LocalPosition: {x: -40.38, y: -1.1, z: -15.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50.69, y: 29.481, z: 1.213}
+  m_LocalEulerAnglesHint: {x: 15.199, y: 18.849, z: -17.298}
 --- !u!114 &792064542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,7 +681,7 @@ MonoBehaviour:
   _cardCollection: {fileID: 11400000, guid: 6fabbe2158386f64cb663531c231e6e8, type: 2}
   _collectionContainer: {fileID: 1249222741}
   _deckCounter: {fileID: 658944904}
-  _collectionSize: 25
+  _collectionSize: 27
   _playerDeck: {fileID: 1187316074}
   _layoutGroup3D: {fileID: 1187316075}
   _collectionlayoutGroup3D: {fileID: 1249222742}
@@ -1513,6 +1513,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -170
+      objectReference: {fileID: 0}
+    - target: {fileID: 4310753596783527034, guid: 624774a931f2a4248ba0dce2ddcdee77,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4378934992764366791, guid: 624774a931f2a4248ba0dce2ddcdee77,
         type: 3}

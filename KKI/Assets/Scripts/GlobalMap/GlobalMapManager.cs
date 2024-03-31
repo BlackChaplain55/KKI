@@ -24,6 +24,7 @@ public class GlobalMapManager : MonoBehaviour
         _player.SetNavAget(false);
         if (!_game) _game = game;
         if (!_player) _player = GameObject.FindObjectOfType<MapCharacter>();
+        _player.Init();
         _encounters = new List<Encounter>();
         _encounters.AddRange(FindObjectsByType<Encounter>(FindObjectsSortMode.None));
         

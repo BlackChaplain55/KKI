@@ -76,7 +76,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     private void Awake()
     {
-        Init(FindObjectOfType<CombatManager>());
+        //Init(FindObjectOfType<CombatManager>());
     }
 
     private void OnValidate()
@@ -91,6 +91,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     private void Init(CombatManager combatManager)
     {
+
         _currentHealth = _health;
         _currentInitiative = 0;
         _bonus = new StatsBonus();

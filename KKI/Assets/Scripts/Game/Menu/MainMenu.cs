@@ -127,13 +127,14 @@ private void OnValidate()
 
     public void ContinueGame()
     {
-        if(_game.CurrentState is GameMainMenuState)
+        if(_game.CurrentState is GameMainMenuState|| _game.CurrentState is GameStartState)
         {
             GMStart();
         }
         else
         {
             _game.MainMenu.Components.MenuPanel.SetActive(false);
+            EventBus.Instance.SetGMNavigation?.Invoke(true);
         }
             
     }
@@ -158,13 +159,21 @@ private void OnValidate()
 
     public void ShowMenu()
     {
-        Debug.Log("ShowMenu");
-        Debug.Log(_game.ToString());
-        Debug.Log(_game.MainMenu.ToString());
-        Debug.Log(_game.MainMenu.Components.ToString());
-        Debug.Log(_game.MainMenu.Components.MenuPanel.ToString());
+        //Debug.Log("ShowMenu");
+        //Debug.Log(_game.ToString());
+        //Debug.Log(_game.MainMenu.ToString());
+        //Debug.Log(_game.MainMenu.Components.ToString());
+        //Debug.Log(_game.MainMenu.Components.MenuPanel.ToString());
         _game.MainMenu.Components.MenuPanel.SetActive(true);
+        EventBus.Instance.SetGMNavigation?.Invoke(false);
         OnButtonClick();
+    }
+
+    public void HallOfGods()
+    {
+        OnButtonClick();
+        _game.MainMenu.Components.MenuPanel.SetActive(false);
+        GameObject.Find("MainMenuBG").SetActive(false);
     }
     private void FadeScreen(IState state, AudioClip sound=null) //Этот метод обеспечивает плавную смену сцен
     {

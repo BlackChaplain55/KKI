@@ -14,7 +14,7 @@ public class DeckBuilder : MonoBehaviour
     [SerializeField] private AutoLayout3D.GridLayoutGroup3D _layoutGroup3D;
     [SerializeField] private AutoLayout3D.GridLayoutGroup3D _collectionlayoutGroup3D;
     [SerializeField] private Game _game;
-    [SerializeField] private int _deckSize = 25;
+    [SerializeField] private int _deckSize = 27;
     [SerializeField] private bool _haveActiveCard=false;
 
     public bool HaveActiveCard => _haveActiveCard;

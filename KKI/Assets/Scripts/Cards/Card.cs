@@ -117,10 +117,17 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
             Debug.Log("CARD INITIALIZATION ERROR");
         }
 
+        EventBus.Instance.DeselectCards.AddListener(DeselectCard);
+
         _game = game;
-        float rnd = UnityEngine.Random.Range(0.5f, 1.2f);
+        float rnd = UnityEngine.Random.Range(0.2f, 1.2f);
         _cardView.Init(this);
         _cardView.Anim.SetFloat("IdleSpeed", rnd);
+    }
+
+    private void DeselectCard()
+    {
+        if (_stateMachine.CurrentState is CardSelectState) _stateMachine.ChangeState(_defaultState);
     }
 
     public void OnPointerClick(PointerEventData eventData)

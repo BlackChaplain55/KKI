@@ -7,6 +7,7 @@ using TMPro;
 public class MenuComponents : MonoBehaviour
 {
     [SerializeField] public GameObject MenuPanel;
+    [SerializeField] public GameObject MenuBG;
     [SerializeField] public GameObject ConfirmPanel;
     [SerializeField] public TMP_Text DialogText;
     [SerializeField] public Button StartButton;
@@ -24,6 +25,7 @@ public class MenuComponents : MonoBehaviour
 
     public void Validate()
     {
+        if (!MenuBG) MenuBG = transform.Find("MainMenu")?.Find("MenuBG").gameObject;
         if (!MenuPanel) MenuPanel = transform?.Find("MainMenu")?.gameObject;
         if (!ConfirmPanel) ConfirmPanel = transform?.Find("Dialogs")?.transform.Find("ConfirmPanel")?.gameObject;
         if (!DialogText) DialogText = transform?.Find("Dialogs")?.transform.Find("ConfirmPanel")?.transform.Find("DialogText")?.GetComponent<TMP_Text>();
