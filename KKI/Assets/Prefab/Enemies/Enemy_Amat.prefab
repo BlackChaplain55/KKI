@@ -2264,17 +2264,17 @@ PrefabInstance:
     - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
         type: 3}
       propertyPath: _damage
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
         type: 3}
       propertyPath: _health
-      value: 1000
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
         type: 3}
       propertyPath: _defence
-      value: 30
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
         type: 3}
@@ -2284,12 +2284,12 @@ PrefabInstance:
     - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
         type: 3}
       propertyPath: _magicPower
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 854887283279405844, guid: c7207e39c28c8fa4088d15ad7e6091b9,
         type: 3}
       propertyPath: _magicResist
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3940766413446507772, guid: c7207e39c28c8fa4088d15ad7e6091b9,
         type: 3}

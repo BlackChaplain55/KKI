@@ -23,6 +23,11 @@ PrefabInstance:
       propertyPath: m_text
       value: "\u0423\u0420:2"
       objectReference: {fileID: 0}
+    - target: {fileID: 2471223037025264950, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _game
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3086776832892134702, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -54,7 +59,7 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.Heal
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -70,6 +75,16 @@ PrefabInstance:
         type: 3}
       propertyPath: _actionPointCost
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _effect.EffectName
+      value: "\u0421\u0438\u043B\u044C\u043D\u043E\u0435 \u043B\u0435\u0447\u0435\u043D\u0438\u0435"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _effect.effectType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -114,7 +129,7 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -149,7 +164,7 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].type
-      value: 6
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -169,17 +184,17 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].type
-      value: 6
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[1].Heal
-      value: 1.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[1].type
-      value: 18
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -194,12 +209,12 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.data[0].Heal
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.data[0].type
-      value: 15
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -209,17 +224,17 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.data[0].Damage
-      value: 1.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.data[0].Vampiric
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[0].Value.Array.data[0].EffectName
-      value: "\u041B\u0435\u0447\u0435\u043D\u0438\u0435 \u0432\u0441\u0435\u043C"
+      value: "\u041F\u0435\u0441\u043D\u044F \u0436\u0438\u0437\u043D\u0438"
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -234,12 +249,13 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].EffectName
-      value: "\u0417\u0430\u0449\u0438\u0442\u0430 \u0438 \u0440\u0435\u0433\u0435\u043D\u0440\u0430\u0446\u0438\u044F"
+      value: "\u041F\u0440\u043E\u0431\u0443\u0436\u0434\u0435\u043D\u0438\u0435
+        \u0436\u0438\u0437\u043D\u0438"
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].MovesCount
-      value: 2
+      value: 999
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -273,43 +289,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].effectType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[1].EffectName
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[1].MovesCount
-      value: 0
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[1].effectType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].EffectName
-      value: Taunt + Health bonus
+      value: "\u041F\u0440\u043E\u0432\u043E\u043A\u0430\u0446\u0438\u044F"
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].MovesCount
-      value: 1
+      value: 999
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].effectType
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.data[0].EffectName
-      value: "\u0412\u0430\u043C\u043F\u0438\u0440\u0438\u0437\u043C"
+      value: "\u0411\u043B\u0430\u0433\u043E\u0441\u043B\u043E\u0432\u043B\u0435\u043D\u0438\u0435
+        \u0414\u0443\u0430\u0442\u0430"
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.data[0].MovesCount
-      value: 0
+      value: 999
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].DefenceBonus
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -320,6 +347,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].DefenceBonus
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].MaxHealthBonus
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -334,12 +366,12 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].MaxHealthBonus
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].InitiativeBonus
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -429,18 +461,14 @@ PrefabInstance:
     - target: {fileID: 6649056135796426233, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: "<b><u>\u0411\u0430\u0441\u0442\u0435\u0442:</u><b>\r\n\u041B\u0435\u0447\u0435\u043D\u0438\u0435
-        \u0432\u0441\u0435\u043C(AOE)\r\n +0 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F<b><u>\u0414\u0436\u0430\u0431\u0430\u0440\u0438:</u><b>\r\n\u0417\u0430\u0449\u0438\u0442\u0430
-        \u0438 \u0440\u0435\u0433\u0435\u043D\u0440\u0430\u0446\u0438\u044F - \u0420\u0435\u0433\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F\r\n
-        +20 \u0431\u043E\u043D\u0443\u0441 \u0437\u0430\u0449\u0438\u0442\u044B \u043D\u0430
-        2 \u0445.\r\n\u0417\u0430\u0449\u0438\u0442\u0430 \u0438 \u0440\u0435\u0433\u0435\u043D\u0440\u0430\u0446\u0438\u044F
-        - \u0420\u0435\u0433\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F\r\n
-        +0 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F<b><u>\u041C\u0435\u0440\u0438\u0442\u0441\u0435\u0433\u0435\u0440:</u><b>\r\n\u041C\u0443\u0442\u0430\u0433\u0435\u043D
-        II - \u0420\u0435\u0433\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F\r\n
-        +1 \u043D\u0430 999 \u0445.\r\n +0 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F<b><u>\u0413\u0435\u0431:</u><b>\r\nTaunt
-        + Health bonus \u043D\u0430 1 \u0445.\r\n<b><u>\u0422\u043E\u0442:</u><b>\r\n\u0412\u0430\u043C\u043F\u0438\u0440\u0438\u0437\u043C6
-        \u0444\u0438\u0437. \u0443\u0440\u043E\u043D\u0430\r\n \u043B\u0435\u0447\u0435\u043D\u0438\u0435
-        \u043D\u0430 20% \u043E\u0442 \u0443\u0440\u043E\u043D\u0430 "
+      value: "<b><u>\u0411\u0430\u0441\u0442\u0435\u0442:</u><b>\r\n\u041F\u0435\u0441\u043D\u044F
+        \u0436\u0438\u0437\u043D\u0438(AOE)\r\n +0 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F<b><u>\u0414\u0436\u0430\u0431\u0430\u0440\u0438:</u><b>\r\n\u041F\u0440\u043E\u0431\u0443\u0436\u0434\u0435\u043D\u0438\u0435
+        \u0436\u0438\u0437\u043D\u0438 \u043D\u0430 999 \u0445.\r\n<b><u>\u041C\u0435\u0440\u0438\u0442\u0441\u0435\u0433\u0435\u0440:</u><b>\r\n\u041C\u0443\u0442\u0430\u0433\u0435\u043D
+        II \u043D\u0430 999 \u0445.\r\n - \u0420\u0435\u0433\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F
+        +0 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F \u043D\u0430 999 \u0445.\r\n<b><u>\u0413\u0435\u0431:</u><b>\r\nTaunt
+        + Health bonus \u043D\u0430 999 \u0445.\r\n<b><u>\u0422\u043E\u0442:</u><b>\r\n\u041F\u043E\u0441\u0442\u0435\u043F\u0435\u043D\u043D\u043E\u0435
+        \u043B\u0435\u0447\u0435\u043D\u0438\u0435 - \u0420\u0435\u0433\u0435\u043D\u0435\u0440\u0430\u0446\u0438\u044F\r\n
+        +0 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F \u043D\u0430 999 \u0445.\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 7807368675564291543, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -460,7 +488,7 @@ PrefabInstance:
     - target: {fileID: 8708706953026549160, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: " +0 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F"
+      value: "\u0421\u0438\u043B\u044C\u043D\u043E\u0435 \u043B\u0435\u0447\u0435\u043D\u0438\u0435"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

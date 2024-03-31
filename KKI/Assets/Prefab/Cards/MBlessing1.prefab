@@ -56,7 +56,8 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.EffectName
-      value: "\u041C\u0430\u0433. \u0443\u0441\u0438\u043B\u0435\u043D\u0438\u0435"
+      value: "\u0423\u043A\u0440\u0435\u043F\u043B\u0435\u043D\u0438\u0435 \u0414\u0443\u0445\u0430
+        I"
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -71,12 +72,12 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.MDamageBonus
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.MResistBonus
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -176,13 +177,12 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].MDamage
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[0].Value.Array.data[0].EffectName
-      value: "\u041D\u0430\u043A\u043E\u043F\u043B\u0435\u043D\u0438\u0435 \u041C\u0430\u043A\u0441
-        \u041D\u0420"
+      value: "\u041D\u0430\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435 \u0436\u0438\u0437\u043D\u044C\u044E"
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -192,12 +192,12 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[0].Value.Array.data[0].effectType
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].EffectName
-      value: "\u0410\u0443\u0440\u0430 \u041D\u0430\u0434\u0435\u0436\u0434\u044B"
+      value: "\u0423\u0441\u0438\u043B\u0435\u043D\u0435\u043D\u0438\u0435 \u043C\u0430\u0433\u0438\u0438"
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -207,7 +207,7 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].effectType
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -222,17 +222,22 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].effectType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].EffectName
-      value: "\u0421\u043E\u043F\u0440\u043E\u0442\u0438\u0432\u043B\u044F\u0435\u043C\u043E\u0441\u0442\u044C"
+      value: "\u041D\u0430\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435 \u0436\u0438\u0437\u043D\u044C\u044E"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].MovesCount
+      value: 999
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].effectType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -247,27 +252,27 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.data[0].effectType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].MDamageBonus
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
-        type: 3}
-      propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].MResistBonus
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
-        type: 3}
-      propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].MResistBonus
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].MResistBonus
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].MResistBonus
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[4].Value.Array.data[0].MDamageBonus
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -286,13 +291,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
+      propertyPath: _personalEffects._serializedList.Array.data[3].Value.Array.data[0].MaxHealthBonus
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[1].Value.Array.data[0].InitiativeBonus
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _personalEffects._serializedList.Array.data[2].Value.Array.data[0].InitiativeBonus
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4885318259277563448, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -357,17 +367,17 @@ PrefabInstance:
     - target: {fileID: 6649056135796426233, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: "<b><u>\u0411\u0430\u0441\u0442\u0435\u0442:</u><b>\r\n\u041D\u0430\u043A\u043E\u043F\u043B\u0435\u043D\u0438\u0435
-        \u041C\u0430\u043A\u0441 \u041D\u0420 - \u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u043E\u0435
+      value: "<b><u>\u0411\u0430\u0441\u0442\u0435\u0442:</u><b>\r\n\u041D\u0430\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435
+        \u0436\u0438\u0437\u043D\u044C\u044E - \u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u043E\u0435
         \u0443\u0441\u0438\u043B\u0435\u043D\u0438\u0435(AOE)\r\n \u043D\u0430 999
-        \u0445.\r\n<b><u>\u0414\u0436\u0430\u0431\u0430\u0440\u0438:</u><b>\r\n\u0410\u0443\u0440\u0430
-        \u041D\u0430\u0434\u0435\u0436\u0434\u044B - \u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u043E\u0435
+        \u0445.\r\n<b><u>\u0414\u0436\u0430\u0431\u0430\u0440\u0438:</u><b>\r\n\u0423\u0441\u0438\u043B\u0435\u043D\u0435\u043D\u0438\u0435
+        \u043C\u0430\u0433\u0438\u0438 - \u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u043E\u0435
         \u0443\u0441\u0438\u043B\u0435\u043D\u0438\u0435(AOE)\r\n \u043D\u0430 999
         \u0445.\r\n<b><u>\u041C\u0435\u0440\u0438\u0442\u0441\u0435\u0433\u0435\u0440:</u><b>\r\n\u0420\u0430\u0441\u0442\u043E\u0440\u043E\u043F\u043D\u043E\u0441\u0442\u044C
-        - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435\r\n 1 1<color=#00FF00>6</color>
-        \u043C\u0430\u0433. \u0443\u0440\u043E\u043D\u0430\r\n +1 \u043D\u0430 999
-        \u0445.\r\n<b><u>\u0413\u0435\u0431:</u><b>\r\n\u0421\u043E\u043F\u0440\u043E\u0442\u0438\u0432\u043B\u044F\u0435\u043C\u043E\u0441\u0442\u044C
-        - \u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0443\u0441\u0438\u043B\u0435\u043D\u0438\u0435\r\n<b><u>\u0422\u043E\u0442:</u><b>\r\n\u0423\u0441\u0438\u043B\u0435\u043D\u0435\u043D\u0438\u0435
+        - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435\r\n +1 \u043D\u0430
+        999 \u0445.\r\n<b><u>\u0413\u0435\u0431:</u><b>\r\n\u041D\u0430\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0435
+        \u0436\u0438\u0437\u043D\u044C\u044E - \u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u043E\u0435
+        \u0443\u0441\u0438\u043B\u0435\u043D\u0438\u0435\r\n \u043D\u0430 999 \u0445.\r\n<b><u>\u0422\u043E\u0442:</u><b>\r\n\u0423\u0441\u0438\u043B\u0435\u043D\u0435\u043D\u0438\u0435
         \u043C\u0430\u0433\u0438\u0438 - \u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u043E\u0435
         \u0443\u0441\u0438\u043B\u0435\u043D\u0438\u0435\r\n \u043D\u0430 999 \u0445.\r\n"
       objectReference: {fileID: 0}
@@ -384,8 +394,8 @@ PrefabInstance:
     - target: {fileID: 8708706953026549160, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: "\u041C\u0430\u0433. \u0443\u0441\u0438\u043B\u0435\u043D\u0438\u0435
-        - \u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0443\u0441\u0438\u043B\u0435\u043D\u0438\u0435\r\n
+      value: "\u0423\u043A\u0440\u0435\u043F\u043B\u0435\u043D\u0438\u0435 \u0414\u0443\u0445\u0430
+        I - \u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0443\u0441\u0438\u043B\u0435\u043D\u0438\u0435\r\n
         \u043D\u0430 999 \u0445.\r\n"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
