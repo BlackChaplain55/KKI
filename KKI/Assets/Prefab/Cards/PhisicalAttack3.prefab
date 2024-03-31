@@ -45,7 +45,7 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.Damage
-      value: 15
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -295,7 +295,7 @@ PrefabInstance:
         \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u0438 \u0432\u0441\u0435\u043C
         - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435(AOE)\r\n12 \u0444\u0438\u0437.
         \u0443\u0440\u043E\u043D\u0430\r\n -2 \u043D\u0430 2 \u0445.\r\n<b><u>\u0414\u0436\u0430\u0431\u0430\u0440\u0438:</u><b>\r\n\u041A\u0440\u043E\u0432\u043E\u0442\u0435\u0447\u0435\u043D\u0438\u0435
-        - \u041A\u0440\u043E\u0432\u043E\u0442\u0435\u0447\u0435\u043D\u0438\u0435\r\n22
+        - \u041A\u0440\u043E\u0432\u043E\u0442\u0435\u0447\u0435\u043D\u0438\u0435\r\n18
         \u0444\u0438\u0437. \u0443\u0440\u043E\u043D\u0430\r\n \u043D\u0430 3 \u0445.\r\n<b><u>\u041C\u0435\u0440\u0438\u0442\u0441\u0435\u0433\u0435\u0440:</u><b>\r\n\u0421\u0438\u043B\u044C\u043D\u044B\u0439
         \u0443\u0440\u043E\u043D - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435\r\n56
         \u0444\u0438\u0437. \u0443\u0440\u043E\u043D\u0430\r\n<b><u>\u0413\u0435\u0431:</u><b>\r\n\u041E\u0433\u043B\u0443\u0448\u0435\u043D\u0438\u043528
@@ -311,7 +311,7 @@ PrefabInstance:
     - target: {fileID: 8708706953026549160, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 15 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0433\u043E 
+      value: " - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435 2 \u043E\u0441\u043D\u043E\u0432\u043D\u043E\u0433\u043E 
         \u0444\u0438\u0437. \u0443\u0440\u043E\u043D\u0430\r\n"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
