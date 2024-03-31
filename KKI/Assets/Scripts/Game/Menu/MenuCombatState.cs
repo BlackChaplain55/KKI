@@ -16,14 +16,16 @@ public class MenuCombatState : IState
     }
     public void Enter()
     {
+        _mainMenu.Components.MenuBG.SetActive(true);
         _mainMenu.Components.ContinueButton.interactable = true;
         _mainMenu.Components.StartButton.interactable = false;
         _mainMenu.Components.MainMenuButton.gameObject.SetActive(true);
         _mainMenu.Components.ContinueButton.gameObject.SetActive(true);
         _mainMenu.Components.StartButton.gameObject.SetActive(true);
         _mainMenu.Components.ReturnButton.gameObject.SetActive(true);
+        _mainMenu.Components.TutorialButton.gameObject.SetActive(false);
         //Доступ к колоде временно доступен
-        _mainMenu.Components.DeckButton.gameObject.SetActive(true);
+        _mainMenu.Components.DeckButton.gameObject.SetActive(false);
     }
 
     public void Exit()

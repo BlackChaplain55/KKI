@@ -24,6 +24,7 @@ public class CardSelectState : IState
         }
         else
         {
+            _cardView.SelectedVFX.gameObject.SetActive(true);
             _cardView.SelectedVFX.Play(); //Эффект "горения" карты
         }
         EventBus.Instance.ActivateCard?.Invoke(_card);

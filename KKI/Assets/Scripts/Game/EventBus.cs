@@ -8,6 +8,7 @@ public class EventBus : MonoBehaviour
 {
     public UnityEvent<Unit> OnSelectUnit;
     public UnityEvent DeselectUnits;
+    public UnityEvent DeselectCards;
     public UnityEvent<Unit> ActivateUnit;
     public UnityEvent<Unit,PlayerUnit> UnitDeath;
     public UnityEvent UnitActivationFinished;
@@ -15,6 +16,7 @@ public class EventBus : MonoBehaviour
     public UnityEvent UpdateCards;
     public UnityEvent<Card> DiscardCard;
     public UnityEvent OnMapTrigger;
+    public UnityEvent<bool> SetGMNavigation;
     public UnityEvent Tick;
     public UnityEvent<SFXClipsTypes> SFXPlay;
     public UnityEvent Confirm;

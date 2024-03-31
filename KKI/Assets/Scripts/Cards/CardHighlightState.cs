@@ -42,6 +42,7 @@ public class CardHighlightState : IState
     {
         if (_card.CurrentGame.CurrentState is GamePlayState && eventData.button == PointerEventData.InputButton.Left)
         {
+            EventBus.Instance.DeselectCards?.Invoke();
             if (_card.APCost > _card.CurrentGame.ActionPoints)
             {
                 return;
@@ -85,7 +86,7 @@ public class CardHighlightState : IState
                 bool playState = false;
                 if (_card.CurrentGame.CurrentState is GamePlayState)
                 {
-                    cardFullViewGO.transform.DOScale(3.5f, 1);
+                    cardFullViewGO.transform.DOScale(2.5f, 1);
                     fullViewPosition = _card.CurrentGame.Combat.FullViewPosition.position;
                     playState = true;
                 }

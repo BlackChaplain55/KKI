@@ -114,6 +114,18 @@ public class UnitView : MonoBehaviour
             ;
     }
 
+    public string GetStatsText()
+    {
+        Unit unit = GetComponent<Unit>();
+        string text = "Макс. НР: " + unit.MaxHealth.ToString() + "\r\n"+
+                            "Скорость: " + unit.Initiative.ToString() + "\r\n"+
+                            "Физ. сила: " + unit.Damage.ToString() + "\r\n"+
+                            "Защита: " + unit.Defence.ToString() + "\r\n" +
+                            "Маг. сила: " + unit.MDamage.ToString() + "\r\n" +
+                            "Сопротивл.: " + unit.MResistance.ToString() + "\r\n";
+        return text;
+    }
+
     public void SetSelect(bool state)
     {
         _selectIndicator.SetActive(state);

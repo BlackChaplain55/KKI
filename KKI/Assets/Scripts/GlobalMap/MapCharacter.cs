@@ -25,6 +25,11 @@ public class MapCharacter : MonoBehaviour, IPointerClickHandler
         _target.gameObject.SetActive(false);
     }
 
+    public void Init()
+    {
+        EventBus.Instance.SetGMNavigation.AddListener(SetNavAget);
+    }
+
     public void SetInputBlocked(bool state)
     {
         _inputBlocked = state;
@@ -62,5 +67,6 @@ public class MapCharacter : MonoBehaviour, IPointerClickHandler
     public void SetNavAget(bool state)
     {
         _navAgent.enabled = state;
+        _anim.SetBool("Run", false);
     }
 }
