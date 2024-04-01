@@ -113,9 +113,13 @@ private void OnValidate()
         progress.TurnCardBonus = 0;
         progress.PlayerPosition = new Vector3(15.16f, 4.201f, 175.8f);
         progress.CompleteEncounters = "";
+        _game.DropCollection();
         SaveLoadManager.SaveProgresData(progress);
-        string startDeck = "PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack2,PhisicalAttack2,MagicalAttack1,MagicalAttack1,MagicalAttack1,MagicalAttack1,DefenceBoost1," +
-                "DefenceBoost1,PBlessing1,MBlessing1,Blessing2,Heal1,Heal1,Heal2,SpeedBoost2,CardDraw,CardDraw";
+
+        //string startDeck = "PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack1,PhisicalAttack2,PhisicalAttack2,MagicalAttack1,MagicalAttack1,MagicalAttack1,MagicalAttack1,DefenceBoost1," +
+        //        "DefenceBoost1,PBlessing1,MBlessing1,Blessing2,Heal1,Heal1,Heal2,SpeedBoost2,CardDraw,CardDraw,APBoost";
+        string startDeck= "PhisicalAttack1,PhisicalAttack2,MagicalAttack1,MagicalAttack2,PhisicalAttack1,PhisicalAttack2,MagicalAttack1,MagicalAttack2," +
+                            "PBlessing1,MBlessing1,Blessing1,Blessing2,Heal1,Heal2,SpeedBoost1,SpeedBoost2,CardDraw,SimplePhisicalAttack,SimpleMagicalAttack";
         PlayerPrefs.SetString("PlayerDeck", startDeck);
         FadeScreen(_game.GlobalMapState, _gameStart);        
     }

@@ -47,4 +47,16 @@ public class CardCollection : ScriptableObject
         Material material = CardMaterials.GetValueOrDefault(color, defaultMat);
         return material;
     }
+
+    public void AddToCollection(GameObject card)
+    {
+        if (card == null)
+        {
+            Debug.Log("No card to add");
+        }
+        if (FindCard(card.name) == null)
+        {
+            Cards.Add(card);
+        }
+    }
 }

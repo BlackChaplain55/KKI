@@ -59,7 +59,7 @@ public class UnitView : MonoBehaviour
     private void Awake()
     {
         if (_localCanvas && Camera.main) _localCanvas.transform.rotation = Camera.main.transform.rotation;
-        _statsPanel.SetActive(false);
+        if (_statsPanel) _statsPanel.SetActive(false);
     }
 
     public void ShowStats(bool state)

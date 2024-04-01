@@ -23,7 +23,8 @@ public class MenuGlobalMapState : IState
         _mainMenu.Components.ContinueButton.gameObject.SetActive(true);
         _mainMenu.Components.StartButton.gameObject.SetActive(false);
         _mainMenu.Components.ReturnButton.gameObject.SetActive(true);
-        //Доступ к колоде временно доступен
+        _mainMenu.Components.TutorialButton.gameObject.SetActive(true);
+        _mainMenu.Components.PanteonButton.gameObject.SetActive(false);
         _mainMenu.Components.DeckButton.gameObject.SetActive(true);
     }
 

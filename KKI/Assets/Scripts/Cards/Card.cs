@@ -198,18 +198,18 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         {
             if (effect.MovesCount > 0)  //Длящиеся эффекты
             {
-                if(effect.effectType == CardTypes.bonusSingle)
-                {
-                    cardUser.AddEffect(effect);
-                    cardUser.Effects.CheckEffects(initial: true);
-                    if (effect.MaxHealthBonus != 0) cardUser.DealInstantEffect(0, 0, effect.MaxHealthBonus, 0);
-                }
-                else
-                {
+                //if(effect.effectType == CardTypes.malusSingle)
+                //{
+                //    cardUser.AddEffect(effect);
+                //    cardUser.Effects.CheckEffects(initial: true);
+                //    if (effect.MaxHealthBonus != 0) cardUser.DealInstantEffect(0, 0, effect.MaxHealthBonus, 0);
+                //}
+                //else
+                //{
                     unit.AddEffect(effect);
                     unit.Effects.CheckEffects(initial: true);
                     if (effect.MaxHealthBonus != 0) unit.DealInstantEffect(0, 0, effect.MaxHealthBonus, 0);
-                }
+                //}
             }
             else                        //Мгновенные эффекты
             {
@@ -292,6 +292,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         //EventBus.Instance.UnitActivationFinished?.Invoke();
         _combatManager.ActionPoints -= _actionPointCost;
         _combatManager.UpdateUI();
+        _game.SetLayoutSpacing();
         DestroyCard();
     }
 

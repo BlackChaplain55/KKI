@@ -15,7 +15,7 @@ public class EventBus : MonoBehaviour
     public UnityEvent<Card> ActivateCard;
     public UnityEvent UpdateCards;
     public UnityEvent<Card> DiscardCard;
-    public UnityEvent OnMapTrigger;
+    public UnityEvent<GameObject,string> OnMapTrigger;
     public UnityEvent<bool> SetGMNavigation;
     public UnityEvent Tick;
     public UnityEvent<SFXClipsTypes> SFXPlay;

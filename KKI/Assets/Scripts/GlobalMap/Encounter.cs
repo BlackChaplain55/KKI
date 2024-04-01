@@ -30,15 +30,19 @@ public class Encounter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _globalMapManager.Player.SetNavAget(false);
-            if (!_isStarted && !_encData.IsComplete)
+            if (!TryGetComponent<MapTrigger>(out _))
             {
-                _isStarted = true;
-                //BeginEncounter();
-                _game.MainMenu.ShowConfirmationWindow(_encData.EncounterBeginText, true);
-                _globalMapManager.Player.SetInputBlocked(true);
-                EventBus.Instance.Confirm.AddListener(OnConfirm);
+                _globalMapManager.Player.SetNavAget(false);
+                if (!_isStarted && !_encData.IsComplete)
+                {
+                    _isStarted = true;
+                    //BeginEncounter();
+                    _game.MainMenu.ShowConfirmationWindow(_encData.EncounterBeginText, true);
+                    _globalMapManager.Player.SetInputBlocked(true);
+                    EventBus.Instance.Confirm.AddListener(OnConfirm);
+                }
             }
+            
         }
     }
 
@@ -83,7 +87,13 @@ public class Encounter : MonoBehaviour
     private void OnConfirm()
     {
         _globalMapManager.SaveProgress("",_encData.SavePoint);
-        //_globalMapManager.Player.SetNavAget(true);
+        if (_encData.Enemies.Count == 0)
+        {
+            return;
+            _globalMapManager.Player.SetNavAget(true);
+            _globalMapManager.Player.SetInputBlocked(false);
+        }
+            //_globalMapManager.Player.SetNavAget(true);
         BeginEncounter();
     }
 
@@ -99,12 +109,13 @@ public struct EncounterData
 {
     public string Name;
     public List<GameObject> Enemies;
-    public string EncounterBeginText;
+    [TextArea(15, 20)] public string EncounterBeginText;
+    [TextArea(15, 20)] public string EncounterVictoryText;
     public Sprite InitialScreen;
     public Sprite VictoryScreen;
     public AudioClip InitialClip;
     public AudioClip VictoryClip;
-    public string EncounterVictoryText;
+    
     public GameObject VictoryCard;
     public bool IsComplete;
     public bool GiveBastet;

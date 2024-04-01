@@ -155,6 +155,11 @@ public class CombatManager : MonoBehaviour
             EnableHero(progress.Meritseger, _Meritseger);
         }
 
+        foreach (var unit in _playerUnits)
+        {
+            unit.Init(this);
+        }
+
         if (enemiesList.Count == 0) enemiesList = _defaultEnemies;
 
         for (int i = 0; i < enemiesList.Count; i++)
@@ -163,6 +168,7 @@ public class CombatManager : MonoBehaviour
             var enemy = enemiesList[i];
             GameObject newEnemy = Instantiate(enemy, _enemyPositions[i].position, _enemyPositions[i].rotation, _enemiesContainer);
             _enemyUnits.Add(newEnemy.GetComponent<Unit>());
+            newEnemy.GetComponent<Unit>().Init(this);
         }
         _finished = false;
         _combatUI.Init(this);

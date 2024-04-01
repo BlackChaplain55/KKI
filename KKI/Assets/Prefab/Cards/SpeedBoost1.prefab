@@ -96,7 +96,7 @@ PrefabInstance:
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: _effect.InitiativeBoost
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4627947290752318534, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -226,7 +226,7 @@ PrefabInstance:
     - target: {fileID: 5770260361504788246, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: "\u0423\u043F\u0440 Initiative - 1"
+      value: "\u041D\u0435\u0431\u0435\u0441\u043D\u044B\u0439 \u0446\u0438\u043A\u043B"
       objectReference: {fileID: 0}
     - target: {fileID: 5793464973898975967, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -272,7 +272,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: "\u0418\u043D\u0438\u0446\u0438\u0430\u0442\u0438\u0432\u0430 - \u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435\r\n
-        \u043D\u0430 50"
+        \u043D\u0430 25"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -81,7 +81,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     private void OnValidate()
     {
-        if (!_anim) _anim = transform.Find("Figure").GetComponent<Animator>();
+        if (!_anim) _anim = transform.Find("Figure")?.GetComponent<Animator>();
         if(!_transform) _transform = transform;
         if (!_view) _view = GetComponent<UnitView>();
         if (!_AI) _AI = GetComponent<SimpleAI>();
@@ -89,9 +89,9 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
         if (!_figure) _figure = transform.Find("Figure");
     }
 
-    private void Init(CombatManager combatManager)
+    public void Init(CombatManager combatManager)
     {
-
+        _combatManager = combatManager;
         _currentHealth = _health;
         _currentInitiative = 0;
         _bonus = new StatsBonus();
@@ -134,6 +134,10 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
                 }
             }
             if (_combatManager.ActiveCard.AnimationName == AnimationConstants.Cast.ToString())
+            {
+                EventBus.Instance.SFXPlay?.Invoke(SFXClipsTypes.Cast);
+            }
+            else
             {
                 EventBus.Instance.SFXPlay?.Invoke(SFXClipsTypes.Cast);
             }
@@ -272,6 +276,7 @@ public class Unit : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     public void Tick()
     {
+        //if (!_combatManager) return;
         _currentInitiative += (_initiative + _bonus.Initiative)/10;
         if (_currentInitiative >= _combatManager.UnitActivationLimit)
         {

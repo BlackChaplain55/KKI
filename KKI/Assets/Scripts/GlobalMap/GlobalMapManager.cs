@@ -16,18 +16,19 @@ public class GlobalMapManager : MonoBehaviour
     private void OnValidate()
     {
         if (!_player) _player = GameObject.FindObjectOfType<MapCharacter>();
+        if (!_game) _game = GameObject.FindObjectOfType<Game>();
         _encounters = new List<Encounter>();
         _encounters.AddRange(FindObjectsByType<Encounter>(FindObjectsSortMode.None));
     }
     public void Init(Game game)
     {
         _player.SetNavAget(false);
-        if (!_game) _game = game;
+        _game = game;
         if (!_player) _player = GameObject.FindObjectOfType<MapCharacter>();
         _player.Init();
         _encounters = new List<Encounter>();
         _encounters.AddRange(FindObjectsByType<Encounter>(FindObjectsSortMode.None));
-        
+
         if (_game.Encounter.Name != "") {
             if (_game.Encounter.IsComplete)
             {
@@ -51,18 +52,28 @@ public class GlobalMapManager : MonoBehaviour
         List<string> CompleteEncounterNames = new();
         CompleteEncounterNames.AddRange(_progress.CompleteEncounters.Split(','));
         foreach (Encounter enc in _encounters)
-        {            
+        {
             if (CompleteEncounterNames.Contains(enc.Name))
             {
-                enc.Init(this, true,_game);
+                enc.Init(this, true, _game);
             }
             else
             {
                 enc.Init(this, false, _game);
             }
-            
+
         }
         _player.SetNavAget(true);
+    }
+
+    public void ReckonPuzzle(Encounter enc, PuzzleAnswer answer, Transform puzzlePosition)
+    {
+        _progress.InitialAP += answer.InitialAP;
+        _progress.InitialDeckBonus += answer.InitialDeckBonus;
+        _progress.TurnAPBonus += answer.TurnAPBonus;
+        _progress.TurnCardBonus += answer.TurnCardBonus;
+        _game.CardCollection.AddToCollection(answer.RewardCard);
+        SaveProgress(enc.Name, puzzlePosition.position);
     }
 
     public void SaveProgress(string addCompleteEncounter, Vector3 savePosition)
@@ -103,6 +114,7 @@ public class GlobalMapManager : MonoBehaviour
     {
         _progress.PlayerPosition = new Vector3(15.16f, 4.201f, 175.8f);
         _progress.CompleteEncounters = "";
+        _game.DropCollection();
         SaveLoadManager.SaveProgresData(_progress);
     }
 }

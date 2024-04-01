@@ -879,7 +879,7 @@ PrefabInstance:
     - target: {fileID: 322442949095722061, guid: 47c3b2e08c1771145b16ef71f6c83e89,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: 322442949095722061, guid: 47c3b2e08c1771145b16ef71f6c83e89,
         type: 3}
@@ -2459,8 +2459,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5614635278013485779, guid: a2d0d831479a97842b35e80c301e76b2,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614635278013485779, guid: a2d0d831479a97842b35e80c301e76b2,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614635278013485779, guid: a2d0d831479a97842b35e80c301e76b2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8632647371550514853, guid: a2d0d831479a97842b35e80c301e76b2,
         type: 3}
@@ -3172,7 +3182,7 @@ PrefabInstance:
     - target: {fileID: 322442949095722061, guid: 71cbf5877217cc0448b04f4457329e30,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 322442949095722061, guid: 71cbf5877217cc0448b04f4457329e30,
         type: 3}
@@ -4376,8 +4386,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5614635278013485779, guid: c4a9c58c03b98134daab41751b17c72e,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614635278013485779, guid: c4a9c58c03b98134daab41751b17c72e,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614635278013485779, guid: c4a9c58c03b98134daab41751b17c72e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8632647371550514853, guid: c4a9c58c03b98134daab41751b17c72e,
         type: 3}
@@ -4789,8 +4809,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5614635278013485779, guid: ed4308fb7d9db054fbd4753fbaf7167c,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614635278013485779, guid: ed4308fb7d9db054fbd4753fbaf7167c,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614635278013485779, guid: ed4308fb7d9db054fbd4753fbaf7167c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8632647371550514853, guid: ed4308fb7d9db054fbd4753fbaf7167c,
         type: 3}
@@ -5097,8 +5127,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1244626565}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+      - m_Target: {fileID: 1822820601}
+        m_TargetAssemblyTypeName: HallOfGodsManager, Assembly-CSharp
         m_MethodName: ShowMenu
         m_Mode: 1
         m_Arguments:

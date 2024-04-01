@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class MapTrigger : MonoBehaviour
 {
+    [SerializeField] string puzzleName = "";
     private void OnTriggerEnter(Collider other)
     {
-        EventBus.Instance.OnMapTrigger?.Invoke();
+        EventBus.Instance.OnMapTrigger?.Invoke(gameObject, puzzleName);
     }
 
     private void OnTriggerExit(Collider other)

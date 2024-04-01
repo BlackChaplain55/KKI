@@ -11,7 +11,7 @@ public class HallOfGodsManager : MonoBehaviour
     [SerializeField] TMP_Text _heroStats;
     private void HideAll()
     {
-        foreach(var unitGO in _unitsGO)
+        foreach (var unitGO in _unitsGO)
         {
             unitGO.SetActive(false);
         }
@@ -28,6 +28,11 @@ public class HallOfGodsManager : MonoBehaviour
             PlayerUnit pUnit = _currentUnit.GetComponent<PlayerUnit>();
             _heroStats.text = pUnit.View.GetStatsText();
         } else
-        _heroStats.text = unit.View.GetStatsText();
+            _heroStats.text = unit.View.GetStatsText();
+    }
+
+    public void ShowMenu()
+    {
+        GameObject.Find("UI").GetComponent<MainMenu>().ShowMenu();
     }
 }

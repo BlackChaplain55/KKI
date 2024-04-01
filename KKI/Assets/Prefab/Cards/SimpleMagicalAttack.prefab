@@ -13,11 +13,6 @@ PrefabInstance:
       propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 2471223037025264950, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
-        type: 3}
-      propertyPath: _game
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3086776832892134702, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -184,7 +179,12 @@ PrefabInstance:
     - target: {fileID: 5770260361504788246, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_text
-      value: "\u0421\u0442\u0440\u0430\u0436\n"
+      value: "\u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u0438\u0439 \u0441\u0442\u0440\u0430\u0436"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5770260361504788246, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 7.15
       objectReference: {fileID: 0}
     - target: {fileID: 5793464973898975967, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
@@ -196,6 +196,11 @@ PrefabInstance:
       propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7807368675564291543, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a505fb46bd8e66e498b1efde5db4ecd0, type: 2}
     - target: {fileID: 8042370180080501523, guid: 8fba2a5aa20ccb94fbefbf903a322bf0,
         type: 3}
       propertyPath: m_Name

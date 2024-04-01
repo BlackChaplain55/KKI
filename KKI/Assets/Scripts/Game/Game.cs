@@ -35,6 +35,7 @@ public class Game : MonoBehaviour
     private bool _isCombat;
     [SerializeField] private EncounterData _currentEncounter;
     [SerializeField] private ProgressData  _progress;
+    [SerializeField] private CardCollection _defaultCollection;
 
     private GameStartState _startState;
     private GameDeckBuildState _deckbuildState;
@@ -47,6 +48,7 @@ public class Game : MonoBehaviour
 
     public EncounterData Encounter { get => _currentEncounter; set => _currentEncounter = value; }
     public ProgressData Progress { get => _progress; set => _progress = value; }
+    public CardCollection DefaultCollection { get => _defaultCollection;}
     public Transform PlayerGMPosition { get => _playerGMPosition; set => _playerGMPosition.SetPositionAndRotation(value.position,value.rotation); }
     public StateMachine StateMachine => _stateMachine;
     public IState CurrentState => _stateMachine.CurrentState;
@@ -173,7 +175,7 @@ public class Game : MonoBehaviour
     {
         _puzzleController = FindObjectOfType<PuzzleController>();
         _globalMapManager = FindObjectOfType<GlobalMapManager>();
-        _puzzleController.Init(this);
+        _puzzleController.Init(this,_globalMapManager);
         _globalMapManager.Init(this);
     }
 
@@ -233,7 +235,7 @@ public class Game : MonoBehaviour
         Debug.Log("Deck container clear - " + _playerDeckContainer.childCount.ToString());
     }
 
-    private void SetLayoutSpacing() //Настраиваем плотность расположения карт в руке игрока
+    public void SetLayoutSpacing() //Настраиваем плотность расположения карт в руке игрока
     {
         if (_playerDeckContainer.childCount <= 8)
             _layoutGroup3D.spacing.z = 1f;
@@ -273,6 +275,12 @@ public class Game : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadSceneAsync(sceneName);
+    }
+
+    public void DropCollection()
+    {
+        _cardCollection.Cards.Clear();
+        _cardCollection.Cards.AddRange(_defaultCollection.Cards);
     }
 }
 

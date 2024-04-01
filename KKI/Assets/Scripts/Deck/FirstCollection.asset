@@ -22,16 +22,13 @@ MonoBehaviour:
   - {fileID: 2972799463160797979, guid: fdc34da87a4b5354a9cbce4363c279d2, type: 3}
   - {fileID: 2972799463160797979, guid: 3dcff0c8733c85f4c8e27a98d8d891c4, type: 3}
   - {fileID: 2972799463160797979, guid: 9c7c1cfa7be5c4041bd52a7f78dfaec1, type: 3}
-  - {fileID: 2972799463160797979, guid: bbc9797fddeae624ab031ca367ffab2f, type: 3}
   - {fileID: 1211178722140606551, guid: 4d4b9cec2a3d40344ae9c0dfc89dffa1, type: 3}
   - {fileID: 1211178722140606551, guid: a073a5cc27dd9084b9eb6576c3688482, type: 3}
   - {fileID: 2972799463160797979, guid: ba49c788e794eac44860a2a4f9e9cf5c, type: 3}
   - {fileID: 2972799463160797979, guid: 7c1259c0467a0024090e6a9061625f36, type: 3}
-  - {fileID: 2972799463160797979, guid: ba3a8c861d61ff8448ed0de0d54bbd50, type: 3}
   - {fileID: 2972799463160797979, guid: f96cb221ba34d444ca9c35bfa23cc78c, type: 3}
   - {fileID: 2972799463160797979, guid: 4c30413ee7f0bd8439f77cc132354256, type: 3}
   - {fileID: 2972799463160797979, guid: 63d1cbd0d47eab2469341393cb2878dd, type: 3}
-  - {fileID: 2972799463160797979, guid: 74e9aabd7cf0950439580a19708d797a, type: 3}
   EffectIcons:
     _serializedList:
     - Key: 0

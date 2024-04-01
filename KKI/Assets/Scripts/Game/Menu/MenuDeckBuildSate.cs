@@ -22,7 +22,7 @@ public class MenuDeckBuildState : IState
         _mainMenu.Components.MainMenuButton.gameObject.SetActive(true);
         _mainMenu.Components.ReturnButton.gameObject.SetActive(true);
         _mainMenu.Components.ContinueButton.gameObject.SetActive(true);
-        _mainMenu.Components.ReturnButton.gameObject.SetActive(true);
+        _mainMenu.Components.PanteonButton.gameObject.SetActive(false);
         _mainMenu.Components.StartButton.gameObject.SetActive(true);
         _mainMenu.Components.DeckButton.gameObject.SetActive(false);
     }
