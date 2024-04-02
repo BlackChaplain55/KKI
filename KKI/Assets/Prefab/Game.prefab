@@ -4814,11 +4814,8 @@ MonoBehaviour:
   _ambientSource: {fileID: 8719436104475312976}
   _musicCombat:
   - {fileID: 8300000, guid: a574df546aa74e443a652a12047d33bd, type: 3}
-  - {fileID: 8300000, guid: 69c8b36f0f152c74b918a4a4549eae50, type: 3}
-  - {fileID: 8300000, guid: 8d7725cf3c5f0904ea4fbc3355cec3f0, type: 3}
   - {fileID: 8300000, guid: 489c747983efbf34fbcd51ee6ba3b291, type: 3}
   - {fileID: 8300000, guid: 41ca8f76f7d4b7a489fb40422206b706, type: 3}
-  - {fileID: 8300000, guid: 709ec3675abab69408402057a3b2a17e, type: 3}
   - {fileID: 8300000, guid: 5104ab68b67738a448629415eedc71c4, type: 3}
   _musicMenu:
   - {fileID: 8300000, guid: 8626c5042001976478a7ed27215494ee, type: 3}
@@ -4828,10 +4825,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 290f7664f03c96f40bc83302703a7f5a, type: 3}
   _musicGlobalMap:
   - {fileID: 8300000, guid: 79d88c689723fa74d9ad79b14b1f9b35, type: 3}
-  - {fileID: 8300000, guid: 5a40873d277240648b59c1f2143e4881, type: 3}
   - {fileID: 8300000, guid: a01d587c1942e204d8d3098237aaa09d, type: 3}
   - {fileID: 8300000, guid: 41ca8f76f7d4b7a489fb40422206b706, type: 3}
-  - {fileID: 8300000, guid: 937623b77590406489d6893b07e63341, type: 3}
   - {fileID: 8300000, guid: 3ff9fa4ddca51c54bbf0e991610a0f69, type: 3}
   _ambient:
   - {fileID: 8300000, guid: c95c497dc1f87d349a4632769f2ba12c, type: 3}
